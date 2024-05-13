@@ -1,0 +1,4 @@
+accessWidener v1 named
+extendable method net/minecraft/world/entity/monster/Creeper explodeCreeper ()V
+accessible method net/minecraft/world/entity/monster/Creeper spawnLingeringCloud ()V
+extendable method net/minecraft/world/entity/item/PrimedTnt explode ()V
