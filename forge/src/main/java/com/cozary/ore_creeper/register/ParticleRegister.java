@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class ParticleRegister {
 
-    @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
     public static void registerFactories(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(ParticleList.COAL_EXPLOSION.get(), BaseExplosionParticle.Factory::new);

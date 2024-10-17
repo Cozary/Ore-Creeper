@@ -18,28 +18,10 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 public class OreCreeperNeoForge {
 
     public OreCreeperNeoForge(IEventBus eventBus) {
-        eventBus.addListener(this::setupCommon);
-
         OreCreeper.init();
         ModTabs.init(eventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigurationHandler.spec);
         ModSpawnEggs.loadClass();
     }
 
-    public void setupCommon(final FMLCommonSetupEvent event) {
-
-        event.enqueueWork(() -> {
-                    SpawnPlacements.register(ModEntityTypes.COAL_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CoalCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.COPPER_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CopperCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.DIAMOND_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DiamondCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.EMERALD_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EmeraldCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.GOLD_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GoldCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.IRON_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, IronCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.LAPIS_LAZULI_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LapisLazuliCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.NETHER_GOLD_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherGoldCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherQuartzCreeperEntity::canOreCreeperSpawn);
-                    SpawnPlacements.register(ModEntityTypes.REDSTONE_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedstoneCreeperEntity::canOreCreeperSpawn);
-                }
-        );
-    }
 }

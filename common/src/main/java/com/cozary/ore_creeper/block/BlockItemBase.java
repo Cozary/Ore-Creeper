@@ -9,7 +9,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 public class BlockItemBase extends BlockItem {
@@ -19,7 +18,7 @@ public class BlockItemBase extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack stack, @Nullable Level worldIn, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
+    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
         tooltip.add(Component.translatable(ChatFormatting.AQUA + "This Tnt transforms the" + ChatFormatting.GOLD + " Creepers" + ChatFormatting.AQUA + " it hits."));
         tooltip.add(Component.translatable(ChatFormatting.GRAY + "Its use is merely intended for Modpacks, not common use."));
     }

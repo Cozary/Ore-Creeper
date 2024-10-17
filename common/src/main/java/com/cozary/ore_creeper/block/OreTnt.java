@@ -7,6 +7,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,8 +30,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class OreTnt extends Block {
     public static final BooleanProperty UNSTABLE;
@@ -100,26 +101,23 @@ public class OreTnt extends Block {
     }
 
     @Override
-    public InteractionResult use(BlockState $$0, Level $$1, BlockPos $$2, Player $$3, InteractionHand $$4, BlockHitResult $$5) {
-        ItemStack $$6 = $$3.getItemInHand($$4);
-        if (!$$6.is(Items.FLINT_AND_STEEL) && !$$6.is(Items.FIRE_CHARGE)) {
-            return super.use($$0, $$1, $$2, $$3, $$4, $$5);
+    protected ItemInteractionResult useItemOn(ItemStack itemStack, BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
+        if (!itemStack.is(Items.FLINT_AND_STEEL) && !itemStack.is(Items.FIRE_CHARGE)) {
+            return super.useItemOn(itemStack, blockState, level, blockPos, player, interactionHand, blockHitResult);
         } else {
-            explode($$1, $$2, $$3);
-            $$1.setBlock($$2, Blocks.AIR.defaultBlockState(), 11);
-            Item $$7 = $$6.getItem();
-            if (!$$3.isCreative()) {
-                if ($$6.is(Items.FLINT_AND_STEEL)) {
-                    $$6.hurtAndBreak(1, $$3, ($$1x) -> {
-                        $$1x.broadcastBreakEvent($$4);
-                    });
+            explode(level, blockPos, player);
+            level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
+            Item $$7 = itemStack.getItem();
+            if (!player.isCreative()) {
+                if (itemStack.is(Items.FLINT_AND_STEEL)) {
+                    itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(interactionHand));
                 } else {
-                    $$6.shrink(1);
+                    itemStack.shrink(1);
                 }
             }
 
-            $$3.awardStat(Stats.ITEM_USED.get($$7));
-            return InteractionResult.sidedSuccess($$1.isClientSide);
+            player.awardStat(Stats.ITEM_USED.get($$7));
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
     }
 

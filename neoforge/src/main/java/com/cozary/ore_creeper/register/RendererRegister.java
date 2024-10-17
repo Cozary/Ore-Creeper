@@ -6,12 +6,13 @@ import com.cozary.ore_creeper.client.render.*;
 import com.cozary.ore_creeper.init.ModEntityTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 import static com.cozary.ore_creeper.util.ClientEventBusSubscriber.*;
 
-@Mod.EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class RendererRegister {
 
     @SubscribeEvent

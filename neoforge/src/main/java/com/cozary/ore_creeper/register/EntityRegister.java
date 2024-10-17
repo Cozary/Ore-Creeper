@@ -4,10 +4,11 @@ import com.cozary.ore_creeper.OreCreeper;
 import com.cozary.ore_creeper.entities.*;
 import com.cozary.ore_creeper.init.ModEntityTypes;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
-@Mod.EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class EntityRegister {
 
 

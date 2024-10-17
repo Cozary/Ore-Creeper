@@ -27,11 +27,11 @@
   "mixins": [
   ],
   "depends": {
-    "fabricloader": ">=0.15",
+    "fabricloader": ">=${fabric_loader_version}",
     "fabric-api": "*",
-    "minecraft": "1.20.4",
-    "java": ">=17",
-    "forgeconfigapiport": ">=20.4.0"
+    "minecraft": "${minecraft_version}",
+    "java": ">=${java_version}",
+    "forgeconfigapiport": ">=${forge_config_api}"
   },
   "suggests": {
     "another-mod": "*"

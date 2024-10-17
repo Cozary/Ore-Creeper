@@ -6,7 +6,8 @@ import com.cozary.ore_creeper.init.ModEntityTypes;
 import com.cozary.ore_creeper.init.ModItems;
 import com.cozary.ore_creeper.init.ModSpawnEggs;
 import com.cozary.ore_creeper.util.ConfigurationHandler;
-import fuzs.forgeconfigapiport.api.config.v3.ForgeConfigRegistry;
+import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
+import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -18,6 +19,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -39,7 +41,7 @@ public class OreCreeperFabric implements ModInitializer {
                 .build()
         );
 
-        ForgeConfigRegistry.INSTANCE.register(OreCreeper.MOD_ID, ModConfig.Type.COMMON, ConfigurationHandler.spec);
+        NeoForgeConfigRegistry.INSTANCE.register(OreCreeper.MOD_ID, ModConfig.Type.COMMON, ConfigurationHandler.spec);
 
         OreCreeper.init();
         register();
@@ -59,16 +61,16 @@ public class OreCreeperFabric implements ModInitializer {
         BiomeModifications.addSpawn(BiomeSelectors.foundInTheNether(), MobCategory.MONSTER, ModEntityTypes.NETHER_GOLD_CREEPER.get(), ConfigurationHandler.GENERAL.netherGoldCreeperWeight.get(), ConfigurationHandler.GENERAL.netherGoldCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.netherGoldCreepermaxGroupSize.get());
         BiomeModifications.addSpawn(BiomeSelectors.foundInTheNether(), MobCategory.MONSTER, ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), ConfigurationHandler.GENERAL.netherQuartzCreeperWeight.get(), ConfigurationHandler.GENERAL.netherQuartzCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.netherQuartzCreepermaxGroupSize.get());
 
-        SpawnPlacements.register(ModEntityTypes.COAL_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CoalCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.COPPER_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CopperCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.DIAMOND_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DiamondCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.EMERALD_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EmeraldCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.GOLD_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GoldCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.IRON_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, IronCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.LAPIS_LAZULI_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LapisLazuliCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.NETHER_GOLD_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherGoldCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherQuartzCreeperEntity::canOreCreeperSpawn);
-        SpawnPlacements.register(ModEntityTypes.REDSTONE_CREEPER.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedstoneCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.COAL_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CoalCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.COPPER_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CopperCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.DIAMOND_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, DiamondCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.EMERALD_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EmeraldCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.GOLD_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, GoldCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.IRON_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, IronCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.LAPIS_LAZULI_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, LapisLazuliCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.NETHER_GOLD_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherGoldCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherQuartzCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.REDSTONE_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedstoneCreeperEntity::canOreCreeperSpawn);
 
     }
 }

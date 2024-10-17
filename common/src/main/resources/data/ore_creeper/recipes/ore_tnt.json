@@ -17,7 +17,7 @@
     }
   },
   "result": {
-    "item": "ore_creeper:ore_tnt",
+    "id": "ore_creeper:ore_tnt",
     "count": 1
   }
 }
