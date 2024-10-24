@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class RedstoneCreeperRenderer extends MobRenderer<RedstoneCreeperEntity, OreCreeperModel<RedstoneCreeperEntity>> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(OreCreeper.MOD_ID, "textures/entity/redstone_creeper.png");
-    ResourceLocation entityIconLoc = new ResourceLocation(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
+    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/redstone_creeper.png");
+    ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public RedstoneCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new OreCreeperModel<>(context.bakeLayer(ClientEventBusSubscriber.REDSTONE_CREEPER)), 0.5F);

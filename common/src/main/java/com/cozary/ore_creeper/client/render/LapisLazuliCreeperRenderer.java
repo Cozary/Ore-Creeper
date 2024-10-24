@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class LapisLazuliCreeperRenderer extends MobRenderer<LapisLazuliCreeperEntity, OreCreeperModel<LapisLazuliCreeperEntity>> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(OreCreeper.MOD_ID, "textures/entity/lapis_lazuli_creeper.png");
-    ResourceLocation entityIconLoc = new ResourceLocation(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
+    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/lapis_lazuli_creeper.png");
+    ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public LapisLazuliCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new OreCreeperModel<>(context.bakeLayer(ClientEventBusSubscriber.LAPIS_LAZULI_CREEPER)), 0.5F);

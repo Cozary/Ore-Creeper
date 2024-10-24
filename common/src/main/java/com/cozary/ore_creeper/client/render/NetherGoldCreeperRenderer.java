@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class NetherGoldCreeperRenderer extends MobRenderer<NetherGoldCreeperEntity, OreCreeperModel<NetherGoldCreeperEntity>> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(OreCreeper.MOD_ID, "textures/entity/nether_gold_creeper.png");
-    ResourceLocation entityIconLoc = new ResourceLocation(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
+    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/nether_gold_creeper.png");
+    ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public NetherGoldCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new OreCreeperModel<>(context.bakeLayer(ClientEventBusSubscriber.NETHER_GOLD_CREEPER)), 0.5F);

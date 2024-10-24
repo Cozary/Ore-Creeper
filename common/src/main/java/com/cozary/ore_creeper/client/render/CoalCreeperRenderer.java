@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class CoalCreeperRenderer extends MobRenderer<CoalCreeperEntity, CreeperModel<CoalCreeperEntity>> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(OreCreeper.MOD_ID, "textures/entity/coal_creeper.png");
-    ResourceLocation entityIconLoc = new ResourceLocation(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
+    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/coal_creeper.png");
+    ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public CoalCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new CreeperModel<>(context.bakeLayer(ClientEventBusSubscriber.COAL_CREEPER)), 0.5F);

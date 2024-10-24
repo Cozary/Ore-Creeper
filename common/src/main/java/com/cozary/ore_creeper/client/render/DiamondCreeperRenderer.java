@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class DiamondCreeperRenderer extends MobRenderer<DiamondCreeperEntity, OreCreeperModel<DiamondCreeperEntity>> {
 
-    protected static final ResourceLocation TEXTURE = new ResourceLocation(OreCreeper.MOD_ID, "textures/entity/diamond_creeper.png");
-    ResourceLocation entityIconLoc = new ResourceLocation(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
+    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/diamond_creeper.png");
+    ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public DiamondCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new OreCreeperModel<>(context.bakeLayer(ClientEventBusSubscriber.DIAMOND_CREEPER)), 0.5F);

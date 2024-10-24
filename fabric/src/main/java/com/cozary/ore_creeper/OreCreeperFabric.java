@@ -28,7 +28,7 @@ import net.neoforged.fml.config.ModConfig;
 
 public class OreCreeperFabric implements ModInitializer {
 
-    private static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation(OreCreeper.MOD_ID, "ore_creeper"));
+    private static final ResourceKey<CreativeModeTab> ITEM_GROUP = ResourceKey.create(Registries.CREATIVE_MODE_TAB, ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ore_creeper"));
 
 
     @Override
