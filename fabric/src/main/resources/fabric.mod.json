@@ -20,8 +20,7 @@
     ],
     "client": [
       "com.cozary.ore_creeper.register.ParticleRegister",
-      "com.cozary.ore_creeper.register.RendererRegister",
-      "com.cozary.ore_creeper.register.EntityRegister"
+      "com.cozary.ore_creeper.register.RendererRegister"
     ]
   },
   "mixins": [
