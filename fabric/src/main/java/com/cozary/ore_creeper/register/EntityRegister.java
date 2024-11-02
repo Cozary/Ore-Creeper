@@ -5,10 +5,9 @@ import com.cozary.ore_creeper.init.ModEntityTypes;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
-public final class EntityRegister implements ClientModInitializer {
+public final class EntityRegister {
 
-    @Override
-    public void onInitializeClient() {
+    public static void registerAttributes() {
         FabricDefaultAttributeRegistry.register(ModEntityTypes.COAL_CREEPER.get(), CoalCreeperEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntityTypes.COPPER_CREEPER.get(), CoalCreeperEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntityTypes.DIAMOND_CREEPER.get(), CoalCreeperEntity.createAttributes());

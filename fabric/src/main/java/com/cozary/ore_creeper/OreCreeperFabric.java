@@ -5,6 +5,7 @@ import com.cozary.ore_creeper.init.ModBlocks;
 import com.cozary.ore_creeper.init.ModEntityTypes;
 import com.cozary.ore_creeper.init.ModItems;
 import com.cozary.ore_creeper.init.ModSpawnEggs;
+import com.cozary.ore_creeper.register.EntityRegister;
 import com.cozary.ore_creeper.util.ConfigurationHandler;
 import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
 import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
@@ -45,6 +46,7 @@ public class OreCreeperFabric implements ModInitializer {
 
         OreCreeper.init();
         register();
+        EntityRegister.registerAttributes();
         ModSpawnEggs.loadClass();
     }
 
@@ -73,4 +75,6 @@ public class OreCreeperFabric implements ModInitializer {
         SpawnPlacements.register(ModEntityTypes.REDSTONE_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedstoneCreeperEntity::canOreCreeperSpawn);
 
     }
+
+
 }
