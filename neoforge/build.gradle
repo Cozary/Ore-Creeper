@@ -1,6 +1,7 @@
 plugins {
     id 'multiloader-loader'
     id 'net.neoforged.moddev'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
 }
 
 base {
@@ -42,3 +43,42 @@ neoForge {
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+dependencies {
+    implementation "net.neoforged:neoforge:${neoforge_version}"
+}
+
+publishMods {
+    file = jar.archiveFile
+    changelog = project(":common").file("CHANGELOG.md").text
+    type = STABLE
+    modLoaders.add("neoforge")
+    displayName = "${mod_name}-neoforge-${minecraft_version}-${version_forge}"
+    dryRun = dry_run.toBoolean()
+
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        projectId = curseforge_project_id
+        minecraftVersions.add(minecraft_version)
+        requires {
+            slug = "forge-config-api-port-fabric"
+        }
+        optional {
+            slug = "journeymap"
+        }
+    }
+
+
+    modrinth {
+        accessToken = accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        projectId = modrinth_project_id
+        minecraftVersions.add(minecraft_version)
+        requires {
+            slug = "forge-config-api-port"
+        }
+        optional {
+            slug = "journeymap"
+        }
+    }
+
+}
