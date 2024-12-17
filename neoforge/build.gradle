@@ -44,10 +44,6 @@ neoForge {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-dependencies {
-    implementation "net.neoforged:neoforge:${neoforge_version}"
-}
-
 publishMods {
     file = jar.archiveFile
     changelog = project(":common").file("CHANGELOG.md").text
