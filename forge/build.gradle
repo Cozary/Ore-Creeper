@@ -2,6 +2,7 @@ plugins {
     id 'multiloader-loader'
     id 'net.minecraftforge.gradle' version '[6.0.29,6.2)'
     id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
 }
 
 base {
@@ -27,6 +28,7 @@ minecraft {
     if (at.exists()) {
         accessTransformer = at
     }
+
     runs {
         client {
             workingDirectory file('runs/client')
@@ -38,6 +40,7 @@ minecraft {
                 }
             }
         }
+
         server {
             workingDirectory file('runs/server')
             ideaModule "${rootProject.name}.${project.name}.main"
@@ -48,6 +51,7 @@ minecraft {
                 }
             }
         }
+
         data {
             workingDirectory file('runs/data')
             ideaModule "${rootProject.name}.${project.name}.main"
@@ -61,6 +65,7 @@ minecraft {
         }
     }
 }
+
 sourceSets.main.resources.srcDir 'src/generated/resources'
 
 dependencies {
@@ -84,4 +89,39 @@ sourceSets.each {
     def dir = layout.buildDirectory.dir("sourcesSets/$it.name")
     it.output.resourcesDir = dir
     it.java.destinationDirectory = dir
+}
+
+publishMods {
+    file = jar.archiveFile
+    changelog = project(":common").file("CHANGELOG.md").text
+    type = STABLE
+    modLoaders.add("forge")
+    displayName = "${mod_name}-forge-${minecraft_version}-${version_forge}"
+    dryRun = dry_run.toBoolean()
+
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        projectId = curseforge_project_id
+        minecraftVersions.add(minecraft_version)
+        requires {
+            slug = "forge-config-api-port-fabric"
+        }
+        optional {
+            slug = "journeymap"
+        }
+    }
+
+
+    modrinth {
+        accessToken = accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        projectId = modrinth_project_id
+        minecraftVersions.add(minecraft_version)
+        requires {
+            slug = "forge-config-api-port"
+        }
+        optional {
+            slug = "journeymap"
+        }
+    }
+
 }
