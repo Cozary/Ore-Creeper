@@ -49,6 +49,7 @@ publishMods {
     modLoaders.add("fabric")
     displayName = "${mod_name}-fabric-${minecraft_version}-${version_fabric}"
     dryRun = dry_run.toBoolean()
+    version = version_fabric
 
         curseforge {
             accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
