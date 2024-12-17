@@ -3,6 +3,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'fabric-loom' version '1.6-SNAPSHOT'
+    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
 }
 base {
     archivesName = "${mod_name}-fabric-${minecraft_version}-${version_fabric}"
@@ -67,4 +68,39 @@ publishing {
             url "file://" + System.getenv("local_maven")
         }
     }
+}
+
+publishMods {
+    file = remapJar.archiveFile
+    changelog = project(":common").file("CHANGELOG.md").text
+    type = STABLE
+    modLoaders.add("fabric")
+    displayName = "${mod_name}-fabric-${minecraft_version}-${version_fabric}"
+    dryRun = dry_run.toBoolean()
+
+        curseforge {
+            accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+            projectId = curseforge_project_id
+            minecraftVersions.add(minecraft_version)
+            requires {
+                slug = "forge-config-api-port-fabric"
+            }
+            optional {
+                slug = "journeymap"
+            }
+        }
+
+
+        modrinth {
+            accessToken = accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+            projectId = modrinth_project_id
+            minecraftVersions.add(minecraft_version)
+            requires {
+                slug = "forge-config-api-port"
+            }
+            optional {
+                slug = "journeymap"
+            }
+        }
+
 }
