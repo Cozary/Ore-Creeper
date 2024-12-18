@@ -1,0 +1,6 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "ore_creeper:block/ore_tnt"
+  }
+}

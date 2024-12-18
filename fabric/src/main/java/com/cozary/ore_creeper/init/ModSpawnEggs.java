@@ -17,43 +17,43 @@ public class ModSpawnEggs {
 
     public static LinkedHashSet<RegistryObject<Item>> SPAWNEGGS_TAB = Sets.newLinkedHashSet();
 
-    public static final Supplier<Item> COAL_CREEPER_EGG = registerWithTab("coal_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.COAL_CREEPER.get(), 0x808080, 0x000000,
+    public static final Supplier<Item> COAL_CREEPER_EGG = registerWithTab("coal_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.COAL_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "coal_creeper_spawn_egg")))));
-    public static final Supplier<Item> COPPER_CREEPER_EGG = registerWithTab("copper_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.COPPER_CREEPER.get(), 0x808080, 0xd2691e,
+    public static final Supplier<Item> COPPER_CREEPER_EGG = registerWithTab("copper_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.COPPER_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "copper_creeper_spawn_egg")))));
-    public static final Supplier<Item> DIAMOND_CREEPER_EGG = registerWithTab("diamond_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.DIAMOND_CREEPER.get(), 0x808080, 0x00bfff,
+    public static final Supplier<Item> DIAMOND_CREEPER_EGG = registerWithTab("diamond_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.DIAMOND_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "diamond_creeper_spawn_egg")))));
-    public static final Supplier<Item> EMERALD_CREEPER_EGG = registerWithTab("emerald_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.EMERALD_CREEPER.get(), 0x808080, 0x7cfc00,
+    public static final Supplier<Item> EMERALD_CREEPER_EGG = registerWithTab("emerald_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.EMERALD_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "emerald_creeper_spawn_egg")))));
-    public static final Supplier<Item> GOLD_CREEPER_EGG = registerWithTab("gold_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.GOLD_CREEPER.get(), 0x808080, 0xffd700,
+    public static final Supplier<Item> GOLD_CREEPER_EGG = registerWithTab("gold_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.GOLD_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "gold_creeper_spawn_egg")))));
-    public static final Supplier<Item> IRON_CREEPER_EGG = registerWithTab("iron_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.IRON_CREEPER.get(), 0x808080, 0xffb6c1,
+    public static final Supplier<Item> IRON_CREEPER_EGG = registerWithTab("iron_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.IRON_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "iron_creeper_spawn_egg")))));
-    public static final Supplier<Item> LAPIS_LAZULI_CREEPER_EGG = registerWithTab("lapis_lazuli_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.LAPIS_LAZULI_CREEPER.get(), 0x808080, 0x00008b,
+    public static final Supplier<Item> LAPIS_LAZULI_CREEPER_EGG = registerWithTab("lapis_lazuli_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.LAPIS_LAZULI_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "lapis_lazuli_creeper_spawn_egg")))));
-    public static final Supplier<Item> NETHER_GOLD_CREEPER_EGG = registerWithTab("nether_gold_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.NETHER_GOLD_CREEPER.get(), 0x8b0000, 0xffd700,
+    public static final Supplier<Item> NETHER_GOLD_CREEPER_EGG = registerWithTab("nether_gold_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.NETHER_GOLD_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "nether_gold_creeper_spawn_egg")))));
-    public static final Supplier<Item> NETHER_QUARTZ_CREEPER_EGG = registerWithTab("nether_quartz_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), 0x8b0000, 0xf5f5f5,
+    public static final Supplier<Item> NETHER_QUARTZ_CREEPER_EGG = registerWithTab("nether_quartz_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "nether_quartz_creeper_spawn_egg")))));
-    public static final Supplier<Item> REDSTONE_CREEPER_EGG = registerWithTab("redstone_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.REDSTONE_CREEPER.get(), 0x808080, 0xff0000,
+    public static final Supplier<Item> REDSTONE_CREEPER_EGG = registerWithTab("redstone_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.REDSTONE_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "redstone_creeper_spawn_egg")))));

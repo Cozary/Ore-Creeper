@@ -10,7 +10,9 @@ import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.TntMinecartRenderer;
+import net.minecraft.client.renderer.entity.TntRenderer;
 import net.minecraft.client.renderer.entity.state.TntRenderState;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -53,7 +55,7 @@ public class OreTntRenderer extends EntityRenderer<OrePrimedTnt, TntRenderState>
     }
 
     public @NotNull ResourceLocation getTextureLocation(@NotNull OrePrimedTnt p_116175_) {
-        return InventoryMenu.BLOCK_ATLAS;
+        return TextureAtlas.LOCATION_BLOCKS;
     }
 
     public void extractRenderState(OrePrimedTnt p_361380_, TntRenderState p_364625_, float p_360472_) {
