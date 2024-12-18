@@ -8,6 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
@@ -29,11 +30,11 @@ public class OrePrimedTnt extends PrimedTnt {
     @Nullable
     private LivingEntity owner;
 
-    public OrePrimedTnt(EntityType<? extends PrimedTnt> p_32076_, Level p_32077_) {
+    public OrePrimedTnt(EntityType<? extends OrePrimedTnt> p_32076_, Level p_32077_) {
         super(ModEntityTypes.ORE_PRIMED_TNT.get(), p_32077_);
     }
 
-    public OrePrimedTnt(Level p_32079_, double p_32080_, double p_32081_, double p_32082_) {
+    public OrePrimedTnt(Level p_32079_, double p_32080_, double p_32081_, double p_32082_, @Nullable LivingEntity owner) {
         this(ModEntityTypes.ORE_PRIMED_TNT.get(), p_32079_);
         this.setPos(p_32080_, p_32081_, p_32082_);
         double d0 = p_32079_.random.nextDouble() * (double) ((float) Math.PI * 2F);
@@ -67,7 +68,7 @@ public class OrePrimedTnt extends PrimedTnt {
         for (LivingEntity livingEntity : foundTarget) {
             livingEntity.remove(RemovalReason.DISCARDED);
 
-            Entity entities = Objects.requireNonNull(getRandomEntityType()).get().create(level());
+            Entity entities = Objects.requireNonNull(getRandomEntityType()).get().create(level(), EntitySpawnReason.CONVERSION);
 
             assert entities != null;
             entities.setPos(livingEntity.position());

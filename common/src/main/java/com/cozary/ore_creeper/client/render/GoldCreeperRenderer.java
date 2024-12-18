@@ -8,40 +8,54 @@ import com.cozary.ore_creeper.util.ClientEventBusSubscriber;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.state.CreeperRenderState;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
-public class GoldCreeperRenderer extends MobRenderer<GoldCreeperEntity, OreCreeperModel<GoldCreeperEntity>> {
+public class GoldCreeperRenderer extends MobRenderer<GoldCreeperEntity, CreeperRenderState, OreCreeperModel> {
 
     protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/gold_creeper.png");
     ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public GoldCreeperRenderer(EntityRendererProvider.Context context) {
-        super(context, new OreCreeperModel<>(context.bakeLayer(ClientEventBusSubscriber.GOLD_CREEPER)), 0.5F);
+        super(context, new OreCreeperModel(context.bakeLayer(ClientEventBusSubscriber.GOLD_CREEPER)), 0.5F);
     }
 
-    protected void scale(GoldCreeperEntity p_114046_, PoseStack p_114047_, float p_114048_) {
-        float f = p_114046_.getSwelling(p_114048_);
+    @Override
+    public CreeperRenderState createRenderState() {
+        return new CreeperRenderState();
+    }
+
+
+    protected void scale(CreeperRenderState p_362568_, PoseStack p_114047_) {
+        float f = p_362568_.swelling;
         float f1 = 1.0F + Mth.sin(f * 100.0F) * f * 0.01F;
         f = Mth.clamp(f, 0.0F, 1.0F);
-        f = f * f;
-        f = f * f;
+        f *= f;
+        f *= f;
         float f2 = (1.0F + f * 0.4F) * f1;
         float f3 = (1.0F + f * 0.1F) / f1;
         p_114047_.scale(f2, f3, f2);
     }
 
-    protected float getWhiteOverlayProgress(GoldCreeperEntity p_114043_, float p_114044_) {
-        float f = p_114043_.getSwelling(p_114044_);
+    protected float getWhiteOverlayProgress(CreeperRenderState p_360678_) {
+        float f = p_360678_.swelling;
         return (int) (f * 10.0F) % 2 == 0 ? 0.0F : Mth.clamp(f, 0.5F, 1.0F);
     }
 
-    public @NotNull ResourceLocation getTextureLocation(@NotNull GoldCreeperEntity p_114041_) {
+    @Override
+    public ResourceLocation getTextureLocation(CreeperRenderState creeperRenderState) {
         return TEXTURE;
     }
 
     public @NotNull ResourceLocation getEntityIconLoc(@NotNull GoldCreeperEntity p_114041_) {
         return entityIconLoc;
+    }
+
+    public void extractRenderState(GoldCreeperEntity p_364394_, CreeperRenderState p_361451_, float p_364659_) {
+        super.extractRenderState(p_364394_, p_361451_, p_364659_);
+        p_361451_.swelling = p_364394_.getSwelling(p_364659_);
+        p_361451_.isPowered = p_364394_.isPowered();
     }
 }

@@ -4,7 +4,6 @@ import com.cozary.ore_creeper.OreCreeper;
 import com.cozary.ore_creeper.entities.*;
 import com.cozary.ore_creeper.init.ModEntityTypes;
 import net.minecraft.world.entity.SpawnPlacementTypes;
-import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

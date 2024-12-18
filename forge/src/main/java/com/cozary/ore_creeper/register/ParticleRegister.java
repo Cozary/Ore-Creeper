@@ -4,7 +4,6 @@ import com.cozary.ore_creeper.OreCreeper;
 import com.cozary.ore_creeper.init.ParticleList;
 import com.cozary.ore_creeper.particles.BaseExplosionParticle;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;

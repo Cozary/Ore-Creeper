@@ -33,15 +33,14 @@ public class FabricRegistrationFactory implements RegistrationProvider.Factory {
         private final Set<RegistryObject<T>> entries = new HashSet<>();
         private final Set<RegistryObject<T>> entriesView = Collections.unmodifiableSet(entries);
 
-        @SuppressWarnings({"unchecked"})
+        @SuppressWarnings("unchecked")
         private Provider(String modId, ResourceKey<? extends Registry<T>> key) {
             this.modId = modId;
 
-            final var reg = BuiltInRegistries.REGISTRY.get(key.location());
-            if (reg == null) {
-                throw new RuntimeException("Registry with name " + key.location() + " was not found!");
-            }
-            registry = (Registry<T>) reg;
+            final var registryRef = BuiltInRegistries.REGISTRY.get(key.location())
+                    .orElseThrow(() -> new RuntimeException("Registry with name " + key.location() + " was not found!"));
+
+            this.registry = (Registry<T>) ((Holder.Reference<?>) registryRef).value();
         }
 
         private Provider(String modId, Registry<T> registry) {
@@ -74,7 +73,7 @@ public class FabricRegistrationFactory implements RegistrationProvider.Factory {
 
                 @Override
                 public Holder<I> asHolder() {
-                    return (Holder<I>) registry.getHolderOrThrow((ResourceKey<T>) this.key);
+                    return (Holder<I>) registry.getValueOrThrow((ResourceKey<T>) this.key);
                 }
             };
             entries.add((RegistryObject<T>) ro);

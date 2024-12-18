@@ -7,7 +7,6 @@ import com.cozary.ore_creeper.init.ModEntityTypes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 import static com.cozary.ore_creeper.util.ClientEventBusSubscriber.*;

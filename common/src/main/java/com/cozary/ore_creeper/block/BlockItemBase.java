@@ -1,11 +1,13 @@
 package com.cozary.ore_creeper.block;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,7 +16,9 @@ import java.util.List;
 public class BlockItemBase extends BlockItem {
 
     public BlockItemBase(Block block) {
-        super(block, new Properties());
+        super(block, new Properties()
+                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("ore_creeper", "ore_tnt")))
+        );
     }
 
     @Override

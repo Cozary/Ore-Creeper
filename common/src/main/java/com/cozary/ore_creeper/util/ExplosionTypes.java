@@ -1,8 +1,8 @@
 package com.cozary.ore_creeper.util;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.PowerableMob;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -14,42 +14,12 @@ import java.util.Random;
 
 public class ExplosionTypes {
 
-    public enum OreType {
-        COAL(Blocks.COAL_ORE, Blocks.COAL_BLOCK, Blocks.DEEPSLATE_COAL_ORE),
-        COPPER(Blocks.COPPER_ORE, Blocks.RAW_COPPER_BLOCK, Blocks.DEEPSLATE_COPPER_ORE),
-        DIAMOND(Blocks.DIAMOND_ORE, null, Blocks.DEEPSLATE_DIAMOND_ORE),
-        EMERALD(Blocks.EMERALD_ORE, null, Blocks.DEEPSLATE_EMERALD_ORE),
-        GOLD(Blocks.GOLD_ORE, Blocks.RAW_GOLD_BLOCK, Blocks.DEEPSLATE_GOLD_ORE),
-        IRON(Blocks.IRON_ORE, Blocks.RAW_IRON_BLOCK, Blocks.DEEPSLATE_IRON_ORE),
-        LAPIS(Blocks.LAPIS_ORE, null, Blocks.DEEPSLATE_LAPIS_ORE),
-        REDSTONE(Blocks.REDSTONE_ORE, null, Blocks.DEEPSLATE_REDSTONE_ORE),
-        NETHERGOLD(Blocks.NETHER_GOLD_ORE, Blocks.RAW_GOLD_BLOCK, null),
-        NETHERQUARTZ(Blocks.NETHER_QUARTZ_ORE, null, null);
-
-        private final Block oreBlock;
-        private final Block rawBlock;
-        private final Block deepslateOreBlock;
-
-        OreType(Block oreBlock, Block rawBlock, Block deepslateOreBlock) {
-            this.oreBlock = oreBlock;
-            this.rawBlock = rawBlock;
-            this.deepslateOreBlock = deepslateOreBlock;
-        }
-
-        public Block getOreBlock() {
-            return oreBlock;
-        }
-
-        public Block getRawBlock() {
-            return rawBlock;
-        }
-
-        public Block getDeepslateOreBlock() {
-            return deepslateOreBlock;
-        }
-    }
-
     public void oreExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
+
+        ServerLevel serverLevel = (ServerLevel) entityWorld;
+        if (serverLevel == null)
+            return;
+
         double radius = 0;
         switch (oreType) {
             case COAL -> radius = ConfigurationHandler.GENERAL.coalCreeperExplosionRadius.get();
@@ -62,11 +32,8 @@ public class ExplosionTypes {
             case REDSTONE -> radius = ConfigurationHandler.GENERAL.redstoneCreeperExplosionRadius.get();
         }
 
-        if (entity instanceof PowerableMob) {
-            radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
-        }
         entityWorld.explode(entity, entityX, entityY, entityZ, 0, Level.ExplosionInteraction.NONE);
-        if (entityWorld.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+        if (serverLevel.getServer().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
                     for (int z = (int) -radius; z <= radius; z++) {
@@ -124,16 +91,20 @@ public class ExplosionTypes {
     }
 
     public void netherExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
+
+        ServerLevel serverLevel = (ServerLevel) entityWorld;
+        if (serverLevel == null)
+            return;
+
         double radius = 0;
+
         switch (oreType) {
             case NETHERGOLD -> radius = ConfigurationHandler.GENERAL.netherGoldCreeperExplosionRadius.get();
             case NETHERQUARTZ -> radius = ConfigurationHandler.GENERAL.netherQuartzCreeperExplosionRadius.get();
         }
-        if (entity instanceof PowerableMob) {
-            radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
-        }
+
         entityWorld.explode(entity, entityX, entityY, entityZ, 0, Level.ExplosionInteraction.NONE);
-        if (entityWorld.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+        if (serverLevel.getServer().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
                     for (int z = (int) -radius; z <= radius; z++) {
@@ -157,6 +128,41 @@ public class ExplosionTypes {
                     }
                 }
             }
+        }
+    }
+
+    public enum OreType {
+        COAL(Blocks.COAL_ORE, Blocks.COAL_BLOCK, Blocks.DEEPSLATE_COAL_ORE),
+        COPPER(Blocks.COPPER_ORE, Blocks.RAW_COPPER_BLOCK, Blocks.DEEPSLATE_COPPER_ORE),
+        DIAMOND(Blocks.DIAMOND_ORE, null, Blocks.DEEPSLATE_DIAMOND_ORE),
+        EMERALD(Blocks.EMERALD_ORE, null, Blocks.DEEPSLATE_EMERALD_ORE),
+        GOLD(Blocks.GOLD_ORE, Blocks.RAW_GOLD_BLOCK, Blocks.DEEPSLATE_GOLD_ORE),
+        IRON(Blocks.IRON_ORE, Blocks.RAW_IRON_BLOCK, Blocks.DEEPSLATE_IRON_ORE),
+        LAPIS(Blocks.LAPIS_ORE, null, Blocks.DEEPSLATE_LAPIS_ORE),
+        REDSTONE(Blocks.REDSTONE_ORE, null, Blocks.DEEPSLATE_REDSTONE_ORE),
+        NETHERGOLD(Blocks.NETHER_GOLD_ORE, Blocks.RAW_GOLD_BLOCK, null),
+        NETHERQUARTZ(Blocks.NETHER_QUARTZ_ORE, null, null);
+
+        private final Block oreBlock;
+        private final Block rawBlock;
+        private final Block deepslateOreBlock;
+
+        OreType(Block oreBlock, Block rawBlock, Block deepslateOreBlock) {
+            this.oreBlock = oreBlock;
+            this.rawBlock = rawBlock;
+            this.deepslateOreBlock = deepslateOreBlock;
+        }
+
+        public Block getOreBlock() {
+            return oreBlock;
+        }
+
+        public Block getRawBlock() {
+            return rawBlock;
+        }
+
+        public Block getDeepslateOreBlock() {
+            return deepslateOreBlock;
         }
     }
 }

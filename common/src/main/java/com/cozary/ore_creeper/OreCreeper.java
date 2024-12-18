@@ -4,7 +4,6 @@ import com.cozary.ore_creeper.init.ModBlocks;
 import com.cozary.ore_creeper.init.ModEntityTypes;
 import com.cozary.ore_creeper.init.ModItems;
 import com.cozary.ore_creeper.init.ParticleList;
-import com.cozary.ore_creeper.platform.Services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

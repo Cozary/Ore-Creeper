@@ -1,9 +1,5 @@
 # Changelog
 
-### Added
+### Changed
 
-- Mod Publish Plugin
-
-### Fixed
-
-- Ore Creeper loot tables
+- Updated to version 1.21.3
