@@ -1,7 +1,7 @@
 plugins {
     id 'multiloader-loader'
     id 'fabric-loom'
-    id "me.modmuss50.mod-publish-plugin" version "0.8.1"
+    id "me.modmuss50.mod-publish-plugin" version "${mod_publish_version}"
 }
 base {
     archivesName = "${mod_name}-fabric-${minecraft_version}-${version_fabric}"
