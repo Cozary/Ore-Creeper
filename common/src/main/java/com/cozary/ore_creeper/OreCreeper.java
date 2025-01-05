@@ -1,10 +1,6 @@
 package com.cozary.ore_creeper;
 
-import com.cozary.ore_creeper.init.ModBlocks;
-import com.cozary.ore_creeper.init.ModEntityTypes;
-import com.cozary.ore_creeper.init.ModItems;
-import com.cozary.ore_creeper.init.ParticleList;
-import com.cozary.ore_creeper.platform.Services;
+import com.cozary.ore_creeper.init.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +16,7 @@ public class OreCreeper {
         ModItems.loadClass();
         ModBlocks.loadClass();
         ParticleList.loadClass();
-
+        ModTags.loadClass();
     }
 
 }
