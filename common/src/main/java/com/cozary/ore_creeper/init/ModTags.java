@@ -13,32 +13,32 @@ public class ModTags {
 
     public static final TagKey<Biome> SPAWNABLE_BIOMES = TagKey.create(
             Registries.BIOME,
-            ResourceLocation.fromNamespaceAndPath(MOD_ID, "spawnable_biomes")
+            new ResourceLocation(MOD_ID, "spawnable_biomes")
     );
 
     public static final TagKey<Biome> BLACKLIST_BIOMES = TagKey.create(
             Registries.BIOME,
-            ResourceLocation.fromNamespaceAndPath(MOD_ID, "blacklist_biomes")
+            new ResourceLocation(MOD_ID, "blacklist_biomes")
     );
 
     public static final TagKey<Block> SPAWNABLE_BLOCKS = TagKey.create(
             Registries.BLOCK,
-            ResourceLocation.fromNamespaceAndPath(MOD_ID, "spawnable_blocks")
+            new ResourceLocation(MOD_ID, "spawnable_blocks")
     );
 
     public static final TagKey<Biome> SPAWNABLE_BIOMES_NETHER = TagKey.create(
             Registries.BIOME,
-            ResourceLocation.fromNamespaceAndPath(MOD_ID, "spawnable_biomes_nether")
+            new ResourceLocation(MOD_ID, "spawnable_biomes_nether")
     );
 
     public static final TagKey<Biome> BLACKLIST_BIOMES_NETHER = TagKey.create(
             Registries.BIOME,
-            ResourceLocation.fromNamespaceAndPath(MOD_ID, "blacklist_biomes_nether")
+            new ResourceLocation(MOD_ID, "blacklist_biomes_nether")
     );
 
     public static final TagKey<Block> SPAWNABLE_BLOCKS_NETHER = TagKey.create(
             Registries.BLOCK,
-            ResourceLocation.fromNamespaceAndPath(MOD_ID, "spawnable_blocks_nether")
+            new ResourceLocation(MOD_ID, "spawnable_blocks_nether")
     );
 
     public static void loadClass() {
