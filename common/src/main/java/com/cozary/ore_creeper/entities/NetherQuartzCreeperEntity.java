@@ -1,5 +1,6 @@
 package com.cozary.ore_creeper.entities;
 
+import com.cozary.ore_creeper.init.ModTags;
 import com.cozary.ore_creeper.init.ParticleList;
 import com.cozary.ore_creeper.util.ConfigurationHandler;
 import com.cozary.ore_creeper.util.ExplosionTypes;
@@ -21,7 +22,7 @@ public class NetherQuartzCreeperEntity extends AbstractOreCreeperEntity {
     }
 
     public static boolean canOreCreeperSpawn(EntityType<? extends AbstractOreCreeperEntity> creeper, ServerLevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return pos.getY() < ConfigurationHandler.GENERAL.netherQuartzCreeperMaxSpawnYLevel.get() && world.getBlockState(pos.below()).is(Blocks.NETHERRACK);
+        return pos.getY() < ConfigurationHandler.GENERAL.netherQuartzCreeperMaxSpawnYLevel.get() && world.getBlockState(pos.below()).is(ModTags.SPAWNABLE_BLOCKS_NETHER);
     }
 
     @Override
