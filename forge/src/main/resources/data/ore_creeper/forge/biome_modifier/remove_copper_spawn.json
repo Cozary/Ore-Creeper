@@ -1,0 +1,5 @@
+{
+  "type": "forge:remove_spawns",
+  "biomes": "#ore_creeper:blacklist_biomes",
+  "entity_types": "ore_creeper:copper_creeper"
+}
