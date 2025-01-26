@@ -3,7 +3,7 @@
   "biomes": "#ore_creeper:spawnable_biomes",
   "spawners": {
     "type": "ore_creeper:emerald_creeper",
-    "weight": 20,
+    "weight": 10,
     "minCount": 1,
     "maxCount": 2
   }
