@@ -19,5 +19,6 @@ public final class ParticleRegister implements ClientModInitializer {
         ParticleFactoryRegistry.getInstance().register(ParticleList.LAPIS_EXPLOSION.get(), BaseExplosionParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ParticleList.REDSTONE_EXPLOSION.get(), BaseExplosionParticle.Factory::new);
         ParticleFactoryRegistry.getInstance().register(ParticleList.WHITE_EXPLOSION.get(), BaseExplosionParticle.Factory::new);
+        ParticleFactoryRegistry.getInstance().register(ParticleList.ANCIENT_DEBRIS_EXPLOSION.get(), BaseExplosionParticle.Factory::new);
     }
 }

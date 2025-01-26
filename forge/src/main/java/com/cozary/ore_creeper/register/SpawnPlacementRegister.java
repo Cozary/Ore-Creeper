@@ -25,6 +25,7 @@ public class SpawnPlacementRegister {
         event.register(ModEntityTypes.NETHER_GOLD_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherGoldCreeperEntity::canOreCreeperSpawn, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherQuartzCreeperEntity::canOreCreeperSpawn, SpawnPlacementRegisterEvent.Operation.AND);
         event.register(ModEntityTypes.REDSTONE_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedstoneCreeperEntity::canOreCreeperSpawn, SpawnPlacementRegisterEvent.Operation.AND);
+        event.register(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AncientDebrisCreeperEntity::canOreCreeperSpawn, SpawnPlacementRegisterEvent.Operation.AND);
 
     }
 }

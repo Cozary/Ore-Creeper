@@ -39,6 +39,9 @@ public class ConfigurationHandler {
         public final ModConfigSpec.IntValue netherQuartzCreeperWeight;
         public final ModConfigSpec.IntValue netherQuartzCreeperminGroupSize;
         public final ModConfigSpec.IntValue netherQuartzCreepermaxGroupSize;
+        public final ModConfigSpec.IntValue ancientDebrisCreeperWeight;
+        public final ModConfigSpec.IntValue ancientDebrisCreeperminGroupSize;
+        public final ModConfigSpec.IntValue ancientDebrisCreepermaxGroupSize;
 
         public final ModConfigSpec.DoubleValue oreTntExplosionRadius;
         public final ModConfigSpec.DoubleValue coalCreeperExplosionRadius;
@@ -61,6 +64,8 @@ public class ConfigurationHandler {
         public final ModConfigSpec.IntValue netherQuartzCreeperMaxSpawnYLevel;
         public final ModConfigSpec.DoubleValue redstoneCreeperExplosionRadius;
         public final ModConfigSpec.IntValue redstoneCreeperMaxSpawnYLevel;
+        public final ModConfigSpec.DoubleValue ancientDebrisCreeperExplosionRadius;
+        public final ModConfigSpec.IntValue ancientDebrisCreeperMaxSpawnYLevel;
 
         General(ModConfigSpec.Builder builder) {
 
@@ -106,6 +111,10 @@ public class ConfigurationHandler {
             builder.push("Redstone Creeper");
             redstoneCreeperExplosionRadius = builder.defineInRange("explosion radius", 3.75, 0, 100);
             redstoneCreeperMaxSpawnYLevel = builder.defineInRange("max spawn Y level", 320, -64, 320);
+            builder.pop();
+            builder.push("Ancient Debris Creeper");
+            ancientDebrisCreeperExplosionRadius = builder.defineInRange("explosion radius", 1.0, 0, 100);
+            ancientDebrisCreeperMaxSpawnYLevel = builder.defineInRange("max spawn Y level", 320, -64, 320);
             builder.pop();
 
             builder.push("Spawn Rates - Only fabric");
@@ -160,6 +169,11 @@ public class ConfigurationHandler {
             netherQuartzCreeperWeight = builder.defineInRange("Weight", 10, 0, 500);
             netherQuartzCreeperminGroupSize = builder.defineInRange("Min Group Size", 1, 0, 100);
             netherQuartzCreepermaxGroupSize = builder.defineInRange("Max Group Size", 2, 0, 100);
+            builder.pop();
+            builder.push("Ancient Debris Creeper - Fabric");
+            ancientDebrisCreeperWeight = builder.defineInRange("Weight", 1, 0, 500);
+            ancientDebrisCreeperminGroupSize = builder.defineInRange("Min Group Size", 1, 0, 100);
+            ancientDebrisCreepermaxGroupSize = builder.defineInRange("Max Group Size", 1, 0, 100);
             builder.pop();
         }
     }

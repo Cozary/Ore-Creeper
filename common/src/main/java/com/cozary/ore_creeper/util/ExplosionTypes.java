@@ -24,7 +24,8 @@ public class ExplosionTypes {
         LAPIS(Blocks.LAPIS_ORE, null, Blocks.DEEPSLATE_LAPIS_ORE),
         REDSTONE(Blocks.REDSTONE_ORE, null, Blocks.DEEPSLATE_REDSTONE_ORE),
         NETHERGOLD(Blocks.NETHER_GOLD_ORE, Blocks.RAW_GOLD_BLOCK, null),
-        NETHERQUARTZ(Blocks.NETHER_QUARTZ_ORE, null, null);
+        NETHERQUARTZ(Blocks.NETHER_QUARTZ_ORE, null, null),
+        ANCIENT_DEBRIS(Blocks.ANCIENT_DEBRIS, null, null);
 
         private final Block oreBlock;
         private final Block rawBlock;
@@ -128,6 +129,7 @@ public class ExplosionTypes {
         switch (oreType) {
             case NETHERGOLD -> radius = ConfigurationHandler.GENERAL.netherGoldCreeperExplosionRadius.get();
             case NETHERQUARTZ -> radius = ConfigurationHandler.GENERAL.netherQuartzCreeperExplosionRadius.get();
+            case ANCIENT_DEBRIS -> radius = ConfigurationHandler.GENERAL.ancientDebrisCreeperExplosionRadius.get();
         }
         if (entity instanceof PowerableMob) {
             radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
