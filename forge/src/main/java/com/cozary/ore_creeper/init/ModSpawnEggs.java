@@ -57,7 +57,7 @@ public class ModSpawnEggs {
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "redstone_creeper_spawn_egg")))));
-    public static final Supplier<Item> ANCIENT_DEBRIS_CREEPER_EGG = registerWithTab("ancient_debris_creeper_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.ANCIENT_DEBRIS_CREEPER, 0x808080, 0x492A23,
+    public static final Supplier<Item> ANCIENT_DEBRIS_CREEPER_EGG = registerWithTab("ancient_debris_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
                             ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ancient_debris_creeper_spawn_egg")))));
