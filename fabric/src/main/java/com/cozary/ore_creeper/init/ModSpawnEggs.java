@@ -25,6 +25,7 @@ public class ModSpawnEggs {
     public static final Supplier<Item> NETHER_GOLD_CREEPER_EGG = registerWithTab("nether_gold_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.NETHER_GOLD_CREEPER.get(), 0x8b0000, 0xffd700, new Item.Properties()));
     public static final Supplier<Item> NETHER_QUARTZ_CREEPER_EGG = registerWithTab("nether_quartz_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), 0x8b0000, 0xf5f5f5, new Item.Properties()));
     public static final Supplier<Item> REDSTONE_CREEPER_EGG = registerWithTab("redstone_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.REDSTONE_CREEPER.get(), 0x808080, 0xff0000, new Item.Properties()));
+    public static final Supplier<Item> ANCIENT_DEBRIS_CREEPER_EGG = registerWithTab("ancient_debris_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), 0x808080, 0x492A23, new Item.Properties()));
 
 
     public static RegistryObject<Item> registerWithTab(final String name, final Supplier<? extends Item> supplier) {
