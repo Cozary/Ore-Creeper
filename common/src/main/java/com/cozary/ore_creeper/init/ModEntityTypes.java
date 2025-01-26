@@ -50,7 +50,7 @@ public class ModEntityTypes {
             .build(new ResourceLocation(OreCreeper.MOD_ID, "redstone_creeper").toString()));
     public static final RegistryObject<EntityType<AncientDebrisCreeperEntity>> ANCIENT_DEBRIS_CREEPER = registerEntitiesList("ancient_debris_creeper", () -> EntityType.Builder.of(AncientDebrisCreeperEntity::new, MobCategory.MONSTER)
             .sized(0.6F, 1.7F).clientTrackingRange(8)
-            .build(ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ancient_debris_creeper").toString()));
+            .build(new ResourceLocation(OreCreeper.MOD_ID, "ancient_debris_creeper").toString()));
     public static final RegistryObject<EntityType<OrePrimedTnt>> ORE_PRIMED_TNT = ENTITY_TYPES.register("ore_primed_tnt", () -> EntityType.Builder.<OrePrimedTnt>of(OrePrimedTnt::new, MobCategory.MISC)
             .fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10)
             .build(new ResourceLocation(OreCreeper.MOD_ID, "ore_primed_tnt").toString()));
