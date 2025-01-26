@@ -17,5 +17,6 @@ public class ClientEventBusSubscriber {
     public static ModelLayerLocation NETHER_GOLD_CREEPER = new ModelLayerLocation(new ResourceLocation(OreCreeper.MOD_ID, "nether_gold_creeper"), "nether_gold_creeper");
     public static ModelLayerLocation NETHER_QUARTZ_CREEPER = new ModelLayerLocation(new ResourceLocation(OreCreeper.MOD_ID, "nether_quartz_creeper"), "nether_quartz_creeper");
     public static ModelLayerLocation REDSTONE_CREEPER = new ModelLayerLocation(new ResourceLocation(OreCreeper.MOD_ID, "redstone_creeper"), "redstone_creeper");
+    public static ModelLayerLocation ANCIENT_DEBRIS_CREEPER = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ancient_debris_creeper"), "ancient_debris_creeper");
 
 }

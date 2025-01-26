@@ -24,5 +24,6 @@ public class EntityRegister {
         event.put(ModEntityTypes.NETHER_GOLD_CREEPER.get(), NetherGoldCreeperEntity.createAttributes().build());
         event.put(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), NetherQuartzCreeperEntity.createAttributes().build());
         event.put(ModEntityTypes.REDSTONE_CREEPER.get(), RedstoneCreeperEntity.createAttributes().build());
+        event.put(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), AncientDebrisCreeperEntity.createAttributes().build());
     }
 }
