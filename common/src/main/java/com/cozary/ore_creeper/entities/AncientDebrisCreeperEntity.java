@@ -7,8 +7,8 @@ import com.cozary.ore_creeper.util.ExplosionTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 
@@ -19,7 +19,7 @@ public class AncientDebrisCreeperEntity extends AbstractOreCreeperEntity {
     }
 
 
-    public static boolean canOreCreeperSpawn(EntityType<? extends AbstractOreCreeperEntity> creeper, ServerLevelAccessor world, MobSpawnType reason, BlockPos pos, RandomSource random) {
+    public static boolean canOreCreeperSpawn(EntityType<? extends AbstractOreCreeperEntity> creeper, ServerLevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         return pos.getY() < ConfigurationHandler.GENERAL.ancientDebrisCreeperMaxSpawnYLevel.get() && world.getBlockState(pos.below()).is(ModTags.SPAWNABLE_BLOCKS_NETHER);
     }
 
