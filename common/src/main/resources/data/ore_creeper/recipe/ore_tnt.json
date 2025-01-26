@@ -6,15 +6,9 @@
     "#S#"
   ],
   "key": {
-    "#": {
-      "item": "minecraft:deepslate"
-    },
-    "S": {
-      "item": "minecraft:stone"
-    },
-    "T": {
-      "item": "minecraft:tnt"
-    }
+    "#": "minecraft:deepslate",
+    "S": "minecraft:stone",
+    "T": "minecraft:tnt"
   },
   "result": {
     "id": "ore_creeper:ore_tnt",
