@@ -45,6 +45,9 @@ public class RendererRegister implements ClientModInitializer {
         EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.REDSTONE_CREEPER, OreCreeperModel::createBodyLayer);
         EntityRendererRegistry.register(ModEntityTypes.REDSTONE_CREEPER.get(), RedstoneCreeperRenderer::new);
 
+        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.ANCIENT_DEBRIS_CREEPER, OreCreeperModel::createBodyLayer);
+        EntityRendererRegistry.register(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), AncientDebrisCreeperRenderer::new);
+
         EntityRendererRegistry.register(ModEntityTypes.ORE_PRIMED_TNT.get(), OreTntRenderer::new);
 
     }

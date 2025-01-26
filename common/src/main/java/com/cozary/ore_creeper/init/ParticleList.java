@@ -29,6 +29,8 @@ public class ParticleList {
     });
     public static final RegistryObject<SimpleParticleType> WHITE_EXPLOSION = PARTICLES.register("white_explosion", () -> new SimpleParticleType(true) {
     });
+    public static final RegistryObject<SimpleParticleType> ANCIENT_DEBRIS_EXPLOSION = PARTICLES.register("ancient_debris_explosion", () -> new SimpleParticleType(true) {
+    });
 
     public static void loadClass() {
     }

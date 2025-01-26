@@ -3,6 +3,7 @@ package com.cozary.ore_creeper.init;
 import com.cozary.ore_creeper.OreCreeper;
 import com.google.common.collect.Sets;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 
@@ -25,6 +26,7 @@ public class ModSpawnEggs {
     public static final Supplier<Item> NETHER_GOLD_CREEPER_EGG = registerWithTab("nether_gold_creeper_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.NETHER_GOLD_CREEPER, 0x8b0000, 0xffd700, new Item.Properties()));
     public static final Supplier<Item> NETHER_QUARTZ_CREEPER_EGG = registerWithTab("nether_quartz_creeper_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.NETHER_QUARTZ_CREEPER, 0x8b0000, 0xf5f5f5, new Item.Properties()));
     public static final Supplier<Item> REDSTONE_CREEPER_EGG = registerWithTab("redstone_creeper_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.REDSTONE_CREEPER, 0x808080, 0xff0000, new Item.Properties()));
+    public static final Supplier<Item> ANCIENT_DEBRIS_CREEPER_EGG = registerWithTab("ancient_debris_creeper_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.ANCIENT_DEBRIS_CREEPER, FastColor.ARGB32.opaque(0x808080), FastColor.ARGB32.opaque(0x492A23), new Item.Properties()));
 
 
     public static RegistryObject<Item> registerWithTab(final String name, final Supplier<? extends Item> supplier) {
