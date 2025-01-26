@@ -30,8 +30,8 @@ public class AncientDebrisCreeperEntity extends AbstractOreCreeperEntity {
         double d2 = this.random.nextGaussian() * 0.02D;
         if (!this.level().isClientSide) {
             this.dead = true;
-            new ExplosionTypes().oreExplosionEffect(this, this.level(), this.getX(), this.getY(), this.getZ(), ExplosionTypes.OreType.ANCIENT_DEBRIS);
-            ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleList.ANCIENT_DEBRIS_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 500, d1, d2, d0, 0.5);
+            new ExplosionTypes().netherExplosionEffect(this, this.level(), this.getX(), this.getY(), this.getZ(), ExplosionTypes.OreType.ANCIENT_DEBRIS);
+            ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleList.ANCIENT_DEBRIS_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
             this.discard();
             this.spawnLingeringCloud();
         }
