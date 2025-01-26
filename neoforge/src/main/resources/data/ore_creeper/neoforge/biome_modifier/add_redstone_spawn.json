@@ -3,7 +3,7 @@
   "biomes": "#ore_creeper:spawnable_biomes",
   "spawners": {
     "type": "ore_creeper:redstone_creeper",
-    "weight": 40,
+    "weight": 20,
     "minCount": 1,
     "maxCount": 2
   }
