@@ -1,5 +1,9 @@
 # Changelog
 
+### Added
+
+- Ancient Debris Creeper
+
 ### Changed
 
 - Spawn rate halved
