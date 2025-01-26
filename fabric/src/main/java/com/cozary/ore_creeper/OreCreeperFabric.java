@@ -69,6 +69,7 @@ public class OreCreeperFabric implements ModInitializer {
         BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.REDSTONE_CREEPER.get(), ConfigurationHandler.GENERAL.redstoneCreeperWeight.get(), ConfigurationHandler.GENERAL.redstoneCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.redstoneCreepermaxGroupSize.get());
         BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.NETHER_GOLD_CREEPER.get(), ConfigurationHandler.GENERAL.netherGoldCreeperWeight.get(), ConfigurationHandler.GENERAL.netherGoldCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.netherGoldCreepermaxGroupSize.get());
         BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), ConfigurationHandler.GENERAL.netherQuartzCreeperWeight.get(), ConfigurationHandler.GENERAL.netherQuartzCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.netherQuartzCreepermaxGroupSize.get());
+        BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), ConfigurationHandler.GENERAL.ancientDebrisCreeperWeight.get(), ConfigurationHandler.GENERAL.ancientDebrisCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.ancientDebrisCreepermaxGroupSize.get());
 
         SpawnPlacements.register(ModEntityTypes.COAL_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CoalCreeperEntity::canOreCreeperSpawn);
         SpawnPlacements.register(ModEntityTypes.COPPER_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CopperCreeperEntity::canOreCreeperSpawn);
@@ -80,6 +81,7 @@ public class OreCreeperFabric implements ModInitializer {
         SpawnPlacements.register(ModEntityTypes.NETHER_GOLD_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherGoldCreeperEntity::canOreCreeperSpawn);
         SpawnPlacements.register(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, NetherQuartzCreeperEntity::canOreCreeperSpawn);
         SpawnPlacements.register(ModEntityTypes.REDSTONE_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, RedstoneCreeperEntity::canOreCreeperSpawn);
+        SpawnPlacements.register(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, AncientDebrisCreeperEntity::canOreCreeperSpawn);
 
     }
 
