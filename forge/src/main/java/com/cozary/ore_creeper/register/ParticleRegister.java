@@ -23,5 +23,6 @@ public class ParticleRegister {
         event.registerSpriteSet(ParticleList.LAPIS_EXPLOSION.get(), BaseExplosionParticle.Factory::new);
         event.registerSpriteSet(ParticleList.REDSTONE_EXPLOSION.get(), BaseExplosionParticle.Factory::new);
         event.registerSpriteSet(ParticleList.WHITE_EXPLOSION.get(), BaseExplosionParticle.Factory::new);
+        event.registerSpriteSet(ParticleList.ANCIENT_DEBRIS_EXPLOSION.get(), BaseExplosionParticle.Factory::new);
     }
 }

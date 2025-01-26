@@ -14,6 +14,7 @@ import java.util.Random;
 
 public class ExplosionTypes {
 
+
     public void oreExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
 
         ServerLevel serverLevel = (ServerLevel) entityWorld;
@@ -101,6 +102,7 @@ public class ExplosionTypes {
         switch (oreType) {
             case NETHERGOLD -> radius = ConfigurationHandler.GENERAL.netherGoldCreeperExplosionRadius.get();
             case NETHERQUARTZ -> radius = ConfigurationHandler.GENERAL.netherQuartzCreeperExplosionRadius.get();
+            case ANCIENT_DEBRIS -> radius = ConfigurationHandler.GENERAL.ancientDebrisCreeperExplosionRadius.get();
         }
 
         entityWorld.explode(entity, entityX, entityY, entityZ, 0, Level.ExplosionInteraction.NONE);
@@ -141,7 +143,8 @@ public class ExplosionTypes {
         LAPIS(Blocks.LAPIS_ORE, null, Blocks.DEEPSLATE_LAPIS_ORE),
         REDSTONE(Blocks.REDSTONE_ORE, null, Blocks.DEEPSLATE_REDSTONE_ORE),
         NETHERGOLD(Blocks.NETHER_GOLD_ORE, Blocks.RAW_GOLD_BLOCK, null),
-        NETHERQUARTZ(Blocks.NETHER_QUARTZ_ORE, null, null);
+        NETHERQUARTZ(Blocks.NETHER_QUARTZ_ORE, null, null),
+        ANCIENT_DEBRIS(Blocks.ANCIENT_DEBRIS, null, null);
 
         private final Block oreBlock;
         private final Block rawBlock;

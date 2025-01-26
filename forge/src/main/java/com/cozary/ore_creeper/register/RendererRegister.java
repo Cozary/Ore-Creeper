@@ -26,6 +26,7 @@ public class RendererRegister {
         event.registerEntityRenderer(ModEntityTypes.NETHER_GOLD_CREEPER.get(), NetherGoldCreeperRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), NetherQuartzCreeperRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.REDSTONE_CREEPER.get(), RedstoneCreeperRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), AncientDebrisCreeperRenderer::new);
 
         event.registerEntityRenderer(ModEntityTypes.ORE_PRIMED_TNT.get(), OreTntRenderer::new);
     }
@@ -42,6 +43,7 @@ public class RendererRegister {
         event.registerLayerDefinition(NETHER_GOLD_CREEPER, OreCreeperModel::createBodyLayer);
         event.registerLayerDefinition(NETHER_QUARTZ_CREEPER, OreCreeperModel::createBodyLayer);
         event.registerLayerDefinition(REDSTONE_CREEPER, OreCreeperModel::createBodyLayer);
+        event.registerLayerDefinition(ANCIENT_DEBRIS_CREEPER, OreCreeperModel::createBodyLayer);
     }
 
 }
