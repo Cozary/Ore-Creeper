@@ -8,7 +8,6 @@ import com.cozary.ore_creeper.init.ModSpawnEggs;
 import com.cozary.ore_creeper.init.ModTags;
 import com.cozary.ore_creeper.register.EntityRegister;
 import com.cozary.ore_creeper.util.ConfigurationHandler;
-import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
 import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -43,7 +42,7 @@ public class OreCreeperFabric implements ModInitializer {
                 .build()
         );
 
-        ForgeConfigRegistry.INSTANCE.register(OreCreeper.MOD_ID, ModConfig.Type.COMMON, ConfigurationHandler.spec);
+        NeoForgeConfigRegistry.INSTANCE.register(OreCreeper.MOD_ID, ModConfig.Type.COMMON, ConfigurationHandler.spec);
 
         OreCreeper.init();
         register();
