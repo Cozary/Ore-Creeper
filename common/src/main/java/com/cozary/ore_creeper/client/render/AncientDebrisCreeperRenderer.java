@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class AncientDebrisCreeperRenderer extends MobRenderer<AncientDebrisCreeperEntity, CreeperModel<AncientDebrisCreeperEntity>> {
 
-    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/ancient_debris_creeper.png");
-    ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
+    protected static final ResourceLocation TEXTURE = new ResourceLocation(OreCreeper.MOD_ID, "textures/entity/ancient_debris_creeper.png");
+    ResourceLocation entityIconLoc = new ResourceLocation(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public AncientDebrisCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new CreeperModel<>(context.bakeLayer(ClientEventBusSubscriber.ANCIENT_DEBRIS_CREEPER)), 0.5F);
