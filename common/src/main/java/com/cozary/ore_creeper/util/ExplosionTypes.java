@@ -34,7 +34,7 @@ public class ExplosionTypes {
             case REDSTONE -> radius = CommonConfigManager.getConfig().redstoneCreeperExplosionRadius();
         }
 
-        entityWorld.explode(entity, entityX, entityY, entityZ, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? (float) radius : 0, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+        entityWorld.explode(entity, entityX, entityY, entityZ, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? (float) radius : 0, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
 
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
@@ -105,7 +105,7 @@ public class ExplosionTypes {
             case ANCIENT_DEBRIS -> radius = CommonConfigManager.getConfig().ancientDebrisCreeperExplosionRadius();
         }
 
-        entityWorld.explode(entity, entityX, entityY, entityZ, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? (float) radius : 0, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+        entityWorld.explode(entity, entityX, entityY, entityZ, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? (float) radius : 0, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
                     for (int z = (int) -radius; z <= radius; z++) {
