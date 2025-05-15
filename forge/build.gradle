@@ -109,9 +109,6 @@ publishMods {
         accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
         projectId = curseforge_project_id
         minecraftVersions.add(minecraft_version)
-        requires {
-            slug = "forge-config-api-port-fabric"
-        }
         optional {
             slug = "journeymap"
         }
@@ -122,9 +119,6 @@ publishMods {
         accessToken = accessToken = providers.environmentVariable("MODRINTH_API_KEY")
         projectId = modrinth_project_id
         minecraftVersions.add(minecraft_version)
-        requires {
-            slug = "forge-config-api-port"
-        }
         optional {
             slug = "journeymap"
         }
