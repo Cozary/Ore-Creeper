@@ -61,7 +61,7 @@ public class ModSpawnEggs {
     public static final Supplier<Item> ANCIENT_DEBRIS_CREEPER_EGG = registerWithTab("ancient_debris_creeper_spawn_egg", () -> new SpawnEggItem(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(),
             new Item.Properties()
                     .setId(ResourceKey.create(Registries.ITEM,
-                    ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ancient_debris_creeper_spawn_egg")))));
+                            ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ancient_debris_creeper_spawn_egg")))));
 
     public static RegistryObject<Item> registerWithTab(final String name, final Supplier<? extends Item> supplier) {
         RegistryObject<Item> item = ITEMS.register(name, supplier);
