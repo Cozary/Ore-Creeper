@@ -3,7 +3,6 @@ package com.cozary.ore_creeper;
 
 import com.cozary.ore_creeper.init.ModSpawnEggs;
 import com.cozary.ore_creeper.init.ModTabs;
-import com.cozary.ore_creeper.util.ConfigurationHandler;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;

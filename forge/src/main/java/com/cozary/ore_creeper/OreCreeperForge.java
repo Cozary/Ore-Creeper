@@ -2,8 +2,6 @@ package com.cozary.ore_creeper;
 
 import com.cozary.ore_creeper.init.ModSpawnEggs;
 import com.cozary.ore_creeper.init.ModTabs;
-import com.cozary.ore_creeper.util.ConfigurationHandler;
-import fuzs.forgeconfigapiport.forge.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
