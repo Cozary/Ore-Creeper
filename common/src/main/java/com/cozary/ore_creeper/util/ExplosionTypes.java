@@ -33,8 +33,8 @@ public class ExplosionTypes {
             case REDSTONE -> radius = ConfigurationHandler.GENERAL.redstoneCreeperExplosionRadius.get();
         }
 
-        entityWorld.explode(entity, entityX, entityY, entityZ, 0, Level.ExplosionInteraction.NONE);
-        if (serverLevel.getServer().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+        entityWorld.explode(entity, entityX, entityY, entityZ, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? (float) radius : 0, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+            if (serverLevel.getServer().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
                     for (int z = (int) -radius; z <= radius; z++) {
@@ -105,8 +105,8 @@ public class ExplosionTypes {
             case ANCIENT_DEBRIS -> radius = ConfigurationHandler.GENERAL.ancientDebrisCreeperExplosionRadius.get();
         }
 
-        entityWorld.explode(entity, entityX, entityY, entityZ, 0, Level.ExplosionInteraction.NONE);
-        if (serverLevel.getServer().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+        entityWorld.explode(entity, entityX, entityY, entityZ, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? (float) radius : 0, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+            if (serverLevel.getServer().getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
                     for (int z = (int) -radius; z <= radius; z++) {
