@@ -8,10 +8,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class BlockItemBase extends BlockItem {
 
@@ -22,9 +24,9 @@ public class BlockItemBase extends BlockItem {
     }
 
     @Override
-    public void appendHoverText(@NotNull ItemStack itemStack, @NotNull TooltipContext tooltipContext, @NotNull List<Component> tooltip, @NotNull TooltipFlag flagIn) {
-        tooltip.add(Component.translatable(ChatFormatting.AQUA + "This Tnt transforms the" + ChatFormatting.GOLD + " Creepers" + ChatFormatting.AQUA + " it hits."));
-        tooltip.add(Component.translatable(ChatFormatting.GRAY + "Its use is merely intended for Modpacks, not common use."));
+    public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay tooltipDisplay, Consumer<Component> tooltipAdder, TooltipFlag flag) {
+        tooltipAdder.accept(Component.translatable(ChatFormatting.AQUA + "This Tnt transforms the" + ChatFormatting.GOLD + " Creepers" + ChatFormatting.AQUA + " it hits."));
+        tooltipAdder.accept(Component.translatable(ChatFormatting.GRAY + "Its use is merely intended for Modpacks, not common use."));
     }
 
 }
