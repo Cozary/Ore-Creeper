@@ -66,7 +66,7 @@ public class ExplosionTypes {
         if (entity instanceof PowerableMob) {
             radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
         }
-        entityWorld.explode(entity, entityX, entityY, entityZ, 0, Level.ExplosionInteraction.NONE);
+        entityWorld.explode(entity, entityX, entityY, entityZ, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? (float) radius : 0, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
         if (entityWorld.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
@@ -134,7 +134,7 @@ public class ExplosionTypes {
         if (entity instanceof PowerableMob) {
             radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
         }
-        entityWorld.explode(entity, entityX, entityY, entityZ, 0, Level.ExplosionInteraction.NONE);
+        entityWorld.explode(entity, entityX, entityY, entityZ, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? (float) radius : 0, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
         if (entityWorld.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
