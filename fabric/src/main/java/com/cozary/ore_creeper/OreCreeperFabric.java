@@ -8,8 +8,6 @@ import com.cozary.ore_creeper.init.ModEntityTypes;
 import com.cozary.ore_creeper.init.ModSpawnEggs;
 import com.cozary.ore_creeper.init.ModTags;
 import com.cozary.ore_creeper.register.EntityRegister;
-import com.cozary.ore_creeper.util.ConfigurationHandler;
-import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;

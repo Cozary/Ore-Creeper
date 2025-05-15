@@ -3,7 +3,6 @@ package com.cozary.ore_creeper.entities;
 import com.cozary.ore_creeper.config.CommonConfigManager;
 import com.cozary.ore_creeper.init.ModTags;
 import com.cozary.ore_creeper.init.ParticleList;
-import com.cozary.ore_creeper.util.ConfigurationHandler;
 import com.cozary.ore_creeper.util.ExplosionTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
