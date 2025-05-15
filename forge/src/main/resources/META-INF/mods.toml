@@ -24,9 +24,3 @@ mandatory = true
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
-[[dependencies.${mod_id}]]
-modId = "forgeconfigapiport"
-mandatory = true
-versionRange = "[20.2.6,)"
-ordering = "NONE"
-side = "BOTH"

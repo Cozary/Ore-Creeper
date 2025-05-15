@@ -1,5 +1,6 @@
 package com.cozary.ore_creeper.util;
 
+import com.cozary.ore_creeper.config.CommonConfigManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PowerableMob;
@@ -53,20 +54,20 @@ public class ExplosionTypes {
     public void oreExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
         double radius = 0;
         switch (oreType) {
-            case COAL -> radius = ConfigurationHandler.GENERAL.coalCreeperExplosionRadius.get();
-            case COPPER -> radius = ConfigurationHandler.GENERAL.copperCreeperExplosionRadius.get();
-            case DIAMOND -> radius = ConfigurationHandler.GENERAL.diamondCreeperExplosionRadius.get();
-            case EMERALD -> radius = ConfigurationHandler.GENERAL.emeraldCreeperExplosionRadius.get();
-            case GOLD -> radius = ConfigurationHandler.GENERAL.goldCreeperExplosionRadius.get();
-            case IRON -> radius = ConfigurationHandler.GENERAL.ironCreeperExplosionRadius.get();
-            case LAPIS -> radius = ConfigurationHandler.GENERAL.lapisLazuliCreeperExplosionRadius.get();
-            case REDSTONE -> radius = ConfigurationHandler.GENERAL.redstoneCreeperExplosionRadius.get();
+            case COAL -> radius = CommonConfigManager.getConfig().coalCreeperExplosionRadius();
+            case COPPER -> radius = CommonConfigManager.getConfig().copperCreeperExplosionRadius();
+            case DIAMOND -> radius = CommonConfigManager.getConfig().diamondCreeperExplosionRadius();
+            case EMERALD -> radius = CommonConfigManager.getConfig().emeraldCreeperExplosionRadius();
+            case GOLD -> radius = CommonConfigManager.getConfig().goldCreeperExplosionRadius();
+            case IRON -> radius = CommonConfigManager.getConfig().ironCreeperExplosionRadius();
+            case LAPIS -> radius = CommonConfigManager.getConfig().lapisLazuliCreeperExplosionRadius();
+            case REDSTONE -> radius = CommonConfigManager.getConfig().redstoneCreeperExplosionRadius();
         }
 
         if (entity instanceof PowerableMob) {
             radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
         }
-        entityWorld.explode(entity, entityX, entityY, entityZ, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? (float) radius : 0, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+        entityWorld.explode(entity, entityX, entityY, entityZ, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? (float) radius : 0, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
 
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {
@@ -126,14 +127,14 @@ public class ExplosionTypes {
     public void netherExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
         double radius = 0;
         switch (oreType) {
-            case NETHERGOLD -> radius = ConfigurationHandler.GENERAL.netherGoldCreeperExplosionRadius.get();
-            case NETHERQUARTZ -> radius = ConfigurationHandler.GENERAL.netherQuartzCreeperExplosionRadius.get();
-            case ANCIENT_DEBRIS -> radius = ConfigurationHandler.GENERAL.ancientDebrisCreeperExplosionRadius.get();
+            case NETHERGOLD -> radius = CommonConfigManager.getConfig().netherGoldCreeperExplosionRadius();
+            case NETHERQUARTZ -> radius = CommonConfigManager.getConfig().netherQuartzCreeperExplosionRadius();
+            case ANCIENT_DEBRIS -> radius = CommonConfigManager.getConfig().ancientDebrisCreeperExplosionRadius();
         }
         if (entity instanceof PowerableMob) {
             radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
         }
-        entityWorld.explode(entity, entityX, entityY, entityZ, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? (float) radius : 0, ConfigurationHandler.GENERAL.oreCreepersExplodeLikeNormalCreepers.get() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+        entityWorld.explode(entity, entityX, entityY, entityZ, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? (float) radius : 0, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
 
             for (int x = (int) -radius; x <= radius; x++) {
                 for (int y = (int) -radius; y <= radius; y++) {

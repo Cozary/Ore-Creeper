@@ -1,15 +1,13 @@
 package com.cozary.ore_creeper;
 
+import com.cozary.ore_creeper.config.FabricConfigManager;
+import com.cozary.ore_creeper.config.FabricConfigManager;
 import com.cozary.ore_creeper.entities.*;
 import com.cozary.ore_creeper.init.ModBlocks;
 import com.cozary.ore_creeper.init.ModEntityTypes;
-import com.cozary.ore_creeper.init.ModItems;
 import com.cozary.ore_creeper.init.ModSpawnEggs;
 import com.cozary.ore_creeper.init.ModTags;
 import com.cozary.ore_creeper.register.EntityRegister;
-import com.cozary.ore_creeper.util.ConfigurationHandler;
-import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
-import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
@@ -26,7 +24,6 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.neoforged.fml.config.ModConfig;
 
 public class OreCreeperFabric implements ModInitializer {
 
@@ -43,12 +40,12 @@ public class OreCreeperFabric implements ModInitializer {
                 .build()
         );
 
-        NeoForgeConfigRegistry.INSTANCE.register(OreCreeper.MOD_ID, ModConfig.Type.COMMON, ConfigurationHandler.spec);
-
         OreCreeper.init();
         register();
         EntityRegister.registerAttributes();
         ModSpawnEggs.loadClass();
+
+        FabricConfigManager.loadConfig();
     }
 
     public void register() {
@@ -59,17 +56,17 @@ public class OreCreeperFabric implements ModInitializer {
         var biomeSelectorNether = BiomeSelectors.tag(ModTags.SPAWNABLE_BIOMES_NETHER)
                 .and(context -> !context.hasTag(ModTags.BLACKLIST_BIOMES_NETHER));
 
-        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.COAL_CREEPER.get(), ConfigurationHandler.GENERAL.coalCreeperWeight.get(), ConfigurationHandler.GENERAL.coalCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.coalCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.COPPER_CREEPER.get(), ConfigurationHandler.GENERAL.copperCreeperWeight.get(), ConfigurationHandler.GENERAL.copperCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.copperCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.DIAMOND_CREEPER.get(), ConfigurationHandler.GENERAL.diamondCreeperWeight.get(), ConfigurationHandler.GENERAL.diamondCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.diamondCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.EMERALD_CREEPER.get(), ConfigurationHandler.GENERAL.emeraldCreeperWeight.get(), ConfigurationHandler.GENERAL.emeraldCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.emeraldCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.GOLD_CREEPER.get(), ConfigurationHandler.GENERAL.goldCreeperWeight.get(), ConfigurationHandler.GENERAL.goldCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.goldCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.IRON_CREEPER.get(), ConfigurationHandler.GENERAL.ironCreeperWeight.get(), ConfigurationHandler.GENERAL.ironCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.ironCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.LAPIS_LAZULI_CREEPER.get(), ConfigurationHandler.GENERAL.lapisLazuliCreeperWeight.get(), ConfigurationHandler.GENERAL.lapisLazuliCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.lapisLazuliCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.REDSTONE_CREEPER.get(), ConfigurationHandler.GENERAL.redstoneCreeperWeight.get(), ConfigurationHandler.GENERAL.redstoneCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.redstoneCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.NETHER_GOLD_CREEPER.get(), ConfigurationHandler.GENERAL.netherGoldCreeperWeight.get(), ConfigurationHandler.GENERAL.netherGoldCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.netherGoldCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), ConfigurationHandler.GENERAL.netherQuartzCreeperWeight.get(), ConfigurationHandler.GENERAL.netherQuartzCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.netherQuartzCreepermaxGroupSize.get());
-        BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), ConfigurationHandler.GENERAL.ancientDebrisCreeperWeight.get(), ConfigurationHandler.GENERAL.ancientDebrisCreeperminGroupSize.get(), ConfigurationHandler.GENERAL.ancientDebrisCreepermaxGroupSize.get());
+        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.COAL_CREEPER.get(), FabricConfigManager.getConfig().coalCreeperWeight(), FabricConfigManager.getConfig().coalCreeperminGroupSize(), FabricConfigManager.getConfig().coalCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.COPPER_CREEPER.get(), FabricConfigManager.getConfig().copperCreeperWeight(), FabricConfigManager.getConfig().copperCreeperminGroupSize(), FabricConfigManager.getConfig().copperCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.DIAMOND_CREEPER.get(), FabricConfigManager.getConfig().diamondCreeperWeight(), FabricConfigManager.getConfig().diamondCreeperminGroupSize(), FabricConfigManager.getConfig().diamondCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.EMERALD_CREEPER.get(), FabricConfigManager.getConfig().emeraldCreeperWeight(), FabricConfigManager.getConfig().emeraldCreeperminGroupSize(), FabricConfigManager.getConfig().emeraldCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.GOLD_CREEPER.get(), FabricConfigManager.getConfig().goldCreeperWeight(), FabricConfigManager.getConfig().goldCreeperminGroupSize(), FabricConfigManager.getConfig().goldCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.IRON_CREEPER.get(), FabricConfigManager.getConfig().ironCreeperWeight(), FabricConfigManager.getConfig().ironCreeperminGroupSize(), FabricConfigManager.getConfig().ironCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.LAPIS_LAZULI_CREEPER.get(), FabricConfigManager.getConfig().lapisLazuliCreeperWeight(), FabricConfigManager.getConfig().lapisLazuliCreeperminGroupSize(), FabricConfigManager.getConfig().lapisLazuliCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelector, MobCategory.MONSTER, ModEntityTypes.REDSTONE_CREEPER.get(), FabricConfigManager.getConfig().redstoneCreeperWeight(), FabricConfigManager.getConfig().redstoneCreeperminGroupSize(), FabricConfigManager.getConfig().redstoneCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.NETHER_GOLD_CREEPER.get(), FabricConfigManager.getConfig().netherGoldCreeperWeight(), FabricConfigManager.getConfig().netherGoldCreeperminGroupSize(), FabricConfigManager.getConfig().netherGoldCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), FabricConfigManager.getConfig().netherQuartzCreeperWeight(), FabricConfigManager.getConfig().netherQuartzCreeperminGroupSize(), FabricConfigManager.getConfig().netherQuartzCreepermaxGroupSize());
+        BiomeModifications.addSpawn(biomeSelectorNether, MobCategory.MONSTER, ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), FabricConfigManager.getConfig().ancientDebrisCreeperWeight(), FabricConfigManager.getConfig().ancientDebrisCreeperminGroupSize(), FabricConfigManager.getConfig().ancientDebrisCreepermaxGroupSize());
 
         SpawnPlacements.register(ModEntityTypes.COAL_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CoalCreeperEntity::canOreCreeperSpawn);
         SpawnPlacements.register(ModEntityTypes.COPPER_CREEPER.get(), SpawnPlacementTypes.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, CopperCreeperEntity::canOreCreeperSpawn);
