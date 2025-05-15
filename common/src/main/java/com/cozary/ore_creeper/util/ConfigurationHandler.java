@@ -9,6 +9,8 @@ public class ConfigurationHandler {
 
     public static class General {
 
+        public final ModConfigSpec.BooleanValue oreCreepersExplodeLikeNormalCreepers;
+
         public final ModConfigSpec.IntValue coalCreeperWeight;
         public final ModConfigSpec.IntValue coalCreeperminGroupSize;
         public final ModConfigSpec.IntValue coalCreepermaxGroupSize;
@@ -68,7 +70,9 @@ public class ConfigurationHandler {
         public final ModConfigSpec.IntValue ancientDebrisCreeperMaxSpawnYLevel;
 
         General(ModConfigSpec.Builder builder) {
-
+            builder.push("Special");
+            oreCreepersExplodeLikeNormalCreepers = builder.define("Ore Creepers Explode Like Normal Creepers?", false);
+            builder.pop();
             builder.push("General");
             oreTntExplosionRadius = builder.defineInRange("explosion radius", 4.0, 0, 100);
             builder.pop();
