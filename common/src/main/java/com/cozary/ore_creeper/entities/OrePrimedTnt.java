@@ -1,8 +1,8 @@
 package com.cozary.ore_creeper.entities;
 
+import com.cozary.ore_creeper.config.CommonConfigManager;
 import com.cozary.ore_creeper.init.ModEntityTypes;
 import com.cozary.ore_creeper.init.RegistryObject;
-import com.cozary.ore_creeper.util.ConfigurationHandler;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -61,7 +61,7 @@ public class OrePrimedTnt extends PrimedTnt {
         double d0 = this.random.nextGaussian() * 0.02D;
         double d1 = this.random.nextGaussian() * 0.02D;
         double d2 = this.random.nextGaussian() * 0.02D;
-        AABB targetBox = new AABB(this.position(), this.position()).inflate(ConfigurationHandler.GENERAL.oreTntExplosionRadius.get());
+        AABB targetBox = new AABB(this.position(), this.position()).inflate(CommonConfigManager.getConfig().oreTntExplosionRadius());
         List<Creeper> foundTarget = this.level().getEntitiesOfClass(Creeper.class, targetBox);
         ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 1, d1, d2, d0, 0.5);
 

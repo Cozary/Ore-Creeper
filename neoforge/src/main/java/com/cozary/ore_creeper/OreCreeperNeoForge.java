@@ -16,9 +16,6 @@ public class OreCreeperNeoForge {
         OreCreeper.init();
         ModTabs.init(eventBus);
         ModSpawnEggs.loadClass();
-
-        //Register the config
-        container.registerConfig(ModConfig.Type.COMMON, ConfigurationHandler.spec);
     }
 
 }

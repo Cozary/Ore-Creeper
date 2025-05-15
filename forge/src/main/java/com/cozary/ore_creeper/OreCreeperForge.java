@@ -18,7 +18,5 @@ public class OreCreeperForge {
         OreCreeper.init();
         ModTabs.CREATIVE_MODE_TAB.register(eventBus);
         ModSpawnEggs.loadClass();
-
-        NeoForgeConfigRegistry.INSTANCE.register(ModConfig.Type.COMMON, ConfigurationHandler.spec);
     }
 }
