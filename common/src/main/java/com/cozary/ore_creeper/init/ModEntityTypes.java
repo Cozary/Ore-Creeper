@@ -51,18 +51,19 @@ public class ModEntityTypes {
     public static final RegistryObject<EntityType<AncientDebrisCreeperEntity>> ANCIENT_DEBRIS_CREEPER = registerEntitiesList("ancient_debris_creeper", () -> EntityType.Builder.of(AncientDebrisCreeperEntity::new, MobCategory.MONSTER)
             .sized(0.6F, 1.7F).clientTrackingRange(8)
             .build(ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ancient_debris_creeper").toString()));
-    public static final RegistryObject<EntityType<OrePrimedTnt>> ORE_PRIMED_TNT = ENTITY_TYPES.register("ore_primed_tnt", () -> EntityType.Builder.<OrePrimedTnt>of(OrePrimedTnt::new, MobCategory.MISC)
-            .fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10)
-            .build(ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ore_primed_tnt").toString()));
 
     @SuppressWarnings("unchecked")
     public static <T extends EntityType<?>> RegistryObject<T> registerEntitiesList(final String name, final Supplier<? extends T> supplier) {
         RegistryObject<T> entity = ENTITY_TYPES.register(name, supplier);
         ENTITY_LIST.add((RegistryObject<EntityType<?>>) entity);
         return entity;
-    }
+    }    public static final RegistryObject<EntityType<OrePrimedTnt>> ORE_PRIMED_TNT = ENTITY_TYPES.register("ore_primed_tnt", () -> EntityType.Builder.<OrePrimedTnt>of(OrePrimedTnt::new, MobCategory.MISC)
+            .fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10)
+            .build(ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ore_primed_tnt").toString()));
 
     public static void loadClass() {
     }
+
+
 
 }

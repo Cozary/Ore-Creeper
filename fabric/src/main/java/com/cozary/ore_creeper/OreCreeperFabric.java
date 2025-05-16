@@ -1,7 +1,6 @@
 package com.cozary.ore_creeper;
 
 import com.cozary.ore_creeper.config.FabricConfigManager;
-import com.cozary.ore_creeper.config.FabricConfigManager;
 import com.cozary.ore_creeper.entities.*;
 import com.cozary.ore_creeper.init.ModBlocks;
 import com.cozary.ore_creeper.init.ModEntityTypes;

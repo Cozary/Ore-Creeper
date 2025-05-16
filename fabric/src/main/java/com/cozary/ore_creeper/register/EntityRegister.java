@@ -2,7 +2,6 @@ package com.cozary.ore_creeper.register;
 
 import com.cozary.ore_creeper.entities.*;
 import com.cozary.ore_creeper.init.ModEntityTypes;
-import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 
 public final class EntityRegister {

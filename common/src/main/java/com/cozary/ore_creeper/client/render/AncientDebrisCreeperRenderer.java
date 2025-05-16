@@ -2,7 +2,6 @@ package com.cozary.ore_creeper.client.render;
 
 import com.cozary.ore_creeper.OreCreeper;
 import com.cozary.ore_creeper.entities.AncientDebrisCreeperEntity;
-import com.cozary.ore_creeper.entities.AncientDebrisCreeperEntity;
 import com.cozary.ore_creeper.util.ClientEventBusSubscriber;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.model.CreeperModel;
