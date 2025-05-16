@@ -1,7 +1,6 @@
 {
   "type": "forge:add_spawns",
   "biomes": "#ore_creeper:spawnable_biomes_nether",
-
   "spawners": {
     "type": "ore_creeper:nether_gold_creeper",
     "weight": 10,

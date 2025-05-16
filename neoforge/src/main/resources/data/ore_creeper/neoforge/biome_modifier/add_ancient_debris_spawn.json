@@ -1,7 +1,6 @@
 {
   "type": "neoforge:add_spawns",
   "biomes": "#ore_creeper:spawnable_biomes_nether",
-
   "spawners": {
     "type": "ore_creeper:ancient_debris_creeper",
     "weight": 1,

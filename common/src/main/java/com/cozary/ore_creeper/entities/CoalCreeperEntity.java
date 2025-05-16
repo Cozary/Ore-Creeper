@@ -19,7 +19,7 @@ public class CoalCreeperEntity extends AbstractOreCreeperEntity {
     }
 
     public static boolean canOreCreeperSpawn(EntityType<? extends AbstractOreCreeperEntity> creeper, ServerLevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-     return pos.getY() < CommonConfigManager.getConfig().coalCreeperMaxSpawnYLevel() && world.getBlockState(pos.below()).is(ModTags.SPAWNABLE_BLOCKS) && isDarkEnoughToSpawn(world, pos, random) && checkMobSpawnRules(creeper, world, reason, pos, random);
+        return pos.getY() < CommonConfigManager.getConfig().coalCreeperMaxSpawnYLevel() && world.getBlockState(pos.below()).is(ModTags.SPAWNABLE_BLOCKS) && isDarkEnoughToSpawn(world, pos, random) && checkMobSpawnRules(creeper, world, reason, pos, random);
     }
 
     @Override
