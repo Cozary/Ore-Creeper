@@ -3,7 +3,6 @@ package com.cozary.ore_creeper.init;
 import com.cozary.ore_creeper.OreCreeper;
 import com.google.common.collect.Sets;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.util.FastColor;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
 

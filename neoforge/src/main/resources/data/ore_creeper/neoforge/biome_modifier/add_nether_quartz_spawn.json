@@ -1,7 +1,6 @@
 {
   "type": "neoforge:add_spawns",
   "biomes": "#ore_creeper:spawnable_biomes_nether",
-
   "spawners": {
     "type": "ore_creeper:nether_quartz_creeper",
     "weight": 10,

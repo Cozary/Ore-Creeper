@@ -50,23 +50,23 @@ publishMods {
     dryRun = dry_run.toBoolean()
     version = version_fabric
 
-        curseforge {
-            accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
-            projectId = curseforge_project_id
-            minecraftVersions.add(minecraft_version)
-            optional {
-                slug = "journeymap"
-            }
+    curseforge {
+        accessToken = providers.environmentVariable("CURSEFORGE_API_KEY")
+        projectId = curseforge_project_id
+        minecraftVersions.add(minecraft_version)
+        optional {
+            slug = "journeymap"
         }
+    }
 
 
-        modrinth {
-            accessToken = accessToken = providers.environmentVariable("MODRINTH_API_KEY")
-            projectId = modrinth_project_id
-            minecraftVersions.add(minecraft_version)
-            optional {
-                slug = "journeymap"
-            }
+    modrinth {
+        accessToken = accessToken = providers.environmentVariable("MODRINTH_API_KEY")
+        projectId = modrinth_project_id
+        minecraftVersions.add(minecraft_version)
+        optional {
+            slug = "journeymap"
         }
+    }
 
 }

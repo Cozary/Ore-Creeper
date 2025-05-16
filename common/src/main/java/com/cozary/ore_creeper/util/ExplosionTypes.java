@@ -4,7 +4,6 @@ import com.cozary.ore_creeper.config.CommonConfigManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PowerableMob;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -14,6 +13,115 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ExplosionTypes {
+
+    public void oreExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
+        double radius = 0;
+        switch (oreType) {
+            case COAL -> radius = CommonConfigManager.getConfig().coalCreeperExplosionRadius();
+            case COPPER -> radius = CommonConfigManager.getConfig().copperCreeperExplosionRadius();
+            case DIAMOND -> radius = CommonConfigManager.getConfig().diamondCreeperExplosionRadius();
+            case EMERALD -> radius = CommonConfigManager.getConfig().emeraldCreeperExplosionRadius();
+            case GOLD -> radius = CommonConfigManager.getConfig().goldCreeperExplosionRadius();
+            case IRON -> radius = CommonConfigManager.getConfig().ironCreeperExplosionRadius();
+            case LAPIS -> radius = CommonConfigManager.getConfig().lapisLazuliCreeperExplosionRadius();
+            case REDSTONE -> radius = CommonConfigManager.getConfig().redstoneCreeperExplosionRadius();
+        }
+
+        if (entity instanceof PowerableMob) {
+            radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
+        }
+        entityWorld.explode(entity, entityX, entityY, entityZ, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? (float) radius : 0, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+
+        for (int x = (int) -radius; x <= radius; x++) {
+            for (int y = (int) -radius; y <= radius; y++) {
+                for (int z = (int) -radius; z <= radius; z++) {
+                    BlockPos blockPos = new BlockPos((int) (entityX + x), (int) (entityY + y), (int) (entityZ + z));
+                    BlockState state = entityWorld.getBlockState(blockPos);
+
+                    if (state != null && state.getBlock() != null) {
+                        Block stoneBlock = state.getBlock();
+
+                        Block[] baseBlockList = {
+                                Blocks.STONE,
+                                Blocks.GRANITE,
+                                Blocks.DIORITE,
+                                Blocks.ANDESITE,
+                                Blocks.GRAVEL,
+                                Blocks.CLAY,
+                                Blocks.DRIPSTONE_BLOCK,
+                                Blocks.DEEPSLATE,
+                                Blocks.CALCITE,
+                                Blocks.TUFF};
+
+                        if (stoneBlock != null && Math.sqrt(Math.pow(x, 2.0D) + Math.pow(y, 2.0D) + Math.pow(z, 2.0D)) <= radius) {
+                            if (Arrays.asList(baseBlockList).contains(stoneBlock)) {
+                                if (stoneBlock.defaultBlockState() == Blocks.DEEPSLATE.defaultBlockState()) {
+                                    switch (new Random().nextInt(10 - 1 + 1) + 1) {
+                                        case 1, 2, 3 ->
+                                                entityWorld.setBlockAndUpdate(blockPos, stoneBlock.defaultBlockState());
+                                        case 4, 5, 6, 7, 8, 9 ->
+                                                entityWorld.setBlockAndUpdate(blockPos, oreType.getDeepslateOreBlock().defaultBlockState());
+                                        case 10 -> {
+                                            if (oreType.getRawBlock() != null)
+                                                entityWorld.setBlockAndUpdate(blockPos, oreType.getRawBlock().defaultBlockState());
+                                        }
+
+                                    }
+                                } else {
+                                    switch (new Random().nextInt(10 - 1 + 1) + 1) {
+                                        case 1, 2, 3 ->
+                                                entityWorld.setBlockAndUpdate(blockPos, stoneBlock.defaultBlockState());
+                                        case 4, 5, 6, 7, 8, 9 ->
+                                                entityWorld.setBlockAndUpdate(blockPos, oreType.getOreBlock().defaultBlockState());
+                                        case 10 -> {
+                                            if (oreType.getRawBlock() != null)
+                                                entityWorld.setBlockAndUpdate(blockPos, oreType.getRawBlock().defaultBlockState());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void netherExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
+        double radius = 0;
+        switch (oreType) {
+            case NETHERGOLD -> radius = CommonConfigManager.getConfig().netherGoldCreeperExplosionRadius();
+            case NETHERQUARTZ -> radius = CommonConfigManager.getConfig().netherQuartzCreeperExplosionRadius();
+            case ANCIENT_DEBRIS -> radius = CommonConfigManager.getConfig().ancientDebrisCreeperExplosionRadius();
+        }
+        if (entity instanceof PowerableMob) {
+            radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
+        }
+        entityWorld.explode(entity, entityX, entityY, entityZ, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? (float) radius : 0, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
+
+        for (int x = (int) -radius; x <= radius; x++) {
+            for (int y = (int) -radius; y <= radius; y++) {
+                for (int z = (int) -radius; z <= radius; z++) {
+                    BlockPos blockPos = new BlockPos((int) (entityX + x), (int) (entityY + y), (int) (entityZ + z));
+                    BlockState state = entityWorld.getBlockState(blockPos);
+
+                    if (state != null && state.getBlock() != null) {
+                        Block stoneBlock = state.getBlock();
+                        Block baseBlock = Blocks.NETHERRACK;
+
+                        if (stoneBlock != null && baseBlock == stoneBlock && Math.sqrt(Math.pow(x, 2.0D) + Math.pow(y, 2.0D) + Math.pow(z, 2.0D)) <= radius) {
+
+                            switch (new Random().nextInt(10 - 1 + 1) + 1) {
+                                case 1, 2, 3 -> entityWorld.setBlockAndUpdate(blockPos, stoneBlock.defaultBlockState());
+                                case 4, 5, 6, 7, 8, 9, 10 ->
+                                        entityWorld.setBlockAndUpdate(blockPos, oreType.getOreBlock().defaultBlockState());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     public enum OreType {
         COAL(Blocks.COAL_ORE, Blocks.COAL_BLOCK, Blocks.DEEPSLATE_COAL_ORE),
@@ -49,115 +157,5 @@ public class ExplosionTypes {
         public Block getDeepslateOreBlock() {
             return deepslateOreBlock;
         }
-    }
-
-    public void oreExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
-        double radius = 0;
-        switch (oreType) {
-            case COAL -> radius = CommonConfigManager.getConfig().coalCreeperExplosionRadius();
-            case COPPER -> radius = CommonConfigManager.getConfig().copperCreeperExplosionRadius();
-            case DIAMOND -> radius = CommonConfigManager.getConfig().diamondCreeperExplosionRadius();
-            case EMERALD -> radius = CommonConfigManager.getConfig().emeraldCreeperExplosionRadius();
-            case GOLD -> radius = CommonConfigManager.getConfig().goldCreeperExplosionRadius();
-            case IRON -> radius = CommonConfigManager.getConfig().ironCreeperExplosionRadius();
-            case LAPIS -> radius = CommonConfigManager.getConfig().lapisLazuliCreeperExplosionRadius();
-            case REDSTONE -> radius = CommonConfigManager.getConfig().redstoneCreeperExplosionRadius();
-        }
-
-        if (entity instanceof PowerableMob) {
-            radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
-        }
-        entityWorld.explode(entity, entityX, entityY, entityZ, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? (float) radius : 0, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
-
-            for (int x = (int) -radius; x <= radius; x++) {
-                for (int y = (int) -radius; y <= radius; y++) {
-                    for (int z = (int) -radius; z <= radius; z++) {
-                        BlockPos blockPos = new BlockPos((int) (entityX + x), (int) (entityY + y), (int) (entityZ + z));
-                        BlockState state = entityWorld.getBlockState(blockPos);
-
-                        if (state != null && state.getBlock() != null) {
-                            Block stoneBlock = state.getBlock();
-
-                            Block[] baseBlockList = {
-                                    Blocks.STONE,
-                                    Blocks.GRANITE,
-                                    Blocks.DIORITE,
-                                    Blocks.ANDESITE,
-                                    Blocks.GRAVEL,
-                                    Blocks.CLAY,
-                                    Blocks.DRIPSTONE_BLOCK,
-                                    Blocks.DEEPSLATE,
-                                    Blocks.CALCITE,
-                                    Blocks.TUFF};
-
-                            if (stoneBlock != null && Math.sqrt(Math.pow(x, 2.0D) + Math.pow(y, 2.0D) + Math.pow(z, 2.0D)) <= radius) {
-                                if (Arrays.asList(baseBlockList).contains(stoneBlock)) {
-                                    if (stoneBlock.defaultBlockState() == Blocks.DEEPSLATE.defaultBlockState()) {
-                                        switch (new Random().nextInt(10 - 1 + 1) + 1) {
-                                            case 1, 2, 3 ->
-                                                    entityWorld.setBlockAndUpdate(blockPos, stoneBlock.defaultBlockState());
-                                            case 4, 5, 6, 7, 8, 9 ->
-                                                    entityWorld.setBlockAndUpdate(blockPos, oreType.getDeepslateOreBlock().defaultBlockState());
-                                            case 10 -> {
-                                                if (oreType.getRawBlock() != null)
-                                                    entityWorld.setBlockAndUpdate(blockPos, oreType.getRawBlock().defaultBlockState());
-                                            }
-
-                                        }
-                                    } else {
-                                        switch (new Random().nextInt(10 - 1 + 1) + 1) {
-                                            case 1, 2, 3 ->
-                                                    entityWorld.setBlockAndUpdate(blockPos, stoneBlock.defaultBlockState());
-                                            case 4, 5, 6, 7, 8, 9 ->
-                                                    entityWorld.setBlockAndUpdate(blockPos, oreType.getOreBlock().defaultBlockState());
-                                            case 10 -> {
-                                                if (oreType.getRawBlock() != null)
-                                                    entityWorld.setBlockAndUpdate(blockPos, oreType.getRawBlock().defaultBlockState());
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-    }
-
-    public void netherExplosionEffect(Entity entity, Level entityWorld, double entityX, double entityY, double entityZ, OreType oreType) {
-        double radius = 0;
-        switch (oreType) {
-            case NETHERGOLD -> radius = CommonConfigManager.getConfig().netherGoldCreeperExplosionRadius();
-            case NETHERQUARTZ -> radius = CommonConfigManager.getConfig().netherQuartzCreeperExplosionRadius();
-            case ANCIENT_DEBRIS -> radius = CommonConfigManager.getConfig().ancientDebrisCreeperExplosionRadius();
-        }
-        if (entity instanceof PowerableMob) {
-            radius = ((PowerableMob) entity).isPowered() ? radius * 1.5 : radius;
-        }
-        entityWorld.explode(entity, entityX, entityY, entityZ, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? (float) radius : 0, CommonConfigManager.getConfig().oreCreepersExplodeLikeNormalCreepers() ? Level.ExplosionInteraction.MOB : Level.ExplosionInteraction.NONE);
-
-            for (int x = (int) -radius; x <= radius; x++) {
-                for (int y = (int) -radius; y <= radius; y++) {
-                    for (int z = (int) -radius; z <= radius; z++) {
-                        BlockPos blockPos = new BlockPos((int) (entityX + x), (int) (entityY + y), (int) (entityZ + z));
-                        BlockState state = entityWorld.getBlockState(blockPos);
-
-                        if (state != null && state.getBlock() != null) {
-                            Block stoneBlock = state.getBlock();
-                            Block baseBlock = Blocks.NETHERRACK;
-
-                            if (stoneBlock != null && baseBlock == stoneBlock && Math.sqrt(Math.pow(x, 2.0D) + Math.pow(y, 2.0D) + Math.pow(z, 2.0D)) <= radius) {
-
-                                switch (new Random().nextInt(10 - 1 + 1) + 1) {
-                                    case 1, 2, 3 ->
-                                            entityWorld.setBlockAndUpdate(blockPos, stoneBlock.defaultBlockState());
-                                    case 4, 5, 6, 7, 8, 9, 10 ->
-                                            entityWorld.setBlockAndUpdate(blockPos, oreType.getOreBlock().defaultBlockState());
-                                }
-                            }
-                        }
-                    }
-                }
-            }
     }
 }
