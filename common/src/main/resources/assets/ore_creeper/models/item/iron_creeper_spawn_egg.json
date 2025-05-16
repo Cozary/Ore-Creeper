@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "ore_creeper:item/iron_creeper_spawn_egg"
+  }
+}

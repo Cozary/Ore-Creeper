@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": 8421504
-      },
-      {
-        "type": "minecraft:constant",
-        "value": 0
-      }
-    ]
+    "model": "ore_creeper:item/coal_creeper_spawn_egg"
   }
 }

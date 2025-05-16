@@ -1,16 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "minecraft:item/template_spawn_egg",
-    "tints": [
-      {
-        "type": "minecraft:constant",
-        "value": 8421504
-      },
-      {
-        "type": "minecraft:constant",
-        "value": 16766720
-      }
-    ]
+    "model": "ore_creeper:item/nether_gold_creeper_spawn_egg"
   }
 }
