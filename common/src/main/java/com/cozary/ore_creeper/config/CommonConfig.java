@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class CommonConfig {
 
     @SerializedName("oreCreepersExplodeLikeNormalCreepers")
-    private boolean oreCreepersExplodeLikeNormalCreepers = true;
+    private boolean oreCreepersExplodeLikeNormalCreepers = false;
     @SerializedName("oreTntExplosionRadius")
     private float oreTntExplosionRadius = 4.0f;
     @SerializedName("coalCreeperExplosionRadius")
