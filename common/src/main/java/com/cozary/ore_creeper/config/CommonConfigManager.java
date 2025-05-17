@@ -8,7 +8,7 @@ import java.nio.file.Path;
 
 public final class CommonConfigManager {
 
-    private static final Path CONFIG_PATH = Path.of("config", "nameless_trinkets-common.json");
+    private static final Path CONFIG_PATH = Path.of("config", "ore-creeper-common.json");
     private static CommonConfig config = new CommonConfig();
 
     public static void loadConfig() {
