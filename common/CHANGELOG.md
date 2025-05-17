@@ -1,5 +1,5 @@
 # Changelog
 
-### Changed
+### Fixed
 
-- oreCreepersExplodeLikeNormalCreepers set to false
+- Config file name.
