@@ -12,4 +12,5 @@
 *.zip binary
 *.pyd binary
 *.cfg text eol=lf
-*.jks binary
+.jks binary
+*.ogg binary
