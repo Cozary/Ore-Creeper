@@ -32,8 +32,8 @@ public class CopperCreeperEntity extends AbstractOreCreeperEntity {
         if (!this.level().isClientSide) {
             this.dead = true;
             new ExplosionTypes().oreExplosionEffect(this, this.level(), this.getX(), this.getY(), this.getZ(), ExplosionTypes.OreType.COPPER);
-            ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleList.COPPER_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
-            ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleList.COPPER_EXPLOSION_0.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
+            ((ServerLevel) this.level()).sendParticles(ParticleList.COPPER_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
+            ((ServerLevel) this.level()).sendParticles(ParticleList.COPPER_EXPLOSION_0.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
             this.discard();
             this.spawnLingeringCloud();
         }

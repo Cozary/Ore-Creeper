@@ -4,7 +4,7 @@ import com.cozary.ore_creeper.OreCreeper;
 import com.cozary.ore_creeper.entities.*;
 import com.cozary.ore_creeper.init.ModEntityTypes;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)

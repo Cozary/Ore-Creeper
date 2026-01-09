@@ -1,17 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "pattern": [
-    "#S#",
-    "STS",
-    "#S#"
-  ],
+  "category": "misc",
   "key": {
     "#": "minecraft:deepslate",
     "S": "minecraft:stone",
     "T": "minecraft:tnt"
   },
+  "pattern": [
+    "#S#",
+    "STS",
+    "#S#"
+  ],
   "result": {
-    "id": "ore_creeper:ore_tnt",
-    "count": 1
+    "count": 1,
+    "id": "ore_creeper:ore_tnt"
   }
 }

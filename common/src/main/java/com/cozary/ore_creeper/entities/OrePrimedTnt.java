@@ -63,7 +63,7 @@ public class OrePrimedTnt extends PrimedTnt {
         double d2 = this.random.nextGaussian() * 0.02D;
         AABB targetBox = new AABB(this.position(), this.position()).inflate(CommonConfigManager.getConfig().oreTntExplosionRadius());
         List<Creeper> foundTarget = this.level().getEntitiesOfClass(Creeper.class, targetBox);
-        ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 1, d1, d2, d0, 0.5);
+        ((ServerLevel) this.level()).sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 1, d1, d2, d0, 0.5);
 
         for (LivingEntity livingEntity : foundTarget) {
             livingEntity.remove(RemovalReason.DISCARDED);
@@ -73,7 +73,7 @@ public class OrePrimedTnt extends PrimedTnt {
             assert entities != null;
             entities.setPos(livingEntity.position());
             level().addFreshEntity(entities);
-            ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleTypes.POOF, entities.getX() + 0.5, entities.getY(), entities.getZ() + 0.5, 100, d1, d2, d0, 0.5);
+            ((ServerLevel) this.level()).sendParticles(ParticleTypes.POOF, entities.getX() + 0.5, entities.getY(), entities.getZ() + 0.5, 100, d1, d2, d0, 0.5);
         }
     }
 }

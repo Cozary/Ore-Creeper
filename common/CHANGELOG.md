@@ -1,5 +1,1 @@
-# Changelog
-
-### Fixed
-
-- Config file name.
+# Changelog [1.21.6]

@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "unstable=false": {
+      "model": "ore_creeper:block/ore_tnt"
+    },
+    "unstable=true": {
       "model": "ore_creeper:block/ore_tnt"
     }
   }

@@ -11,7 +11,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 import static com.cozary.ore_creeper.util.ClientEventBusSubscriber.*;
 
-@EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@EventBusSubscriber(modid = OreCreeper.MOD_ID, value = Dist.CLIENT)
 public class RendererRegister {
 
     @SubscribeEvent

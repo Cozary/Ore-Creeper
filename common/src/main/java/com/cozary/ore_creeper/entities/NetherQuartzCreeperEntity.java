@@ -32,8 +32,8 @@ public class NetherQuartzCreeperEntity extends AbstractOreCreeperEntity {
         if (!this.level().isClientSide) {
             this.dead = true;
             new ExplosionTypes().netherExplosionEffect(this, this.level(), this.getX(), this.getY(), this.getZ(), ExplosionTypes.OreType.NETHERQUARTZ);
-            ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleList.WHITE_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
-            ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleList.REDSTONE_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
+            ((ServerLevel) this.level()).sendParticles(ParticleList.WHITE_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
+            ((ServerLevel) this.level()).sendParticles(ParticleList.REDSTONE_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 250, d1, d2, d0, 0.5);
             this.discard();
             this.spawnLingeringCloud();
         }

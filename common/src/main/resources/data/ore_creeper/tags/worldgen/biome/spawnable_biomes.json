@@ -1,6 +1,5 @@
 {
   "values": [
     "#minecraft:is_overworld"
-  ],
-  "replace": false
+  ]
 }

@@ -34,7 +34,7 @@ public class EmeraldCreeperEntity extends AbstractOreCreeperEntity {
         if (!this.level().isClientSide) {
             this.dead = true;
             new ExplosionTypes().oreExplosionEffect(this, this.level(), this.getX(), this.getY(), this.getZ(), ExplosionTypes.OreType.EMERALD);
-            ((ServerLevel) this.getCommandSenderWorld()).sendParticles(ParticleList.EMERALD_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 500, d1, d2, d0, 0.5);
+            ((ServerLevel) this.level()).sendParticles(ParticleList.EMERALD_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 500, d1, d2, d0, 0.5);
             this.discard();
             this.spawnLingeringCloud();
         }
