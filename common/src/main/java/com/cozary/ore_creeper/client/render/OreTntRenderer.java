@@ -5,31 +5,29 @@ import com.cozary.ore_creeper.entities.OrePrimedTnt;
 import com.cozary.ore_creeper.init.ModBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.TntMinecartRenderer;
 import net.minecraft.client.renderer.entity.state.TntRenderState;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
 public class OreTntRenderer extends EntityRenderer<OrePrimedTnt, TntRenderState> {
-    private final BlockRenderDispatcher blockRenderer;
 
     public OreTntRenderer(EntityRendererProvider.Context p_174426_) {
         super(p_174426_);
         this.shadowRadius = 0.5F;
-        this.blockRenderer = p_174426_.getBlockRenderDispatcher();
     }
 
     public TntRenderState createRenderState() {
         return new TntRenderState();
     }
 
-    public void render(TntRenderState tntRenderState, PoseStack poseStack, MultiBufferSource multiBufferSource, int packedLight) {
+    public void submit(TntRenderState tntRenderState, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState cameraRenderState) {
         poseStack.pushPose();
         poseStack.translate(0.0F, 0.5F, 0.0F);
         float f = tntRenderState.fuseRemainingInTicks;
@@ -46,10 +44,10 @@ public class OreTntRenderer extends EntityRenderer<OrePrimedTnt, TntRenderState>
         poseStack.translate(-0.5F, -0.5F, 0.5F);
         poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
 
-        TntMinecartRenderer.renderWhiteSolidBlock(this.blockRenderer, ModBlocks.ORE_TNT.get().defaultBlockState(), poseStack, multiBufferSource, packedLight, (int) f / 5 % 2 == 0);
+        TntMinecartRenderer.submitWhiteSolidBlock(ModBlocks.ORE_TNT.get().defaultBlockState(), poseStack, submitNodeCollector, tntRenderState.lightCoords, (int) f / 5 % 2 == 0, tntRenderState.outlineColor);
 
         poseStack.popPose();
-        super.render(tntRenderState, poseStack, multiBufferSource, packedLight);
+        super.submit(tntRenderState, poseStack, submitNodeCollector, cameraRenderState);
     }
 
     public @NotNull ResourceLocation getTextureLocation(@NotNull OrePrimedTnt p_116175_) {

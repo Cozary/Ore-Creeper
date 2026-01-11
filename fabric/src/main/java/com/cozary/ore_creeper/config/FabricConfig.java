@@ -96,6 +96,7 @@ public class FabricConfig {
     public int copperCreeperWeight() {
         return copperCreeperWeight;
     }
+
     ;
 
     public int copperCreeperminGroupSize() {
@@ -113,6 +114,7 @@ public class FabricConfig {
     public int diamondCreeperminGroupSize() {
         return diamondCreeperminGroupSize;
     }
+
     ;
 
     public int diamondCreepermaxGroupSize() {
@@ -130,6 +132,7 @@ public class FabricConfig {
     public int emeraldCreepermaxGroupSize() {
         return emeraldCreepermaxGroupSize;
     }
+
     ;
 
     public int goldCreeperWeight() {

@@ -12,9 +12,4 @@ public abstract class AbstractOreCreeperEntity extends Creeper {
         super(type, level);
     }
 
-    @Override
-    protected boolean shouldDespawnInPeaceful() {
-        return false;
-    }
-
 }

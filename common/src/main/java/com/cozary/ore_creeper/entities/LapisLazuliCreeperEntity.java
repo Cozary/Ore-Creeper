@@ -31,7 +31,7 @@ public class LapisLazuliCreeperEntity extends AbstractOreCreeperEntity {
         double d0 = this.random.nextGaussian() * 0.02D;
         double d1 = this.random.nextGaussian() * 0.02D;
         double d2 = this.random.nextGaussian() * 0.02D;
-        if (!this.level().isClientSide) {
+        if (!this.level().isClientSide()) {
             this.dead = true;
             new ExplosionTypes().oreExplosionEffect(this, this.level(), this.getX(), this.getY(), this.getZ(), ExplosionTypes.OreType.LAPIS);
             ((ServerLevel) this.level()).sendParticles(ParticleList.LAPIS_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 500, d1, d2, d0, 0.5);

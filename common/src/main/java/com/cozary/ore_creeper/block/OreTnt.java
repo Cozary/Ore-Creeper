@@ -58,7 +58,7 @@ public class OreTnt extends Block {
     }
 
     private static void explode(Level level, BlockPos pos, @Nullable LivingEntity entity) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             OrePrimedTnt primedtnt = new OrePrimedTnt(level, (double) pos.getX() + 0.5, pos.getY(), (double) pos.getZ() + 0.5, entity);
             level.addFreshEntity(primedtnt);
             level.playSound(null, primedtnt.getX(), primedtnt.getY(), primedtnt.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -114,7 +114,7 @@ public class OreTnt extends Block {
             Item $$7 = itemStack.getItem();
             if (!player.isCreative()) {
                 if (itemStack.is(Items.FLINT_AND_STEEL)) {
-                    itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(interactionHand));
+                    itemStack.hurtAndBreak(1, player, interactionHand.asEquipmentSlot());
                 } else {
                     itemStack.shrink(1);
                 }

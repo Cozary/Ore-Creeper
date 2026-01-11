@@ -62,6 +62,7 @@ public class CommonConfig {
     public boolean oreCreepersExplodeLikeNormalCreepers() {
         return oreCreepersExplodeLikeNormalCreepers;
     }
+
     ;
 
     public float oreTntExplosionRadius() {
@@ -71,6 +72,7 @@ public class CommonConfig {
     public float coalCreeperExplosionRadius() {
         return coalCreeperExplosionRadius;
     }
+
     ;
 
     public float coalCreeperMaxSpawnYLevel() {
@@ -80,6 +82,7 @@ public class CommonConfig {
     public float copperCreeperExplosionRadius() {
         return copperCreeperExplosionRadius;
     }
+
     ;
 
     public float copperCreeperMaxSpawnYLevel() {
@@ -97,6 +100,7 @@ public class CommonConfig {
     public float emeraldCreeperExplosionRadius() {
         return emeraldCreeperExplosionRadius;
     }
+
     ;
 
     public float emeraldCreeperMaxSpawnYLevel() {
@@ -114,6 +118,7 @@ public class CommonConfig {
     public float ironCreeperExplosionRadius() {
         return ironCreeperExplosionRadius;
     }
+
     ;
 
     public float ironCreeperMaxSpawnYLevel() {
@@ -131,6 +136,7 @@ public class CommonConfig {
     public float netherGoldCreeperExplosionRadius() {
         return netherGoldCreeperExplosionRadius;
     }
+
     ;
 
     public float netherGoldCreeperMaxSpawnYLevel() {
@@ -148,6 +154,7 @@ public class CommonConfig {
     public float redstoneCreeperExplosionRadius() {
         return redstoneCreeperExplosionRadius;
     }
+
     ;
 
     public float redstoneCreeperMaxSpawnYLevel() {

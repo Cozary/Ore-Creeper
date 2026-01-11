@@ -58,12 +58,13 @@ public class ModEntityTypes {
         RegistryObject<T> entity = ENTITY_TYPES.register(name, supplier);
         ENTITY_LIST.add((RegistryObject<EntityType<?>>) entity);
         return entity;
+    }
+
+    public static void loadClass() {
     }    public static final RegistryObject<EntityType<OrePrimedTnt>> ORE_PRIMED_TNT = ENTITY_TYPES.register("ore_primed_tnt", () -> EntityType.Builder.<OrePrimedTnt>of(OrePrimedTnt::new, MobCategory.MISC)
             .fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10)
             .build(ResourceKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "ore_primed_tnt"))));
 
-    public static void loadClass() {
-    }
 
 
 

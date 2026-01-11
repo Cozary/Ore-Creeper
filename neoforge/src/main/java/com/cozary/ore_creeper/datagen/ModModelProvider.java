@@ -37,8 +37,8 @@ public class ModModelProvider extends ModelProvider {
     private void createTntBlock(BlockModelGenerators blockModels, Block block) {
         String blockName = BuiltInRegistries.BLOCK.getKey(block).getPath();
         ResourceLocation side = this.modLocation("block/" + blockName + "_side");
-        ResourceLocation top = this.modLocation("block/" + blockName + "_top");
-        ResourceLocation bottom = this.modLocation("block/" + blockName + "_bottom");
+        ResourceLocation top = this.mcLocation("block/tnt_top");
+        ResourceLocation bottom = this.mcLocation("block/tnt_bottom");
 
         ResourceLocation modelLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(
                 block,
@@ -53,8 +53,8 @@ public class ModModelProvider extends ModelProvider {
         MultiVariant variant = BlockModelGenerators.plainVariant(modelLocation);
 
         blockModels.blockStateOutput.accept(
-            MultiVariantGenerator.dispatch(block)
-                .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.UNSTABLE, variant, variant))
+                MultiVariantGenerator.dispatch(block)
+                        .with(BlockModelGenerators.createBooleanModelDispatch(BlockStateProperties.UNSTABLE, variant, variant))
         );
 
         blockModels.registerSimpleItemModel(block, modelLocation);

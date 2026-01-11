@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import static com.cozary.ore_creeper.util.ClientEventBusSubscriber.*;
 
-@Mod.EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = OreCreeper.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
 public class RendererRegister {
 
     @SubscribeEvent
