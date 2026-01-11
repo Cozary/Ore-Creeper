@@ -2,8 +2,8 @@ package com.cozary.ore_creeper.datagen;
 
 import com.cozary.ore_creeper.init.ModEntityTypes;
 import com.cozary.ore_creeper.init.RegistryObject;
-import net.minecraft.advancements.critereon.EntityFlagsPredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.criterion.EntityFlagsPredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.EntityLootSubProvider;
 import net.minecraft.world.entity.EntityType;

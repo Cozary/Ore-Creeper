@@ -14,7 +14,7 @@ import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -36,11 +36,11 @@ public class ModModelProvider extends ModelProvider {
 
     private void createTntBlock(BlockModelGenerators blockModels, Block block) {
         String blockName = BuiltInRegistries.BLOCK.getKey(block).getPath();
-        ResourceLocation side = this.modLocation("block/" + blockName + "_side");
-        ResourceLocation top = this.mcLocation("block/tnt_top");
-        ResourceLocation bottom = this.mcLocation("block/tnt_bottom");
+        Identifier side = this.modLocation("block/" + blockName + "_side");
+        Identifier top = this.mcLocation("block/tnt_top");
+        Identifier bottom = this.mcLocation("block/tnt_bottom");
 
-        ResourceLocation modelLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(
+        Identifier modelLocation = ModelTemplates.CUBE_BOTTOM_TOP.create(
                 block,
                 new TextureMapping()
                         .put(TextureSlot.SIDE, side)

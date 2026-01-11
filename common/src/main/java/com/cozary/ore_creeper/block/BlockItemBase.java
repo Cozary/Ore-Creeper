@@ -3,8 +3,8 @@ package com.cozary.ore_creeper.block;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -17,7 +17,7 @@ public class BlockItemBase extends BlockItem {
 
     public BlockItemBase(Block block) {
         super(block, new Properties()
-                .setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("ore_creeper", "ore_tnt")))
+                .setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath("ore_creeper", "ore_tnt")))
         );
     }
 

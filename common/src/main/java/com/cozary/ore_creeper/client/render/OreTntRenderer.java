@@ -12,7 +12,7 @@ import net.minecraft.client.renderer.entity.TntMinecartRenderer;
 import net.minecraft.client.renderer.entity.state.TntRenderState;
 import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.texture.TextureAtlas;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
@@ -50,7 +50,7 @@ public class OreTntRenderer extends EntityRenderer<OrePrimedTnt, TntRenderState>
         super.submit(tntRenderState, poseStack, submitNodeCollector, cameraRenderState);
     }
 
-    public @NotNull ResourceLocation getTextureLocation(@NotNull OrePrimedTnt p_116175_) {
+    public @NotNull Identifier getTextureLocation(@NotNull OrePrimedTnt p_116175_) {
         return TextureAtlas.LOCATION_BLOCKS;
     }
 

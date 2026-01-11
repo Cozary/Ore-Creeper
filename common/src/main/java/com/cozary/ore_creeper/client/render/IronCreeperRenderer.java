@@ -9,14 +9,14 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.CreeperRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
 public class IronCreeperRenderer extends MobRenderer<IronCreeperEntity, CreeperRenderState, OreCreeperModel> {
 
-    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/iron_creeper.png");
-    ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
+    protected static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/iron_creeper.png");
+    Identifier entityIconLoc = Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public IronCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new OreCreeperModel(context.bakeLayer(ClientEventBusSubscriber.IRON_CREEPER)), 0.5F);
@@ -45,11 +45,11 @@ public class IronCreeperRenderer extends MobRenderer<IronCreeperEntity, CreeperR
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CreeperRenderState creeperRenderState) {
+    public Identifier getTextureLocation(CreeperRenderState creeperRenderState) {
         return TEXTURE;
     }
 
-    public @NotNull ResourceLocation getEntityIconLoc(@NotNull IronCreeperEntity p_114041_) {
+    public @NotNull Identifier getEntityIconLoc(@NotNull IronCreeperEntity p_114041_) {
         return entityIconLoc;
     }
 

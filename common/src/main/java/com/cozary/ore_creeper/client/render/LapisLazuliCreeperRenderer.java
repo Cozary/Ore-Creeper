@@ -8,14 +8,14 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.entity.state.CreeperRenderState;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import org.jetbrains.annotations.NotNull;
 
 public class LapisLazuliCreeperRenderer extends MobRenderer<LapisLazuliCreeperEntity, CreeperRenderState, OreCreeperModel> {
 
-    protected static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/lapis_lazuli_creeper.png");
-    ResourceLocation entityIconLoc = ResourceLocation.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
+    protected static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/lapis_lazuli_creeper.png");
+    Identifier entityIconLoc = Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
 
     public LapisLazuliCreeperRenderer(EntityRendererProvider.Context context) {
         super(context, new OreCreeperModel(context.bakeLayer(ClientEventBusSubscriber.LAPIS_LAZULI_CREEPER)), 0.5F);
@@ -44,11 +44,11 @@ public class LapisLazuliCreeperRenderer extends MobRenderer<LapisLazuliCreeperEn
     }
 
     @Override
-    public ResourceLocation getTextureLocation(CreeperRenderState creeperRenderState) {
+    public Identifier getTextureLocation(CreeperRenderState creeperRenderState) {
         return TEXTURE;
     }
 
-    public @NotNull ResourceLocation getEntityIconLoc(@NotNull LapisLazuliCreeperEntity p_114041_) {
+    public @NotNull Identifier getEntityIconLoc(@NotNull LapisLazuliCreeperEntity p_114041_) {
         return entityIconLoc;
     }
 

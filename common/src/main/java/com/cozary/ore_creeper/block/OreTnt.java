@@ -4,7 +4,7 @@ import com.cozary.ore_creeper.entities.OrePrimedTnt;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -43,7 +43,7 @@ public class OreTnt extends Block {
 
     public OreTnt() {
         super(Properties.of()
-                .setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("ore_creeper", "ore_tnt")))
+                .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath("ore_creeper", "ore_tnt")))
                 .mapColor(MapColor.FIRE)
                 .ignitedByLava()
                 .instabreak()
