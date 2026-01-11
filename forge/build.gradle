@@ -96,7 +96,26 @@ sourceSets.each {
     it.java.destinationDirectory = dir
 }
 
-publishMods {
+// Implement mcgradleconventions loader attribute
+def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', String)
+['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements'].each { variant ->
+    configurations.named("$variant") {
+        attributes {
+            attribute(loaderAttribute, 'forge')
+        }
+    }
+}
+sourceSets.configureEach {
+    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant->
+        configurations.named("$variant") {
+            attributes {
+                attribute(loaderAttribute, 'forge')
+            }
+        }
+    }
+}
+
+    publishMods {
     file = jar.archiveFile
     changelog = project(":common").file("CHANGELOG.md").text
     type = STABLE
