@@ -24,6 +24,15 @@ body:
       required: true
 
   - type: input
+    id: mc_version
+    attributes:
+      label: Minecraft Version
+      description: Which version of Minecraft are you using?
+      placeholder: 1.21.11
+    validations:
+      required: true
+
+  - type: input
     id: version
     attributes:
       label: Mod Version
@@ -57,7 +66,7 @@ body:
     id: log
     attributes:
       label: Crash Log
-      description: Use https://mclo.gs (or similar) to share your crash log.
-      placeholder: https://mclo.gs
+      description: Please upload your `crash-report` or `latest.log` to https://mclo.gs and paste the link here.
+      placeholder: https://mclo.gs/...
     validations:
       required: true
