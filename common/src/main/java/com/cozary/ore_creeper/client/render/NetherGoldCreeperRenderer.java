@@ -1,61 +1,11 @@
 package com.cozary.ore_creeper.client.render;
 
-
-import com.cozary.ore_creeper.OreCreeper;
-import com.cozary.ore_creeper.client.model.OreCreeperModel;
 import com.cozary.ore_creeper.entities.NetherGoldCreeperEntity;
 import com.cozary.ore_creeper.util.ClientEventBusSubscriber;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.MobRenderer;
-import net.minecraft.client.renderer.entity.state.CreeperRenderState;
-import net.minecraft.resources.Identifier;
-import net.minecraft.util.Mth;
-import org.jetbrains.annotations.NotNull;
 
-public class NetherGoldCreeperRenderer extends MobRenderer<NetherGoldCreeperEntity, CreeperRenderState, OreCreeperModel> {
-
-    protected static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, "textures/entity/nether_gold_creeper.png");
-    Identifier entityIconLoc = Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, OreCreeper.MOD_ID.replace("/entity/", "/entity_icon/"));
-
+public class NetherGoldCreeperRenderer extends BaseCreeperRenderer<NetherGoldCreeperEntity> {
     public NetherGoldCreeperRenderer(EntityRendererProvider.Context context) {
-        super(context, new OreCreeperModel(context.bakeLayer(ClientEventBusSubscriber.NETHER_GOLD_CREEPER)), 0.5F);
-    }
-
-    @Override
-    public CreeperRenderState createRenderState() {
-        return new CreeperRenderState();
-    }
-
-
-    protected void scale(CreeperRenderState p_362568_, PoseStack p_114047_) {
-        float f = p_362568_.swelling;
-        float f1 = 1.0F + Mth.sin(f * 100.0F) * f * 0.01F;
-        f = Mth.clamp(f, 0.0F, 1.0F);
-        f *= f;
-        f *= f;
-        float f2 = (1.0F + f * 0.4F) * f1;
-        float f3 = (1.0F + f * 0.1F) / f1;
-        p_114047_.scale(f2, f3, f2);
-    }
-
-    protected float getWhiteOverlayProgress(CreeperRenderState p_360678_) {
-        float f = p_360678_.swelling;
-        return (int) (f * 10.0F) % 2 == 0 ? 0.0F : Mth.clamp(f, 0.5F, 1.0F);
-    }
-
-    @Override
-    public Identifier getTextureLocation(CreeperRenderState creeperRenderState) {
-        return TEXTURE;
-    }
-
-    public @NotNull Identifier getEntityIconLoc(@NotNull NetherGoldCreeperEntity p_114041_) {
-        return entityIconLoc;
-    }
-
-    public void extractRenderState(NetherGoldCreeperEntity p_364394_, CreeperRenderState p_361451_, float p_364659_) {
-        super.extractRenderState(p_364394_, p_361451_, p_364659_);
-        p_361451_.swelling = p_364394_.getSwelling(p_364659_);
-        p_361451_.isPowered = p_364394_.isPowered();
+        super(context, ClientEventBusSubscriber.NETHER_GOLD_CREEPER, "nether_gold_creeper");
     }
 }

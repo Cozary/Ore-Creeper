@@ -10,60 +10,52 @@ public class CommonConfig {
     private float oreTntExplosionRadius = 4.0f;
     @SerializedName("coalCreeperExplosionRadius")
     private float coalCreeperExplosionRadius = 3.75f;
-    ;
     @SerializedName("coalCreeperMaxSpawnYLevel")
-    private float coalCreeperMaxSpawnYLevel = 320;
+    private int coalCreeperMaxSpawnYLevel = 320;
     @SerializedName("copperCreeperExplosionRadius")
     private float copperCreeperExplosionRadius = 3.75f;
-    ;
     @SerializedName("copperCreeperMaxSpawnYLevel")
-    private float copperCreeperMaxSpawnYLevel = 320;
+    private int copperCreeperMaxSpawnYLevel = 320;
     @SerializedName("diamondCreeperExplosionRadius")
     private float diamondCreeperExplosionRadius = 3.75f;
     @SerializedName("diamondCreeperMaxSpawnYLevel")
-    private float diamondCreeperMaxSpawnYLevel = 320;
+    private int diamondCreeperMaxSpawnYLevel = 320;
     @SerializedName("emeraldCreeperExplosionRadius")
     private float emeraldCreeperExplosionRadius = 3.75f;
-    ;
     @SerializedName("emeraldCreeperMaxSpawnYLevel")
-    private float emeraldCreeperMaxSpawnYLevel = 320;
+    private int emeraldCreeperMaxSpawnYLevel = 320;
     @SerializedName("goldCreeperExplosionRadius")
     private float goldCreeperExplosionRadius = 3.75f;
     @SerializedName("goldCreeperMaxSpawnYLevel")
-    private float goldCreeperMaxSpawnYLevel = 320;
+    private int goldCreeperMaxSpawnYLevel = 320;
     @SerializedName("ironCreeperExplosionRadius")
     private float ironCreeperExplosionRadius = 3.75f;
-    ;
     @SerializedName("ironCreeperMaxSpawnYLevel")
-    private float ironCreeperMaxSpawnYLevel = 320.0f;
+    private int ironCreeperMaxSpawnYLevel = 320;
     @SerializedName("lapisLazuliCreeperExplosionRadius")
     private float lapisLazuliCreeperExplosionRadius = 3.75f;
     @SerializedName("lapisLazuliCreeperMaxSpawnYLevel")
-    private float lapisLazuliCreeperMaxSpawnYLevel = 320;
+    private int lapisLazuliCreeperMaxSpawnYLevel = 320;
     @SerializedName("netherGoldCreeperExplosionRadius")
     private float netherGoldCreeperExplosionRadius = 3.75f;
-    ;
     @SerializedName("netherGoldCreeperMaxSpawnYLevel")
-    private float netherGoldCreeperMaxSpawnYLevel = 320;
+    private int netherGoldCreeperMaxSpawnYLevel = 320;
     @SerializedName("netherQuartzCreeperExplosionRadius")
     private float netherQuartzCreeperExplosionRadius = 3.75f;
     @SerializedName("netherQuartzCreeperMaxSpawnYLevel")
-    private float netherQuartzCreeperMaxSpawnYLevel = 320;
+    private int netherQuartzCreeperMaxSpawnYLevel = 320;
     @SerializedName("redstoneCreeperExplosionRadius")
     private float redstoneCreeperExplosionRadius = 3.75f;
-    ;
     @SerializedName("redstoneCreeperMaxSpawnYLevel")
-    private float redstoneCreeperMaxSpawnYLevel = 320;
+    private int redstoneCreeperMaxSpawnYLevel = 320;
     @SerializedName("ancientDebrisCreeperExplosionRadius")
     private float ancientDebrisCreeperExplosionRadius = 3.75f;
     @SerializedName("ancientDebrisCreeperMaxSpawnYLevel")
-    private float ancientDebrisCreeperMaxSpawnYLevel = 320;
+    private int ancientDebrisCreeperMaxSpawnYLevel = 320;
 
     public boolean oreCreepersExplodeLikeNormalCreepers() {
         return oreCreepersExplodeLikeNormalCreepers;
     }
-
-    ;
 
     public float oreTntExplosionRadius() {
         return oreTntExplosionRadius;
@@ -73,9 +65,7 @@ public class CommonConfig {
         return coalCreeperExplosionRadius;
     }
 
-    ;
-
-    public float coalCreeperMaxSpawnYLevel() {
+    public int coalCreeperMaxSpawnYLevel() {
         return coalCreeperMaxSpawnYLevel;
     }
 
@@ -83,9 +73,7 @@ public class CommonConfig {
         return copperCreeperExplosionRadius;
     }
 
-    ;
-
-    public float copperCreeperMaxSpawnYLevel() {
+    public int copperCreeperMaxSpawnYLevel() {
         return copperCreeperMaxSpawnYLevel;
     }
 
@@ -93,7 +81,7 @@ public class CommonConfig {
         return diamondCreeperExplosionRadius;
     }
 
-    public float diamondCreeperMaxSpawnYLevel() {
+    public int diamondCreeperMaxSpawnYLevel() {
         return diamondCreeperMaxSpawnYLevel;
     }
 
@@ -101,9 +89,7 @@ public class CommonConfig {
         return emeraldCreeperExplosionRadius;
     }
 
-    ;
-
-    public float emeraldCreeperMaxSpawnYLevel() {
+    public int emeraldCreeperMaxSpawnYLevel() {
         return emeraldCreeperMaxSpawnYLevel;
     }
 
@@ -111,7 +97,7 @@ public class CommonConfig {
         return goldCreeperExplosionRadius;
     }
 
-    public float goldCreeperMaxSpawnYLevel() {
+    public int goldCreeperMaxSpawnYLevel() {
         return goldCreeperMaxSpawnYLevel;
     }
 
@@ -119,9 +105,7 @@ public class CommonConfig {
         return ironCreeperExplosionRadius;
     }
 
-    ;
-
-    public float ironCreeperMaxSpawnYLevel() {
+    public int ironCreeperMaxSpawnYLevel() {
         return ironCreeperMaxSpawnYLevel;
     }
 
@@ -129,7 +113,7 @@ public class CommonConfig {
         return lapisLazuliCreeperExplosionRadius;
     }
 
-    public float lapisLazuliCreeperMaxSpawnYLevel() {
+    public int lapisLazuliCreeperMaxSpawnYLevel() {
         return lapisLazuliCreeperMaxSpawnYLevel;
     }
 
@@ -137,9 +121,7 @@ public class CommonConfig {
         return netherGoldCreeperExplosionRadius;
     }
 
-    ;
-
-    public float netherGoldCreeperMaxSpawnYLevel() {
+    public int netherGoldCreeperMaxSpawnYLevel() {
         return netherGoldCreeperMaxSpawnYLevel;
     }
 
@@ -147,7 +129,7 @@ public class CommonConfig {
         return netherQuartzCreeperExplosionRadius;
     }
 
-    public float netherQuartzCreeperMaxSpawnYLevel() {
+    public int netherQuartzCreeperMaxSpawnYLevel() {
         return netherQuartzCreeperMaxSpawnYLevel;
     }
 
@@ -155,9 +137,7 @@ public class CommonConfig {
         return redstoneCreeperExplosionRadius;
     }
 
-    ;
-
-    public float redstoneCreeperMaxSpawnYLevel() {
+    public int redstoneCreeperMaxSpawnYLevel() {
         return redstoneCreeperMaxSpawnYLevel;
     }
 
@@ -165,9 +145,7 @@ public class CommonConfig {
         return ancientDebrisCreeperExplosionRadius;
     }
 
-    public float ancientDebrisCreeperMaxSpawnYLevel() {
+    public int ancientDebrisCreeperMaxSpawnYLevel() {
         return ancientDebrisCreeperMaxSpawnYLevel;
     }
-
-
 }

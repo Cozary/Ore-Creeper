@@ -18,6 +18,7 @@ public class OreCreeper {
         ModBlocks.loadClass();
         ParticleList.loadClass();
         ModTags.loadClass();
+        ModSpawnEggs.loadClass();
 
         CommonConfigManager.loadConfig();
 

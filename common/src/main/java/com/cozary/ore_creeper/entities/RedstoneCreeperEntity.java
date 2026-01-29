@@ -1,11 +1,10 @@
 package com.cozary.ore_creeper.entities;
 
 import com.cozary.ore_creeper.config.CommonConfigManager;
-import com.cozary.ore_creeper.init.ModTags;
 import com.cozary.ore_creeper.init.ParticleList;
 import com.cozary.ore_creeper.util.ExplosionTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
@@ -15,29 +14,21 @@ import net.minecraft.world.level.ServerLevelAccessor;
 
 public class RedstoneCreeperEntity extends AbstractOreCreeperEntity {
 
-
     public RedstoneCreeperEntity(EntityType<? extends Creeper> type, Level level) {
         super(type, level);
     }
 
-    public static boolean canOreCreeperSpawn(EntityType<? extends AbstractOreCreeperEntity> creeper, ServerLevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
-        return pos.getY() < CommonConfigManager.getConfig().redstoneCreeperMaxSpawnYLevel() && world.getBlockState(pos.below()).is(ModTags.SPAWNABLE_BLOCKS) && isDarkEnoughToSpawn(world, pos, random) && checkMobSpawnRules(creeper, world, reason, pos, random);
+    @Override
+    protected ExplosionTypes.OreType getOreType() {
+        return ExplosionTypes.OreType.REDSTONE;
     }
 
     @Override
-    public void explodeCreeper() {
-        double d0 = this.random.nextGaussian() * 0.02D;
-        double d1 = this.random.nextGaussian() * 0.02D;
-        double d2 = this.random.nextGaussian() * 0.02D;
-        if (!this.level().isClientSide()) {
-            this.dead = true;
-            new ExplosionTypes().oreExplosionEffect(this, this.level(), this.getX(), this.getY(), this.getZ(), ExplosionTypes.OreType.REDSTONE);
-            ((ServerLevel) this.level()).sendParticles(ParticleList.REDSTONE_EXPLOSION.get(), this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 500, d1, d2, d0, 0.5);
-            this.discard();
-            this.spawnLingeringCloud();
-        }
-
+    protected ParticleOptions getExplosionParticle() {
+        return ParticleList.REDSTONE_EXPLOSION.get();
     }
 
-
+    public static boolean canOreCreeperSpawn(EntityType<? extends AbstractOreCreeperEntity> creeper, ServerLevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+        return checkSpawnRules(creeper, world, reason, pos, random, CommonConfigManager.getConfig().redstoneCreeperMaxSpawnYLevel(), false);
+    }
 }
