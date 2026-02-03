@@ -1,5 +1,0 @@
-{
-  "type": "forge:remove_spawns",
-  "biomes": "#ore_creeper:blacklist_biomes_nether",
-  "entity_types": "ore_creeper:nether_quartz_creeper"
-}

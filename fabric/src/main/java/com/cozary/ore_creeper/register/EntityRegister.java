@@ -1,22 +1,20 @@
 package com.cozary.ore_creeper.register;
 
-import com.cozary.ore_creeper.entities.*;
-import com.cozary.ore_creeper.init.ModEntityTypes;
+import com.cozary.ore_creeper.data.BaseOreCreeperLoader;
+import com.cozary.ore_creeper.entities.BaseOreCreeperEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 
 public final class EntityRegister {
 
     public static void registerAttributes() {
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.COAL_CREEPER.get(), CoalCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.COPPER_CREEPER.get(), CopperCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.DIAMOND_CREEPER.get(), DiamondCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.EMERALD_CREEPER.get(), EmeraldCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.GOLD_CREEPER.get(), GoldCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.IRON_CREEPER.get(), IronCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.LAPIS_LAZULI_CREEPER.get(), LapisLazuliCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.NETHER_GOLD_CREEPER.get(), NetherGoldCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), NetherQuartzCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.REDSTONE_CREEPER.get(), RedstoneCreeperEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), AncientDebrisCreeperEntity.createAttributes());
+        for (Identifier id : BaseOreCreeperLoader.LOADED_TYPES.keySet()) {
+            BuiltInRegistries.ENTITY_TYPE.getOptional(id).ifPresent(type -> {
+                FabricDefaultAttributeRegistry.register((EntityType<? extends LivingEntity>) type, BaseOreCreeperEntity.createAttributes());
+            });
+        }
     }
 }

@@ -1,54 +1,57 @@
 package com.cozary.ore_creeper.register;
 
+import com.cozary.ore_creeper.OreCreeper;
 import com.cozary.ore_creeper.client.model.OreCreeperModel;
-import com.cozary.ore_creeper.client.render.*;
+import com.cozary.ore_creeper.client.render.BaseOreCreeperRenderer;
+import com.cozary.ore_creeper.client.render.OreTntRenderer;
+import com.cozary.ore_creeper.data.BaseOreCreeperLoader;
+import com.cozary.ore_creeper.entities.BaseOreCreeperEntity;
 import com.cozary.ore_creeper.init.ModEntityTypes;
+import com.cozary.ore_creeper.init.ParticleList;
+import com.cozary.ore_creeper.network.CommonNetwork;
+import com.cozary.ore_creeper.network.OreCreeperSyncPayload;
+import com.cozary.ore_creeper.particles.ColoredExplosionParticle;
 import com.cozary.ore_creeper.util.ClientEventBusSubscriber;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntityType;
 
 @Environment(EnvType.CLIENT)
 public class RendererRegister implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.COAL_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.COAL_CREEPER.get(), CoalCreeperRenderer::new);
+        try {
+            PayloadTypeRegistry.playS2C().register(OreCreeperSyncPayload.TYPE, OreCreeperSyncPayload.STREAM_CODEC);
+        } catch (IllegalArgumentException e) {
+            OreCreeper.LOG.debug("I'm already registered, ignore me :)");
+        }
 
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.COPPER_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.COPPER_CREEPER.get(), CopperCreeperRenderer::new);
+        ClientPlayNetworking.registerGlobalReceiver(OreCreeperSyncPayload.TYPE, (payload, context) -> {
+            context.client().execute(() -> CommonNetwork.handleBaseSync(payload, context));
+        });
 
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.DIAMOND_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.DIAMOND_CREEPER.get(), DiamondCreeperRenderer::new);
+        ParticleFactoryRegistry.getInstance().register(ParticleList.COLORED_EXPLOSION.get(), ColoredExplosionParticle.Factory::new);
 
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.EMERALD_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.EMERALD_CREEPER.get(), EmeraldCreeperRenderer::new);
+        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.ORE_CREEPER_BASE, OreCreeperModel::createBodyLayer);
 
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.GOLD_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.GOLD_CREEPER.get(), GoldCreeperRenderer::new);
+        EntityRenderers.register(ModEntityTypes.ORE_PRIMED_TNT.get(), OreTntRenderer::new);
 
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.IRON_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.IRON_CREEPER.get(), IronCreeperRenderer::new);
-
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.LAPIS_LAZULI_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.LAPIS_LAZULI_CREEPER.get(), LapisLazuliCreeperRenderer::new);
-
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.NETHER_GOLD_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.NETHER_GOLD_CREEPER.get(), NetherGoldCreeperRenderer::new);
-
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.NETHER_QUARTZ_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.NETHER_QUARTZ_CREEPER.get(), NetherQuartzCreeperRenderer::new);
-
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.REDSTONE_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.REDSTONE_CREEPER.get(), RedstoneCreeperRenderer::new);
-
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.ANCIENT_DEBRIS_CREEPER, OreCreeperModel::createBodyLayer);
-        EntityRendererRegistry.register(ModEntityTypes.ANCIENT_DEBRIS_CREEPER.get(), AncientDebrisCreeperRenderer::new);
-
-        EntityRendererRegistry.register(ModEntityTypes.ORE_PRIMED_TNT.get(), OreTntRenderer::new);
+        for (Identifier id : BaseOreCreeperLoader.LOADED_TYPES.keySet()) {
+            BuiltInRegistries.ENTITY_TYPE.getOptional(id).ifPresent(type -> {
+                if (type != EntityType.PIG) {
+                    EntityRenderers.register((EntityType<BaseOreCreeperEntity>) type, BaseOreCreeperRenderer::new);
+                }
+            });
+        }
 
     }
 }

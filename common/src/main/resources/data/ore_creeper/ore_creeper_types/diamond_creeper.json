@@ -1,0 +1,15 @@
+{
+  "ore_block": "minecraft:diamond_ore",
+  "deepslate_ore_block": "minecraft:deepslate_diamond_ore",
+  "radius": 3.75,
+  "texture": "ore_creeper:textures/entity/diamond_creeper.png",
+  "item_texture": "ore_creeper:textures/item/diamond_creeper_spawn_egg.png",
+  "particle_color": 8900331,
+  "spawn_in_biomes": "#ore_creeper:spawnable_biomes",
+  "remove_from_biomes": "#ore_creeper:blacklist_biomes",
+  "is_nether": false,
+  "max_spawn_y_level": 320,
+  "spawn_weight": 10,
+  "min_group_size": 1,
+  "max_group_size": 2
+}

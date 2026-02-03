@@ -1,5 +1,0 @@
-{
-  "type": "neoforge:remove_spawns",
-  "biomes": "#ore_creeper:blacklist_biomes",
-  "entity_types": "ore_creeper:coal_creeper"
-}

@@ -1,5 +1,7 @@
 package com.cozary.ore_creeper.platform.services;
 
+import java.nio.file.Path;
+
 public interface IPlatformHelper {
 
     /**
@@ -33,4 +35,12 @@ public interface IPlatformHelper {
 
         return isDevelopmentEnvironment() ? "development" : "production";
     }
+
+    /**
+     * Gets a path to a resource within the mod's container.
+     *
+     * @param path The path components.
+     * @return The path to the resource, or null if not found.
+     */
+    Path getResourcePath(String... path);
 }

@@ -1,14 +1,11 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.cozary.ore_creeper.mixin",
+  "package": "com.cozary.ore_creeper.neoforge.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-  ],
-  "client": [
-  ],
-  "server": [
-  ],
+  "mixins": [],
+  "client": [],
+  "server": [],
   "injectors": {
     "defaultRequire": 1
   }

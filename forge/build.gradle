@@ -104,7 +104,7 @@ def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', Strin
     }
 }
 sourceSets.configureEach {
-    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant->
+    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant ->
         configurations.named("$variant") {
             attributes {
                 attribute(loaderAttribute, 'forge')
@@ -113,7 +113,7 @@ sourceSets.configureEach {
     }
 }
 
-    publishMods {
+publishMods {
     file = jar.archiveFile
     changelog = project(":common").file("CHANGELOG.md").text
     type = STABLE

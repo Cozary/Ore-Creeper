@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
+//Todo review
+
 @EventBusSubscriber(modid = OreCreeper.MOD_ID)
 public class DataGenerators {
     @SubscribeEvent
@@ -27,7 +29,6 @@ public class DataGenerators {
 
         generator.addProvider(true, new ModBlockTagProvider(packOutput, lookupProvider));
         generator.addProvider(true, new ModWorldGenTagProvider(packOutput, lookupProvider));
-
 
         event.createProvider((output) -> new LootTableProvider(output, Set.of(), List.of(new LootTableProvider.SubProviderEntry(ModLootTableProvider::new, LootContextParamSets.ENTITY)), lookupProvider));
     }

@@ -1,16 +1,18 @@
 package com.cozary.ore_creeper.init;
 
 import com.cozary.ore_creeper.OreCreeper;
+import com.cozary.ore_creeper.data.BaseOreCreeperLoader;
 import com.google.common.collect.Sets;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.SpawnEggItem;
 
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModSpawnEggs {
@@ -18,18 +20,6 @@ public class ModSpawnEggs {
     public static final RegistrationProvider<Item> ITEMS = RegistrationProvider.get(Registries.ITEM, OreCreeper.MOD_ID);
 
     public static LinkedHashSet<RegistryObject<Item>> SPAWNEGGS_TAB = Sets.newLinkedHashSet();
-
-    public static final Supplier<Item> COAL_CREEPER_EGG = registerSpawnEgg("coal_creeper_spawn_egg", ModEntityTypes.COAL_CREEPER);
-    public static final Supplier<Item> COPPER_CREEPER_EGG = registerSpawnEgg("copper_creeper_spawn_egg", ModEntityTypes.COPPER_CREEPER);
-    public static final Supplier<Item> DIAMOND_CREEPER_EGG = registerSpawnEgg("diamond_creeper_spawn_egg", ModEntityTypes.DIAMOND_CREEPER);
-    public static final Supplier<Item> EMERALD_CREEPER_EGG = registerSpawnEgg("emerald_creeper_spawn_egg", ModEntityTypes.EMERALD_CREEPER);
-    public static final Supplier<Item> GOLD_CREEPER_EGG = registerSpawnEgg("gold_creeper_spawn_egg", ModEntityTypes.GOLD_CREEPER);
-    public static final Supplier<Item> IRON_CREEPER_EGG = registerSpawnEgg("iron_creeper_spawn_egg", ModEntityTypes.IRON_CREEPER);
-    public static final Supplier<Item> LAPIS_LAZULI_CREEPER_EGG = registerSpawnEgg("lapis_lazuli_creeper_spawn_egg", ModEntityTypes.LAPIS_LAZULI_CREEPER);
-    public static final Supplier<Item> NETHER_GOLD_CREEPER_EGG = registerSpawnEgg("nether_gold_creeper_spawn_egg", ModEntityTypes.NETHER_GOLD_CREEPER);
-    public static final Supplier<Item> NETHER_QUARTZ_CREEPER_EGG = registerSpawnEgg("nether_quartz_creeper_spawn_egg", ModEntityTypes.NETHER_QUARTZ_CREEPER);
-    public static final Supplier<Item> REDSTONE_CREEPER_EGG = registerSpawnEgg("redstone_creeper_spawn_egg", ModEntityTypes.REDSTONE_CREEPER);
-    public static final Supplier<Item> ANCIENT_DEBRIS_CREEPER_EGG = registerSpawnEgg("ancient_debris_creeper_spawn_egg", ModEntityTypes.ANCIENT_DEBRIS_CREEPER);
 
     public static RegistryObject<Item> registerWithTab(final String name, final Supplier<? extends Item> supplier) {
         RegistryObject<Item> item = ITEMS.register(name, supplier);
@@ -46,6 +36,18 @@ public class ModSpawnEggs {
         ));
     }
 
+    @SuppressWarnings("unchecked")
     public static void loadClass() {
+        for (Map.Entry<Identifier, com.cozary.ore_creeper.data.BaseOreCreeper> entry : BaseOreCreeperLoader.LOADED_TYPES.entrySet()) {
+            String id = entry.getKey().getPath();
+            String entityName = id;
+
+            RegistryObject<EntityType<?>> entityObj = ModEntityTypes.ENTITY_MAP.get(entityName);
+            if (entityObj != null) {
+                registerSpawnEgg(entityName + "_spawn_egg", () -> (EntityType<? extends Mob>) entityObj.get());
+            } else {
+                OreCreeper.LOG.error("Could not find entity type for ore creeper spawn egg: {}", entityName);
+            }
+        }
     }
 }

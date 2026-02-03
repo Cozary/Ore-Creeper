@@ -42,17 +42,17 @@ loom {
 }
 
 // Implement mcgradleconventions loader attribute
-    def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', String)
+def loaderAttribute = Attribute.of('io.github.mcgradleconventions.loader', String)
 ['apiElements', 'runtimeElements', 'sourcesElements', 'javadocElements', 'includeInternal', 'modCompileClasspath'].each { variant ->
     configurations.named("$variant") {
-            attributes {
-                attribute(loaderAttribute, 'fabric')
-            }
+        attributes {
+            attribute(loaderAttribute, 'fabric')
         }
     }
-    // Use attribute for include-ed dependencies
+}
+// Use attribute for include-ed dependencies
 sourceSets.configureEach {
-    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant->
+    [it.compileClasspathConfigurationName, it.runtimeClasspathConfigurationName].each { variant ->
         configurations.named("$variant") {
             attributes {
                 attribute(loaderAttribute, 'fabric')
@@ -62,12 +62,11 @@ sourceSets.configureEach {
 }
 loom.remapConfigurations.configureEach {
     configurations.named(it.name) {
-            attributes {
-                attribute(loaderAttribute, 'fabric')
-            }
+        attributes {
+            attribute(loaderAttribute, 'fabric')
         }
     }
-
+}
 
 
 publishMods {

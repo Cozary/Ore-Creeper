@@ -1,8 +1,13 @@
 package com.cozary.ore_creeper.platform;
 
+import com.cozary.ore_creeper.OreCreeper;
 import com.cozary.ore_creeper.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.neoforgespi.language.IModInfo;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class NeoForgePlatformHelper implements IPlatformHelper {
 
@@ -22,5 +27,25 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     public boolean isDevelopmentEnvironment() {
 
         return !FMLLoader.getCurrent().isProduction();
+    }
+
+    @Override
+    public Path getResourcePath(String... path) {
+        IModInfo info = ModList.get().getModFileById(OreCreeper.MOD_ID).getMods().get(0);
+        var contents = info.getOwningFile().getFile().getContents();
+        String relativePath = String.join("/", path);
+
+        for (Path root : contents.getContentRoots()) {
+            if (Files.isDirectory(root)) {
+                Path targetPath = root.resolve(relativePath);
+                if (Files.exists(targetPath)) {
+                    OreCreeper.LOG.info("Found resource path using content root: {}", targetPath);
+                    return targetPath;
+                }
+            }
+        }
+
+        OreCreeper.LOG.error("Could not find resource path for: {}", relativePath);
+        return null;
     }
 }

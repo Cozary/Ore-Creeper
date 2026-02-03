@@ -1,0 +1,14 @@
+{
+  "ore_block": "minecraft:ancient_debris",
+  "radius": 3.75,
+  "texture": "ore_creeper:textures/entity/ancient_debris_creeper.png",
+  "item_texture": "ore_creeper:textures/item/ancient_debris_creeper_spawn_egg.png",
+  "particle_color": 6704207,
+  "spawn_in_biomes": "#ore_creeper:spawnable_biomes_nether",
+  "remove_from_biomes": "#ore_creeper:blacklist_biomes_nether",
+  "is_nether": true,
+  "max_spawn_y_level": 320,
+  "spawn_weight": 1,
+  "min_group_size": 1,
+  "max_group_size": 2
+}
