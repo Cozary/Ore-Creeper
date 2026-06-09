@@ -37,7 +37,9 @@ public class ModEntityTypes {
         registerEntitiesList(name, () -> EntityType.Builder.of(factory, MobCategory.MONSTER)
                 .sized(0.6F, 1.7F).clientTrackingRange(8)
                 .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, name))));
-    }    public static final RegistryObject<EntityType<OrePrimedTnt>> ORE_PRIMED_TNT = ENTITY_TYPES.register("ore_primed_tnt", () -> EntityType.Builder.<OrePrimedTnt>of(OrePrimedTnt::new, MobCategory.MISC)
+    }
+
+    public static final RegistryObject<EntityType<OrePrimedTnt>> ORE_PRIMED_TNT = ENTITY_TYPES.register("ore_primed_tnt", () -> EntityType.Builder.<OrePrimedTnt>of(OrePrimedTnt::new, MobCategory.MISC)
             .fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10)
             .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, "ore_primed_tnt"))));
 

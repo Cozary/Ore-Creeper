@@ -17,6 +17,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -80,11 +81,11 @@ public class BaseOreCreeperEntity extends Creeper {
         }
     };
 
-    public BaseOreCreeperEntity(EntityType<? extends Creeper> type, Level level) {
+    public BaseOreCreeperEntity(EntityType<? extends BaseOreCreeperEntity> type, Level level) {
         super(type, level);
     }
 
-    public static boolean checkSpawnRules(EntityType<? extends Creeper> creeper, ServerLevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
+    public static boolean checkSpawnRules(EntityType<? extends BaseOreCreeperEntity> creeper, ServerLevelAccessor world, EntitySpawnReason reason, BlockPos pos, RandomSource random) {
         Identifier entityId = BuiltInRegistries.ENTITY_TYPE.getKey(creeper);
         BaseOreCreeper base = BaseOreCreeperManager.getType(entityId);
 
