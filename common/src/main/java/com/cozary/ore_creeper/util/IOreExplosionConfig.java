@@ -14,6 +14,10 @@ public interface IOreExplosionConfig {
 
     float getRadius();
 
+    float getOreChance();
+
+    float getRawChance();
+
     Identifier getTextureId();
 
     default int getParticleColor() {
@@ -27,6 +31,8 @@ public interface IOreExplosionConfig {
     default boolean isNether() {
         return false;
     }
+
+    int getMinSpawnYLevel();
 
     int getMaxSpawnYLevel();
 }

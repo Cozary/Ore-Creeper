@@ -38,19 +38,16 @@ public class ExplosionTypes {
         processExplosionArea(entityWorld, entityX, entityY, entityZ, radius, (blockPos, state) -> {
             Block block = state.getBlock();
             if (BASE_BLOCKS.contains(block)) {
-                boolean isDeepslate = block == Blocks.DEEPSLATE;
-                Block targetOre = isDeepslate ? oreType.getDeepslateOreBlock() : oreType.getOreBlock();
+                if (entityWorld.random.nextFloat() < oreType.getOreChance()) {
+                    boolean isDeepslate = block == Blocks.DEEPSLATE;
+                    Block targetOre = isDeepslate ? oreType.getDeepslateOreBlock() : oreType.getOreBlock();
 
-                if (targetOre == null) return;
+                    if (targetOre == null) return;
 
-                int chance = entityWorld.random.nextInt(10) + 1;
-                if (chance <= 3) {
-                    return;
-                } else if (chance <= 9) {
-                    entityWorld.setBlockAndUpdate(blockPos, targetOre.defaultBlockState());
-                } else {
-                    if (oreType.getRawBlock() != null) {
+                    if (oreType.getRawBlock() != null && entityWorld.random.nextFloat() < oreType.getRawChance()) {
                         entityWorld.setBlockAndUpdate(blockPos, oreType.getRawBlock().defaultBlockState());
+                    } else {
+                        entityWorld.setBlockAndUpdate(blockPos, targetOre.defaultBlockState());
                     }
                 }
             }
@@ -65,8 +62,7 @@ public class ExplosionTypes {
 
         processExplosionArea(entityWorld, entityX, entityY, entityZ, radius, (blockPos, state) -> {
             if (state.is(Blocks.NETHERRACK)) {
-                int chance = entityWorld.random.nextInt(10) + 1;
-                if (chance > 3) {
+                if (entityWorld.random.nextFloat() < oreType.getOreChance()) {
                     entityWorld.setBlockAndUpdate(blockPos, oreType.getOreBlock().defaultBlockState());
                 }
             }

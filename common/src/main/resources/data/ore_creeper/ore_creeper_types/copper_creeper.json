@@ -1,7 +1,10 @@
 {
   "ore_block": "minecraft:copper_ore",
   "deepslate_ore_block": "minecraft:deepslate_copper_ore",
+  "raw_block": "minecraft:raw_copper_block",
   "radius": 3.75,
+  "ore_chance": 0.3,
+  "raw_chance": 0.2,
   "texture": "ore_creeper:textures/entity/copper_creeper.png",
   "item_texture": "ore_creeper:textures/item/copper_creeper_spawn_egg.png",
   "particle_color": "9C5B43",
@@ -9,8 +12,9 @@
   "spawn_in_biomes": "#ore_creeper:spawnable_biomes",
   "remove_from_biomes": "#ore_creeper:blacklist_biomes",
   "is_nether": false,
+  "min_spawn_y_level": -16,
   "max_spawn_y_level": 320,
-  "spawn_weight": 30,
+  "spawn_weight": 20,
   "min_group_size": 1,
-  "max_group_size": 2
+  "max_group_size": 1
 }

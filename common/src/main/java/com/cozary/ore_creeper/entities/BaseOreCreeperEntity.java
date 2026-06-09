@@ -21,6 +21,7 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import org.joml.Vector3f;
@@ -54,8 +55,23 @@ public class BaseOreCreeperEntity extends Creeper {
         }
 
         @Override
+        public float getOreChance() {
+            return 1.0f; // Default to 100% chance for fallback
+        }
+
+        @Override
+        public float getRawChance() {
+            return 0.0f; // Default to 0% raw chance for fallback
+        }
+
+        @Override
         public Identifier getTextureId() {
             return Identifier.fromNamespaceAndPath("minecraft", "textures/entity/creeper/creeper.png");
+        }
+
+        @Override
+        public int getMinSpawnYLevel() {
+            return 0;
         }
 
         @Override
@@ -73,7 +89,7 @@ public class BaseOreCreeperEntity extends Creeper {
         BaseOreCreeper base = BaseOreCreeperManager.getType(entityId);
 
         if (base != null) {
-            return pos.getY() < base.getMaxSpawnYLevel() && world.getBlockState(pos.below()).is(base.isNether() ? ModTags.SPAWNABLE_BLOCKS_NETHER : ModTags.SPAWNABLE_BLOCKS);
+            return pos.getY() < base.getMaxSpawnYLevel() && pos.getY() > base.getMinSpawnYLevel() && world.getBlockState(pos.below()).is(base.isNether() ? ModTags.SPAWNABLE_BLOCKS_NETHER : ModTags.SPAWNABLE_BLOCKS);
         }
 
         return checkMobSpawnRules(creeper, world, reason, pos, random);
@@ -131,6 +147,16 @@ public class BaseOreCreeperEntity extends Creeper {
                     }
 
                     @Override
+                    public float getOreChance() {
+                        return base.getOreChance();
+                    }
+
+                    @Override
+                    public float getRawChance() {
+                        return base.getRawChance();
+                    }
+
+                    @Override
                     public Identifier getTextureId() {
                         return getTextureLocation();
                     }
@@ -151,43 +177,18 @@ public class BaseOreCreeperEntity extends Creeper {
                     }
 
                     @Override
+                    public int getMinSpawnYLevel() {
+                        return base.getMinSpawnYLevel();
+                    }
+
+                    @Override
                     public int getMaxSpawnYLevel() {
-                        return 320;
+                        return base.getMaxSpawnYLevel();
                     }
                 };
             }
         }
-        return new IOreExplosionConfig() {
-            @Override
-            public Block getOreBlock() {
-                return null;
-            }
-
-            @Override
-            public Block getRawBlock() {
-                return null;
-            }
-
-            @Override
-            public Block getDeepslateOreBlock() {
-                return null;
-            }
-
-            @Override
-            public float getRadius() {
-                return 3.0f;
-            }
-
-            @Override
-            public Identifier getTextureId() {
-                return getTextureLocation();
-            }
-
-            @Override
-            public int getMaxSpawnYLevel() {
-                return 320;
-            }
-        };
+        return FALLBACK;
     }
 
     public IOreExplosionConfig getOreType() {

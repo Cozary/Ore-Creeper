@@ -1,6 +1,8 @@
 {
   "ore_block": "minecraft:nether_gold_ore",
   "radius": 3.75,
+  "ore_chance": 0.3,
+  "raw_chance": 0.0,
   "texture": "ore_creeper:textures/entity/nether_gold_creeper.png",
   "item_texture": "ore_creeper:textures/item/nether_gold_creeper_spawn_egg.png",
   "particle_color": "CFA833",
@@ -8,8 +10,9 @@
   "spawn_in_biomes": "#ore_creeper:spawnable_biomes_nether",
   "remove_from_biomes": "#ore_creeper:blacklist_biomes_nether",
   "is_nether": true,
-  "max_spawn_y_level": 320,
+  "min_spawn_y_level": 10,
+  "max_spawn_y_level": 117,
   "spawn_weight": 10,
   "min_group_size": 1,
-  "max_group_size": 2
+  "max_group_size": 1
 }

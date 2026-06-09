@@ -2,14 +2,17 @@
   "ore_block": "minecraft:emerald_ore",
   "deepslate_ore_block": "minecraft:deepslate_emerald_ore",
   "radius": 3.75,
+  "ore_chance": 0.3,
+  "raw_chance": 0.0,
   "texture": "ore_creeper:textures/entity/emerald_creeper.png",
   "item_texture": "ore_creeper:textures/item/emerald_creeper_spawn_egg.png",
   "particle_color": "0B8B3C",
   "spawn_in_biomes": "#ore_creeper:spawnable_biomes",
   "remove_from_biomes": "#ore_creeper:blacklist_biomes",
   "is_nether": false,
+  "min_spawn_y_level": -16,
   "max_spawn_y_level": 320,
-  "spawn_weight": 10,
+  "spawn_weight": 5,
   "min_group_size": 1,
-  "max_group_size": 2
+  "max_group_size": 1
 }
