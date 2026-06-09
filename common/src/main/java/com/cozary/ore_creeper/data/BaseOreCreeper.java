@@ -1,6 +1,7 @@
 package com.cozary.ore_creeper.data;
 
 import com.cozary.ore_creeper.util.IOreExplosionConfig;
+import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,6 +35,17 @@ public record BaseOreCreeper(
         int maxGroupSize
 ) implements IOreExplosionConfig {
 
+    public static final Codec<Integer> COLOR_CODEC = Codec.either(Codec.INT, Codec.STRING).xmap(
+            either -> either.map(
+                    integer -> integer,
+                    string -> {
+                        String hex = string.startsWith("#") ? string.substring(1) : string;
+                        return Integer.parseInt(hex, 16);
+                    }
+            ),
+            Either::left
+    );
+
     public static final Codec<BaseOreCreeper> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Identifier.CODEC.fieldOf("ore_block").forGetter(BaseOreCreeper::oreBlockId),
             Identifier.CODEC.optionalFieldOf("raw_block").forGetter(BaseOreCreeper::rawBlockId),
@@ -41,8 +53,8 @@ public record BaseOreCreeper(
             Codec.FLOAT.fieldOf("radius").orElse(3.0f).forGetter(BaseOreCreeper::radius),
             Identifier.CODEC.fieldOf("texture").forGetter(BaseOreCreeper::texture),
             Identifier.CODEC.optionalFieldOf("item_texture").forGetter(BaseOreCreeper::itemTexture),
-            Codec.INT.fieldOf("particle_color").orElse(0xFFFFFF).forGetter(BaseOreCreeper::particleColor),
-            Codec.INT.optionalFieldOf("secondary_particle_color").forGetter(BaseOreCreeper::secondaryParticleColor),
+            COLOR_CODEC.fieldOf("particle_color").orElse(0xFFFFFF).forGetter(BaseOreCreeper::particleColor),
+            COLOR_CODEC.optionalFieldOf("secondary_particle_color").forGetter(BaseOreCreeper::secondaryParticleColor),
             TagKey.hashedCodec(Registries.BIOME).optionalFieldOf("spawn_in_biomes").forGetter(BaseOreCreeper::spawnInBiomes),
             TagKey.hashedCodec(Registries.BIOME).optionalFieldOf("remove_from_biomes").forGetter(BaseOreCreeper::removeFromBiomes),
             Codec.BOOL.fieldOf("is_nether").orElse(false).forGetter(BaseOreCreeper::isNether),

@@ -4,7 +4,7 @@
   "radius": 3.75,
   "texture": "ore_creeper:textures/entity/emerald_creeper.png",
   "item_texture": "ore_creeper:textures/item/emerald_creeper_spawn_egg.png",
-  "particle_color": 1761607,
+  "particle_color": "0B8B3C",
   "spawn_in_biomes": "#ore_creeper:spawnable_biomes",
   "remove_from_biomes": "#ore_creeper:blacklist_biomes",
   "is_nether": false,

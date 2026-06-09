@@ -4,7 +4,7 @@
   "radius": 3.75,
   "texture": "ore_creeper:textures/entity/coal_creeper.png",
   "item_texture": "ore_creeper:textures/item/coal_creeper_spawn_egg.png",
-  "particle_color": 3355443,
+  "particle_color": "191919",
   "spawn_in_biomes": "#ore_creeper:spawnable_biomes",
   "remove_from_biomes": "#ore_creeper:blacklist_biomes",
   "is_nether": false,
