@@ -71,7 +71,7 @@ sourceSets.configureEach {
 publishMods {
     file = jar.archiveFile
     changelog = project(":common").file("CHANGELOG.md").text
-    type = ALPHA
+    type = BETA
     modLoaders.add("neoforge")
     displayName = "${mod_name}-neoforge-${minecraft_version}-${version_neoforge}"
     dryRun = dry_run.toBoolean()
