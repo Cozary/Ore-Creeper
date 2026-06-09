@@ -1,19 +1,11 @@
 # Changelog
 
-## [Unreleased]
+### Added
 
-- Research popular ore mods to create a compatibility datapack.
-- Adjust Ore Creeper explosion colors.
-- Modify the amount of ores dropped by explosions. (Maybe Config)
-- Review datagen to adapt to the new system.
-- Create a tag to define which blocks are affected by an explosion of normal and Nether creepers.
-- Nerf/Tweak spawn rates? (Especially in Fabric, where the spawning rate is higher.)
-- Add a "template" texture for the entity and item as a default fallback, for user-made ore creepers.
+- Implement configurable minimum spawn heights and dynamic ore generation chances
+- Added block tags for replaceable blocks instead of hardcoded sets.
 
 ### Changed
 
-- Implemented a dynamic registration system for Ore Creepers.
-
-### Removed
-
-- Fabric config since if no more needed.
+- [Datapack] now supports hex color.
+- Ore Creepers explosions colors to be paler.
