@@ -40,6 +40,16 @@ public class ModTags {
             Identifier.fromNamespaceAndPath(MOD_ID, "spawnable_blocks_nether")
     );
 
+    public static final TagKey<Block> ORE_CREEPER_REPLACEABLE = TagKey.create(
+            Registries.BLOCK,
+            Identifier.fromNamespaceAndPath(MOD_ID, "ore_creeper_replaceable")
+    );
+
+    public static final TagKey<Block> ORE_CREEPER_REPLACEABLE_NETHER = TagKey.create(
+            Registries.BLOCK,
+            Identifier.fromNamespaceAndPath(MOD_ID, "ore_creeper_replaceable_nether")
+    );
+
     public static void loadClass() {
     }
 }

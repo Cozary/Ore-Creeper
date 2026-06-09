@@ -1,6 +1,7 @@
 package com.cozary.ore_creeper.util;
 
 import com.cozary.ore_creeper.config.CommonConfigManager;
+import com.cozary.ore_creeper.init.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -9,22 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.Set;
-
 public class ExplosionTypes {
-
-    private static final Set<Block> BASE_BLOCKS = Set.of(
-            Blocks.STONE,
-            Blocks.GRANITE,
-            Blocks.DIORITE,
-            Blocks.ANDESITE,
-            Blocks.GRAVEL,
-            Blocks.CLAY,
-            Blocks.DRIPSTONE_BLOCK,
-            Blocks.DEEPSLATE,
-            Blocks.CALCITE,
-            Blocks.TUFF
-    );
 
     private ExplosionTypes() {
     }
@@ -36,10 +22,9 @@ public class ExplosionTypes {
         createExplosion(entity, entityWorld, entityX, entityY, entityZ, radius);
 
         processExplosionArea(entityWorld, entityX, entityY, entityZ, radius, (blockPos, state) -> {
-            Block block = state.getBlock();
-            if (BASE_BLOCKS.contains(block)) {
+            if (state.is(ModTags.ORE_CREEPER_REPLACEABLE)) {
                 if (entityWorld.random.nextFloat() < oreType.getOreChance()) {
-                    boolean isDeepslate = block == Blocks.DEEPSLATE;
+                    boolean isDeepslate = state.is(Blocks.DEEPSLATE);
                     Block targetOre = isDeepslate ? oreType.getDeepslateOreBlock() : oreType.getOreBlock();
 
                     if (targetOre == null) return;
@@ -61,7 +46,7 @@ public class ExplosionTypes {
         createExplosion(entity, entityWorld, entityX, entityY, entityZ, radius);
 
         processExplosionArea(entityWorld, entityX, entityY, entityZ, radius, (blockPos, state) -> {
-            if (state.is(Blocks.NETHERRACK)) {
+            if (state.is(ModTags.ORE_CREEPER_REPLACEABLE_NETHER)) {
                 if (entityWorld.random.nextFloat() < oreType.getOreChance()) {
                     entityWorld.setBlockAndUpdate(blockPos, oreType.getOreBlock().defaultBlockState());
                 }
