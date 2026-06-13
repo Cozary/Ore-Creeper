@@ -100,7 +100,7 @@ public class OreTnt extends Block {
     public void wasExploded(ServerLevel level, BlockPos pos, Explosion explosion) {
         OrePrimedTnt primedtnt = new OrePrimedTnt(level, (double) pos.getX() + 0.5, pos.getY(), (double) pos.getZ() + 0.5, explosion.getIndirectSourceEntity());
         int i = primedtnt.getFuse();
-        primedtnt.setFuse((short) (level.random.nextInt(i / 4) + i / 8));
+        primedtnt.setFuse((short) (level.getRandom().nextInt(i / 4) + i / 8));
         level.addFreshEntity(primedtnt);
     }
 

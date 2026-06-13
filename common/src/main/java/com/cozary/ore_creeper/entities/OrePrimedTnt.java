@@ -37,7 +37,7 @@ public class OrePrimedTnt extends PrimedTnt {
     public OrePrimedTnt(Level p_32079_, double p_32080_, double p_32081_, double p_32082_, @Nullable LivingEntity owner) {
         this(ModEntityTypes.ORE_PRIMED_TNT.get(), p_32079_);
         this.setPos(p_32080_, p_32081_, p_32082_);
-        double d0 = p_32079_.random.nextDouble() * (double) ((float) Math.PI * 2F);
+        double d0 = p_32079_.getRandom().nextDouble() * (double) ((float) Math.PI * 2F);
         this.setDeltaMovement(-Math.sin(d0) * 0.02D, 0.2F, -Math.cos(d0) * 0.02D);
         this.setFuse(80);
         this.xo = p_32080_;
@@ -57,7 +57,7 @@ public class OrePrimedTnt extends PrimedTnt {
 
     @Override
     public void explode() {
-        this.level().playSound((Player) owner, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 4.0F, (1.0F + (this.level().random.nextFloat() - this.level().random.nextFloat()) * 0.2F) * 0.7F);
+        this.level().playSound((Player) owner, this.getX(), this.getY(), this.getZ(), SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 4.0F, (1.0F + (this.level().getRandom().nextFloat() - this.level().getRandom().nextFloat()) * 0.2F) * 0.7F);
         double d0 = this.random.nextGaussian() * 0.02D;
         double d1 = this.random.nextGaussian() * 0.02D;
         double d2 = this.random.nextGaussian() * 0.02D;
