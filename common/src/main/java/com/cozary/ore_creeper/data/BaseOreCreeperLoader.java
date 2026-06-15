@@ -63,7 +63,31 @@ public class BaseOreCreeperLoader {
             JsonElement json = GSON.fromJson(reader, JsonElement.class);
             BaseOreCreeper.CODEC.parse(JsonOps.INSTANCE, json)
                     .resultOrPartial(error -> OreCreeper.LOG.error("Failed to parse type {}: {}", id, error))
-                    .ifPresent(base -> LOADED_TYPES.put(identifier, base));
+                    .ifPresent(base -> {
+                        boolean modLoaded = true;
+                        String oreNamespace = base.oreBlockId().getNamespace();
+                        if (!oreNamespace.equals("minecraft") && !oreNamespace.equals("ore_creeper") && !Services.PLATFORM.isModLoaded(oreNamespace)) {
+                            modLoaded = false;
+                        }
+                        if (base.rawBlockId().isPresent()) {
+                            String rawNamespace = base.rawBlockId().get().getNamespace();
+                            if (!rawNamespace.equals("minecraft") && !rawNamespace.equals("ore_creeper") && !Services.PLATFORM.isModLoaded(rawNamespace)) {
+                                modLoaded = false;
+                            }
+                        }
+                        if (base.deepslateOreBlockId().isPresent()) {
+                            String deepslateNamespace = base.deepslateOreBlockId().get().getNamespace();
+                            if (!deepslateNamespace.equals("minecraft") && !deepslateNamespace.equals("ore_creeper") && !Services.PLATFORM.isModLoaded(deepslateNamespace)) {
+                                modLoaded = false;
+                            }
+                        }
+
+                        if (modLoaded) {
+                            LOADED_TYPES.put(identifier, base);
+                        } else {
+                            OreCreeper.LOG.info("Skipping ore creeper type {} because a required mod is not loaded", id);
+                        }
+                    });
         } catch (Exception e) {
             OreCreeper.LOG.error("Failed to parse json for {}", id, e);
         }
