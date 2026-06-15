@@ -16,8 +16,8 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.particle.v1.ParticleProviderRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -30,7 +30,7 @@ public class RendererRegister implements ClientModInitializer {
     public void onInitializeClient() {
 
         try {
-            PayloadTypeRegistry.playS2C().register(OreCreeperSyncPayload.TYPE, OreCreeperSyncPayload.STREAM_CODEC);
+            PayloadTypeRegistry.clientboundPlay().register(OreCreeperSyncPayload.TYPE, OreCreeperSyncPayload.STREAM_CODEC);
         } catch (IllegalArgumentException e) {
             OreCreeper.LOG.debug("I'm already registered, ignore me :)");
         }
@@ -39,9 +39,9 @@ public class RendererRegister implements ClientModInitializer {
             context.client().execute(() -> CommonNetwork.handleBaseSync(payload, context));
         });
 
-        ParticleFactoryRegistry.getInstance().register(ParticleList.COLORED_EXPLOSION.get(), ColoredExplosionParticle.Factory::new);
+        ParticleProviderRegistry.getInstance().register(ParticleList.COLORED_EXPLOSION.get(), ColoredExplosionParticle.Factory::new);
 
-        EntityModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.ORE_CREEPER_BASE, OreCreeperModel::createBodyLayer);
+        ModelLayerRegistry.registerModelLayer(ClientEventBusSubscriber.ORE_CREEPER_BASE, OreCreeperModel::createBodyLayer);
 
         EntityRenderers.register(ModEntityTypes.ORE_PRIMED_TNT.get(), OreTntRenderer::new);
 

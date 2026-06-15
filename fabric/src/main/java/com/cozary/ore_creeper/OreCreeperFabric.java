@@ -11,7 +11,7 @@ import com.cozary.ore_creeper.register.EntityRegister;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.creativetab.v1.FabricCreativeModeTab;
 import net.fabricmc.fabric.api.resource.v1.ResourceLoader;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -42,7 +42,7 @@ public class OreCreeperFabric implements ModInitializer {
     @Override
     public void onInitialize() {
 
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricItemGroup.builder()
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ITEM_GROUP, FabricCreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.ore_creeper"))
                 .icon(() -> new ItemStack(ModBlocks.ORE_TNT.get()))
                 .displayItems((parameters, output) -> ModSpawnEggs.SPAWNEGGS_TAB.forEach((item) -> output.accept(item.get())))
@@ -53,7 +53,7 @@ public class OreCreeperFabric implements ModInitializer {
         register();
         EntityRegister.registerAttributes();
 
-        ResourceLoader.get(PackType.SERVER_DATA).registerReloader(
+        ResourceLoader.get(PackType.SERVER_DATA).registerReloadListener(
                 Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, "ore_creeper_types"),
                 new BaseOreCreeperManager()
         );
