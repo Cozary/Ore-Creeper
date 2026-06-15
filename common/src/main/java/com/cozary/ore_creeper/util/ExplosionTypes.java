@@ -27,10 +27,15 @@ public class ExplosionTypes {
                     boolean isDeepslate = state.is(Blocks.DEEPSLATE);
                     Block targetOre = isDeepslate ? oreType.getDeepslateOreBlock() : oreType.getOreBlock();
 
-                    if (targetOre == null) return;
+                    if (targetOre == null || targetOre.defaultBlockState().isAir()) return;
 
                     if (oreType.getRawBlock() != null && entityWorld.random.nextFloat() < oreType.getRawChance()) {
-                        entityWorld.setBlockAndUpdate(blockPos, oreType.getRawBlock().defaultBlockState());
+                        Block rawBlock = oreType.getRawBlock();
+                        if (rawBlock != null && !rawBlock.defaultBlockState().isAir()) {
+                            entityWorld.setBlockAndUpdate(blockPos, rawBlock.defaultBlockState());
+                        } else {
+                            entityWorld.setBlockAndUpdate(blockPos, targetOre.defaultBlockState());
+                        }
                     } else {
                         entityWorld.setBlockAndUpdate(blockPos, targetOre.defaultBlockState());
                     }
@@ -45,10 +50,13 @@ public class ExplosionTypes {
         double radius = oreType.getRadius();
         createExplosion(entity, entityWorld, entityX, entityY, entityZ, radius);
 
+        Block targetOre = oreType.getOreBlock();
+        if (targetOre == null || targetOre.defaultBlockState().isAir()) return;
+
         processExplosionArea(entityWorld, entityX, entityY, entityZ, radius, (blockPos, state) -> {
             if (state.is(ModTags.ORE_CREEPER_REPLACEABLE_NETHER)) {
                 if (entityWorld.random.nextFloat() < oreType.getOreChance()) {
-                    entityWorld.setBlockAndUpdate(blockPos, oreType.getOreBlock().defaultBlockState());
+                    entityWorld.setBlockAndUpdate(blockPos, targetOre.defaultBlockState());
                 }
             }
         });
