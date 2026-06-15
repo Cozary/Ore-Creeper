@@ -77,7 +77,7 @@ sourceSets.configureEach {
 publishMods {
     file = jar.archiveFile
     changelog = getLatestChangelog()
-    type = BETA
+    type = STABLE
     modLoaders.add("forge")
     displayName = "${mod_name}-forge-${minecraft_version}-${version_forge}"
     dryRun = dry_run.toBoolean()
