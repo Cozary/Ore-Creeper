@@ -3,6 +3,7 @@ package com.cozary.ore_creeper.data;
 import com.cozary.ore_creeper.util.IOreExplosionConfig;
 import com.mojang.datafixers.util.Either;
 import com.mojang.datafixers.util.Function16;
+import com.mojang.datafixers.util.Function4;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -26,7 +27,7 @@ public record BaseOreCreeper(
         float radius,
         float oreChance,
         float rawChance,
-        Identifier texture,
+        Optional<Identifier> texture,
         Optional<Identifier> itemTexture,
         int particleColor,
         Optional<Integer> secondaryParticleColor,
@@ -37,7 +38,9 @@ public record BaseOreCreeper(
         int maxSpawnYLevel,
         int spawnWeight,
         int minGroupSize,
-        int maxGroupSize
+        int maxGroupSize,
+        Optional<Integer> skinColor,
+        Optional<Integer> oreColor
 ) implements IOreExplosionConfig {
 
     public static final Codec<Integer> COLOR_CODEC = Codec.either(Codec.INT, Codec.STRING).xmap(
@@ -59,7 +62,7 @@ public record BaseOreCreeper(
                 Codec.FLOAT.fieldOf("radius").orElse(3.0f).forGetter(BaseOreCreeper::radius),
                 Codec.FLOAT.fieldOf("ore_chance").orElse(1.0f).forGetter(BaseOreCreeper::oreChance),
                 Codec.FLOAT.fieldOf("raw_chance").orElse(0.0f).forGetter(BaseOreCreeper::rawChance),
-                Identifier.CODEC.fieldOf("texture").forGetter(BaseOreCreeper::texture),
+                Identifier.CODEC.optionalFieldOf("texture").forGetter(BaseOreCreeper::texture),
                 Identifier.CODEC.optionalFieldOf("item_texture").forGetter(BaseOreCreeper::itemTexture),
                 COLOR_CODEC.fieldOf("particle_color").orElse(0xFFFFFF).forGetter(BaseOreCreeper::particleColor),
                 COLOR_CODEC.optionalFieldOf("secondary_particle_color").forGetter(BaseOreCreeper::secondaryParticleColor),
@@ -73,13 +76,15 @@ public record BaseOreCreeper(
 
         var group2 = instance.group(
                 Codec.INT.fieldOf("min_group_size").orElse(1).forGetter(BaseOreCreeper::minGroupSize),
-                Codec.INT.fieldOf("max_group_size").orElse(3).forGetter(BaseOreCreeper::maxGroupSize)
+                Codec.INT.fieldOf("max_group_size").orElse(3).forGetter(BaseOreCreeper::maxGroupSize),
+                COLOR_CODEC.optionalFieldOf("skin_color").forGetter(BaseOreCreeper::skinColor),
+                COLOR_CODEC.optionalFieldOf("ore_color").forGetter(BaseOreCreeper::oreColor)
         );
 
-        BiFunction<Integer, Integer, Function16<Identifier, Optional<Identifier>, Optional<Identifier>, Float, Float, Float, Identifier, Optional<Identifier>, Integer, Optional<Integer>, Optional<TagKey<Biome>>, Optional<TagKey<Biome>>, Boolean, Integer, Integer, Integer, BaseOreCreeper>> constructor =
-                (minGroupSize, maxGroupSize) ->
+        Function4<Integer, Integer, Optional<Integer>, Optional<Integer>, Function16<Identifier, Optional<Identifier>, Optional<Identifier>, Float, Float, Float, Optional<Identifier>, Optional<Identifier>, Integer, Optional<Integer>, Optional<TagKey<Biome>>, Optional<TagKey<Biome>>, Boolean, Integer, Integer, Integer, BaseOreCreeper>> constructor =
+                (minGroupSize, maxGroupSize, skinColor, oreColor) ->
                         (p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16) ->
-                                new BaseOreCreeper(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, minGroupSize, maxGroupSize);
+                                new BaseOreCreeper(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, minGroupSize, maxGroupSize, skinColor, oreColor);
 
         var appWithFunc = group2.apply(instance, constructor);
         return group1.apply(instance, appWithFunc);
@@ -93,7 +98,7 @@ public record BaseOreCreeper(
                 ByteBufCodecs.FLOAT.encode(buf, val.radius());
                 ByteBufCodecs.FLOAT.encode(buf, val.oreChance());
                 ByteBufCodecs.FLOAT.encode(buf, val.rawChance());
-                Identifier.STREAM_CODEC.encode(buf, val.texture());
+                ByteBufCodecs.optional(Identifier.STREAM_CODEC).encode(buf, val.texture());
                 ByteBufCodecs.optional(Identifier.STREAM_CODEC).encode(buf, val.itemTexture());
                 ByteBufCodecs.INT.encode(buf, val.particleColor());
                 ByteBufCodecs.optional(ByteBufCodecs.INT).encode(buf, val.secondaryParticleColor());
@@ -105,6 +110,8 @@ public record BaseOreCreeper(
                 ByteBufCodecs.INT.encode(buf, val.spawnWeight());
                 ByteBufCodecs.INT.encode(buf, val.minGroupSize());
                 ByteBufCodecs.INT.encode(buf, val.maxGroupSize());
+                ByteBufCodecs.optional(ByteBufCodecs.INT).encode(buf, val.skinColor());
+                ByteBufCodecs.optional(ByteBufCodecs.INT).encode(buf, val.oreColor());
             },
             buf -> new BaseOreCreeper(
                     Identifier.STREAM_CODEC.decode(buf),
@@ -113,7 +120,7 @@ public record BaseOreCreeper(
                     ByteBufCodecs.FLOAT.decode(buf),
                     ByteBufCodecs.FLOAT.decode(buf),
                     ByteBufCodecs.FLOAT.decode(buf),
-                    Identifier.STREAM_CODEC.decode(buf),
+                    ByteBufCodecs.optional(Identifier.STREAM_CODEC).decode(buf),
                     ByteBufCodecs.optional(Identifier.STREAM_CODEC).decode(buf),
                     ByteBufCodecs.INT.decode(buf),
                     ByteBufCodecs.optional(ByteBufCodecs.INT).decode(buf),
@@ -124,7 +131,9 @@ public record BaseOreCreeper(
                     ByteBufCodecs.INT.decode(buf),
                     ByteBufCodecs.INT.decode(buf),
                     ByteBufCodecs.INT.decode(buf),
-                    ByteBufCodecs.INT.decode(buf)
+                    ByteBufCodecs.INT.decode(buf),
+                    ByteBufCodecs.optional(ByteBufCodecs.INT).decode(buf),
+                    ByteBufCodecs.optional(ByteBufCodecs.INT).decode(buf)
             )
     );
 
@@ -160,7 +169,7 @@ public record BaseOreCreeper(
 
     @Override
     public Identifier getTextureId() {
-        return texture;
+        return texture.orElse(null);
     }
 
     @Override
