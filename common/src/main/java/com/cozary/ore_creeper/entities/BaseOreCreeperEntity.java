@@ -105,7 +105,7 @@ public class BaseOreCreeperEntity extends Creeper {
         this.entityData.set(BASE_ID, baseId.toString());
         BaseOreCreeper base = BaseOreCreeperManager.getType(baseId);
         if (base != null) {
-            this.entityData.set(TEXTURE_LOCATION, base.texture().toString());
+            this.entityData.set(TEXTURE_LOCATION, base.texture().map(Identifier::toString).orElse(""));
         }
     }
 
@@ -116,7 +116,7 @@ public class BaseOreCreeperEntity extends Creeper {
 
     public Identifier getTextureLocation() {
         String tex = this.entityData.get(TEXTURE_LOCATION);
-        return tex.isEmpty() ? FALLBACK.getTextureId() : Identifier.tryParse(tex);
+        return tex.isEmpty() ? null : Identifier.tryParse(tex);
     }
 
     private IOreExplosionConfig getBaseConfig() {
@@ -291,7 +291,7 @@ public class BaseOreCreeperEntity extends Creeper {
             if (id != null) {
                 BaseOreCreeper base = BaseOreCreeperManager.getType(id);
                 if (base != null) {
-                    this.entityData.set(TEXTURE_LOCATION, base.texture().toString());
+                    this.entityData.set(TEXTURE_LOCATION, base.texture().map(Identifier::toString).orElse(""));
                 }
             }
         }
