@@ -24,6 +24,11 @@ public class BiomeModifierGenerator {
         Path configDir = FMLPaths.CONFIGDIR.get();
         Path packDir = configDir.resolve("ore_creeper/generated_pack");
 
+        File packFile = packDir.toFile();
+        if (packFile.exists()) {
+            deleteDirectory(packFile);
+        }
+
         File modifiersDir = packDir.resolve("data/ore_creeper/forge/biome_modifier").toFile();
         if (!modifiersDir.exists()) {
             modifiersDir.mkdirs();
@@ -80,6 +85,16 @@ public class BiomeModifierGenerator {
 
         OreCreeper.LOG.info("Generated dynamic biome modifiers pack at {}", packDir.toAbsolutePath());
         return packDir;
+    }
+
+    private static void deleteDirectory(File directoryToBeDeleted) {
+        File[] allContents = directoryToBeDeleted.listFiles();
+        if (allContents != null) {
+            for (File file : allContents) {
+                deleteDirectory(file);
+            }
+        }
+        directoryToBeDeleted.delete();
     }
 
     private static void createPackMcmeta(File packDir) {

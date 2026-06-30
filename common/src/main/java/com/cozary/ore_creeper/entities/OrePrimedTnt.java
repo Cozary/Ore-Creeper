@@ -66,14 +66,19 @@ public class OrePrimedTnt extends PrimedTnt {
         ((ServerLevel) this.level()).sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX() + 0.5, this.getY(), this.getZ() + 0.5, 1, d1, d2, d0, 0.5);
 
         for (LivingEntity livingEntity : foundTarget) {
-            livingEntity.remove(RemovalReason.DISCARDED);
-
-            Entity entities = Objects.requireNonNull(getRandomEntityType()).get().create(level(), EntitySpawnReason.CONVERSION);
-
-            assert entities != null;
-            entities.setPos(livingEntity.position());
-            level().addFreshEntity(entities);
-            ((ServerLevel) this.level()).sendParticles(ParticleTypes.POOF, entities.getX() + 0.5, entities.getY(), entities.getZ() + 0.5, 100, d1, d2, d0, 0.5);
+            RegistryObject<EntityType<?>> randomType = getRandomEntityType();
+            if (randomType != null) {
+                EntityType<?> type = randomType.get();
+                if (type != null) {
+                    Entity entities = type.create(level(), EntitySpawnReason.CONVERSION);
+                    if (entities != null) {
+                        livingEntity.remove(RemovalReason.DISCARDED);
+                        entities.setPos(livingEntity.position());
+                        level().addFreshEntity(entities);
+                        ((ServerLevel) this.level()).sendParticles(ParticleTypes.POOF, entities.getX() + 0.5, entities.getY(), entities.getZ() + 0.5, 100, d1, d2, d0, 0.5);
+                    }
+                }
+            }
         }
     }
 }
