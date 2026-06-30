@@ -36,16 +36,11 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
         String relativePath = String.join("/", path);
 
         for (Path root : contents.getContentRoots()) {
-            if (Files.isDirectory(root)) {
-                Path targetPath = root.resolve(relativePath);
-                if (Files.exists(targetPath)) {
-                    OreCreeper.LOG.info("Found resource path using content root: {}", targetPath);
-                    return targetPath;
-                }
+            Path targetPath = relativePath.isEmpty() ? root : root.resolve(relativePath);
+            if (Files.exists(targetPath)) {
+                return targetPath;
             }
         }
-
-        OreCreeper.LOG.error("Could not find resource path for: {}", relativePath);
         return null;
     }
 }
