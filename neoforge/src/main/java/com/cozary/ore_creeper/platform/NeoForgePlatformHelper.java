@@ -4,6 +4,7 @@ import com.cozary.ore_creeper.OreCreeper;
 import com.cozary.ore_creeper.platform.services.IPlatformHelper;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLPaths;
 import net.neoforged.neoforgespi.language.IModInfo;
 
 import java.nio.file.Files;
@@ -51,5 +52,10 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
             return relativePath.isEmpty() ? root : root.resolve(relativePath);
         }
         return null;
+    }
+
+    @Override
+    public Path getConfigDir() {
+        return FMLPaths.CONFIGDIR.get();
     }
 }

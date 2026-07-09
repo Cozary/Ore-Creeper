@@ -18,13 +18,11 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isModLoaded(String modId) {
-
         return FabricLoader.getInstance().isModLoaded(modId);
     }
 
     @Override
     public boolean isDevelopmentEnvironment() {
-
         return FabricLoader.getInstance().isDevelopmentEnvironment();
     }
 
@@ -48,5 +46,10 @@ public class FabricPlatformHelper implements IPlatformHelper {
             return relativePath.isEmpty() ? root : root.resolve(relativePath);
         }
         return null;
+    }
+
+    @Override
+    public Path getConfigDir() {
+        return FabricLoader.getInstance().getConfigDir();
     }
 }

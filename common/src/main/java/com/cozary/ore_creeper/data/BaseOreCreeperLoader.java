@@ -11,6 +11,8 @@ import net.minecraft.resources.Identifier;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,6 +47,25 @@ public class BaseOreCreeperLoader {
                 }
             } catch (IOException e) {
                 OreCreeper.LOG.error("Failed to read built-in type file {}", type, e);
+            }
+        }
+
+        Path customTypesDir = Services.PLATFORM.getConfigDir().resolve("ore_creeper/ore_creeper_types");
+        if (Files.exists(customTypesDir) && Files.isDirectory(customTypesDir)) {
+            try {
+                Files.walk(customTypesDir)
+                        .filter(path -> path.toString().endsWith(".json"))
+                        .forEach(path -> {
+                            String fileName = path.getFileName().toString();
+                            String id = fileName.substring(0, fileName.length() - 5);
+                            try (InputStream is = Files.newInputStream(path)) {
+                                loadInputStream(is, id);
+                            } catch (IOException e) {
+                                OreCreeper.LOG.error("Failed to read custom type file {}", fileName, e);
+                            }
+                        });
+            } catch (IOException e) {
+                OreCreeper.LOG.error("Failed to walk custom types directory", e);
             }
         }
 

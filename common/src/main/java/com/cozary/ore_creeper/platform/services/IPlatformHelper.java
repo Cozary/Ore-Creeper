@@ -43,4 +43,11 @@ public interface IPlatformHelper {
      * @return The path to the resource, or null if not found.
      */
     Path getResourcePath(String... path);
+
+    /**
+     * Gets the path to the configuration directory.
+     *
+     * @return The path to the configuration directory.
+     */
+    Path getConfigDir();
 }
