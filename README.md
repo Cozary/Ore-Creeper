@@ -1,5 +1,7 @@
 # Ore Creeper
 
+### **[Check out the wiki!](https://cozarycore.com/wiki/ore-creeper/)**
+
 This mod adds creepers based on the Ores that the game includes. 
 When exploring you will be able to find them and when they explode the surrounding blocks they will become ores according to the type of Creeper! 
 Ore Tnt transforms normal Creepers into Ore Creepers!
