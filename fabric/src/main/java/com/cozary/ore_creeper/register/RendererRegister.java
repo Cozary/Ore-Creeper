@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 
 @Environment(EnvType.CLIENT)
 public class RendererRegister implements ClientModInitializer {
@@ -47,7 +48,7 @@ public class RendererRegister implements ClientModInitializer {
 
         for (Identifier id : BaseOreCreeperLoader.LOADED_TYPES.keySet()) {
             BuiltInRegistries.ENTITY_TYPE.getOptional(id).ifPresent(type -> {
-                if (type != EntityType.PIG) {
+                if (type != EntityTypes.PIG) {
                     EntityRenderers.register((EntityType<BaseOreCreeperEntity>) type, BaseOreCreeperRenderer::new);
                 }
             });

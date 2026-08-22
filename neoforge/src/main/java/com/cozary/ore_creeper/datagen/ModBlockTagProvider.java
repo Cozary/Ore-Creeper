@@ -24,12 +24,12 @@ public class ModBlockTagProvider extends net.neoforged.neoforge.common.data.Bloc
     protected void addTags(HolderLookup.Provider provider) {
         tag(SPAWNABLE_BLOCKS)
                 .add(
-                        Blocks.STONE,
-                        Blocks.DEEPSLATE);
+                        Blocks.STONE.builtInRegistryHolder().key(),
+                        Blocks.DEEPSLATE.builtInRegistryHolder().key());
 
         tag(SPAWNABLE_BLOCKS_NETHER)
                 .add(
-                        Blocks.NETHERRACK);
+                        Blocks.NETHERRACK.builtInRegistryHolder().key());
 
     }
 }
