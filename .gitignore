@@ -24,3 +24,5 @@ run
 runs
 .vscode/
 -vscode
+.cache/
+**/.cache/
