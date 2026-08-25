@@ -88,11 +88,16 @@ public class BaseOreCreeperEntity extends Creeper {
         BaseOreCreeper base = BaseOreCreeperManager.getType(entityId);
 
         if (base != null) {
-            return pos.getY() < base.getMaxSpawnYLevel() && pos.getY() > base.getMinSpawnYLevel() && world.getBlockState(pos.below()).is(base.isNether() ? ModTags.SPAWNABLE_BLOCKS_NETHER : ModTags.SPAWNABLE_BLOCKS);
+            boolean validY = pos.getY() < base.getMaxSpawnYLevel() && pos.getY() > base.getMinSpawnYLevel();
+            boolean validBlock = world.getBlockState(pos.below()).is(base.isNether() ? ModTags.SPAWNABLE_BLOCKS_NETHER : ModTags.SPAWNABLE_BLOCKS);
+            boolean validMonsterRules = base.isNether() ? checkMobSpawnRules(creeper, world, reason, pos, random) : checkMonsterSpawnRules(creeper, world, reason, pos, random);
+
+            return validY && validBlock && validMonsterRules;
         }
 
-        return checkMobSpawnRules(creeper, world, reason, pos, random);
+        return checkMonsterSpawnRules(creeper, world, reason, pos, random);
     }
+
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
