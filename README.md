@@ -24,19 +24,10 @@ I do this as a hobby but it still consumes some of my time. So if you really lik
 
 ## Translations
 
-<details>
-<summary>🌍 Translation Progress %</summary>
-<br>
+If you would like to help translate Ore Creeper into your language:
 
-Here are the translations, which are managed through Crowdin at the following link: **[Crowdin Ore Creeper](https://crowdin.com/project/ore-creeper)**. You can contribute to the translations there or by submitting a PR to the project. If the language you are looking for is not available on Crowdin, you can ask me to enable it.
+1. Use the English reference file: [`en_us.json`](common/src/main/resources/assets/ore_creeper/lang/en_us.json).
+2. Create or update your language file (e.g., `de_de.json`, `fr_fr.json`) inside [`common/src/main/resources/assets/ore_creeper/lang/`](common/src/main/resources/assets/ore_creeper/lang/).
+3. Submit your translation by opening a [Pull Request](https://github.com/Cozary/ore-creeper/pulls) (or open an issue with the translated file/entries).
 
-| Language |  Status                                                                                                                                                                                                                                                                                  |
-| :--- |:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| German | [![de proofreading](https://img.shields.io/badge/dynamic/json?color=green&label=de&style=flat&logo=crowdin&query=%24.progress.0.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-15393530-795714.json)](https://crowdin.com/project/ore-creeper) |
-| Spanish | [![es-ES proofreading](https://img.shields.io/badge/dynamic/json?color=green&label=es-ES&style=flat&logo=crowdin&query=%24.progress.1.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-15393530-795714.json)](https://crowdin.com/project/ore-creeper) |
-| Italian | [![it proofreading](https://img.shields.io/badge/dynamic/json?color=green&label=it&style=flat&logo=crowdin&query=%24.progress.2.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-15393530-795714.json)](https://crowdin.com/project/ore-creeper) |
-| Japanese | [![ja proofreading](https://img.shields.io/badge/dynamic/json?color=green&label=ja&style=flat&logo=crowdin&query=%24.progress.3.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-15393530-795714.json)](https://crowdin.com/project/ore-creeper) |
-| Turkish | [![tr proofreading](https://img.shields.io/badge/dynamic/json?color=green&label=tr&style=flat&logo=crowdin&query=%24.progress.4.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-15393530-795714.json)](https://crowdin.com/project/ore-creeper) |
-| Chinese Simplified | [![zh-CN proofreading](https://img.shields.io/badge/dynamic/json?color=green&label=zh-CN&style=flat&logo=crowdin&query=%24.progress.5.data.approvalProgress&url=https%3A%2F%2Fbadges.awesome-crowdin.com%2Fstats-15393530-795714.json)](https://crowdin.com/project/ore-creeper) |
-
-</details>  
+Any translation contributions are always appreciated!
