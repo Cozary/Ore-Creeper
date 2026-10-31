@@ -56,8 +56,15 @@ public class BiomeModifierGenerator {
             JsonObject spawner = new JsonObject();
             spawner.addProperty("type", "ore_creeper:" + id.getPath());
             spawner.addProperty("weight", base.spawnWeight());
-            spawner.addProperty("minCount", base.minGroupSize());
-            spawner.addProperty("maxCount", base.maxGroupSize());
+            if (base.minGroupSize() == base.maxGroupSize()) {
+                spawner.addProperty("count", base.minGroupSize());
+            } else {
+                JsonObject countObj = new JsonObject();
+                countObj.addProperty("type", "minecraft:uniform");
+                countObj.addProperty("min_inclusive", base.minGroupSize());
+                countObj.addProperty("max_inclusive", base.maxGroupSize());
+                spawner.add("count", countObj);
+            }
 
             JsonArray spawners = new JsonArray();
             spawners.add(spawner);

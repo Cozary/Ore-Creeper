@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.Optional;
-import java.util.function.BiFunction;
 
 public record BaseOreCreeper(
         Identifier oreBlockId,

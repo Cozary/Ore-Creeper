@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.3] - 2026-08-25
 
+- 26.3 Port
+
+## [2.0.3] - 2026-08-25
+
 ### Fixed
 
 - Fix Ore Creepers spawning regardless of light level by enforcing monster spawn rules in the Overworld (#10).

@@ -42,9 +42,9 @@ public class OreTntRenderer extends EntityRenderer<OrePrimedTnt, TntRenderState>
             poseStack.scale(f2, f2, f2);
         }
 
-        poseStack.mulPose(Axis.YP.rotationDegrees(-90.0F));
+        poseStack.rotateDegrees(Axis.YP, -90.0F);
         poseStack.translate(-0.5F, -0.5F, 0.5F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+        poseStack.rotateDegrees(Axis.YP, 90.0F);
 
         if (!tntRenderState.blockState.isEmpty()) {
             TntMinecartRenderer.submitWhiteSolidBlock(tntRenderState.blockState, poseStack, submitNodeCollector, tntRenderState.lightCoords, (int) f / 5 % 2 == 0, tntRenderState.outlineColor);

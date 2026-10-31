@@ -46,21 +46,9 @@ public class OreCreeperNeoForge {
                         Optional.empty()
                 );
 
-                Pack.ResourcesSupplier resources = new Pack.ResourcesSupplier() {
-                    @Override
-                    public net.minecraft.server.packs.PackResources openPrimary(PackLocationInfo locationInfo) {
-                        return new PathPackResources(locationInfo, packDir);
-                    }
-
-                    @Override
-                    public net.minecraft.server.packs.PackResources openFull(PackLocationInfo locationInfo, Pack.Metadata metadata) {
-                        return new PathPackResources(locationInfo, packDir);
-                    }
-                };
-
                 Pack pack = Pack.readMetaAndCreate(
                         info,
-                        resources,
+                        new PathPackResources.PathResourcesSupplier(packDir),
                         PackType.SERVER_DATA,
                         new PackSelectionConfig(true, Pack.Position.TOP, false)
                 );

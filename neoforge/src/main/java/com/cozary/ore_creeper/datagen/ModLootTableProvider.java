@@ -4,11 +4,12 @@ import com.cozary.ore_creeper.init.ModEntityTypes;
 import com.cozary.ore_creeper.init.RegistryObject;
 import net.minecraft.advancements.predicates.entity.EntityFlagsPredicate;
 import net.minecraft.advancements.predicates.entity.EntityPredicate;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.LootTableSubProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -16,153 +17,164 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.EnchantedCountIncreaseFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SmeltItemFunction;
+import net.minecraft.world.level.storage.loot.predicates.AnyOfCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-
-import java.util.function.BiConsumer;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 public class ModLootTableProvider implements LootTableSubProvider {
 
-    private final HolderLookup.Provider lookupProvider;
+    private final LootTableSubProvider.Context context;
+    private final HolderGetter<Enchantment> enchantments;
 
-    public ModLootTableProvider(HolderLookup.Provider lookupProvider) {
-        this.lookupProvider = lookupProvider;
+    public ModLootTableProvider(LootTableSubProvider.Context context) {
+        this.context = context;
+        this.enchantments = context.lookup(Registries.ENCHANTMENT);
+    }
+
+    private LootItemCondition.Builder shouldSmeltLoot() {
+        return AnyOfCondition.anyOf(
+                LootItemEntityPropertyCondition.hasProperties(
+                        LootContext.EntityTarget.THIS,
+                        EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true))
+                )
+        );
     }
 
     @Override
-    public void generate(BiConsumer<ResourceKey<LootTable>, LootTable.Builder> consumer) {
+    public void run() {
         // Coal Creeper
-        consumer.accept(getEntityType("coal_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("coal_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.COAL)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 16.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 16)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.COAL_BLOCK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                         .when(LootItemRandomChanceCondition.randomChance(0.4F))));
 
         // Ancient Debris Creeper
-        consumer.accept(getEntityType("ancient_debris_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("ancient_debris_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.NETHERRACK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 16.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 16)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.NETHERRACK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3))))
                         .when(LootItemRandomChanceCondition.randomChance(0.5F))));
 
         // Copper Creeper
-        consumer.accept(getEntityType("copper_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("copper_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.RAW_COPPER)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 10.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 10)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.COPPER_BLOCK.weathering().unaffected())
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                         .when(LootItemRandomChanceCondition.randomChance(0.1F))));
 
         // Diamond Creeper
-        consumer.accept(getEntityType("diamond_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("diamond_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.DIAMOND)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 6.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 2.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 6)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 2.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.DIAMOND_BLOCK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 1.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 1))))
                         .when(LootItemRandomChanceCondition.randomChance(0.1F))));
 
         // Emerald Creeper
-        consumer.accept(getEntityType("emerald_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("emerald_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.EMERALD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 6.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 6)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.EMERALD_BLOCK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                         .when(LootItemRandomChanceCondition.randomChance(0.1F))));
 
         // Gold Creeper
-        consumer.accept(getEntityType("gold_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("gold_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.RAW_GOLD)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 10.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 10)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.GOLD_BLOCK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                         .when(LootItemRandomChanceCondition.randomChance(0.1F))));
 
         // Iron Creeper
-        consumer.accept(getEntityType("iron_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("iron_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.RAW_IRON)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 12.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 12)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.IRON_BLOCK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                         .when(LootItemRandomChanceCondition.randomChance(0.2F))));
 
         // Lapis Lazuli Creeper
-        consumer.accept(getEntityType("lapis_lazuli_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("lapis_lazuli_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.LAPIS_LAZULI)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 12.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 12)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.LAPIS_BLOCK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 2.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 2))))
                         .when(LootItemRandomChanceCondition.randomChance(0.2F))));
 
         // Nether Gold Creeper
-        consumer.accept(getEntityType("nether_gold_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("nether_gold_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.GOLD_NUGGET)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 32.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 32)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.GOLD_INGOT)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 6.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 6))))
                         .when(LootItemRandomChanceCondition.randomChance(0.6F))));
 
         // Nether Quartz Creeper
-        consumer.accept(getEntityType("nether_quartz_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("nether_quartz_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.QUARTZ)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 18.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 18)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.QUARTZ_BLOCK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(0.0F, 5.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(0, 5))))
                         .when(LootItemRandomChanceCondition.randomChance(0.5F))));
 
         // Redstone Creeper
-        consumer.accept(getEntityType("redstone_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+        this.context.accept(getEntityType("redstone_creeper").getDefaultLootTable().orElseThrow(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.REDSTONE)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 16.0F)))
-                                .apply(SmeltItemFunction.smelted().when(LootItemEntityPropertyCondition.hasProperties(LootContext.EntityTarget.THIS, EntityPredicate.Builder.entity().flags(EntityFlagsPredicate.Builder.flags().setOnFire(true)))))
-                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.lookupProvider, UniformGenerator.between(0.0F, 4.0F)))))
-                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 16)))
+                                .apply(SmeltItemFunction.smelted().when(this.shouldSmeltLoot()))
+                                .apply(EnchantedCountIncreaseFunction.lootingMultiplier(this.enchantments, ContextFloatProviders.between(0.0F, 4.0F)))))
+                .withPool(LootPool.lootPool().setRolls(ContextIntProviders.exactly(1))
                         .add(LootItem.lootTableItem(Items.REDSTONE_BLOCK)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F))))
+                                .apply(SetItemCountFunction.setCount(ContextIntProviders.between(1, 3))))
                         .when(LootItemRandomChanceCondition.randomChance(0.5F))));
     }
 

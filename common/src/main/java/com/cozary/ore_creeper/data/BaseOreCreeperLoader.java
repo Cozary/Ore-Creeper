@@ -18,8 +18,6 @@ import java.util.Map;
 
 public class BaseOreCreeperLoader {
     public static final Map<Identifier, BaseOreCreeper> LOADED_TYPES = new HashMap<>();
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
-
     public static final String[] BUILT_IN_TYPES = {
             "ancient_debris_creeper",
             "coal_creeper",
@@ -33,6 +31,7 @@ public class BaseOreCreeperLoader {
             "nether_quartz_creeper",
             "redstone_creeper"
     };
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
     public static void loadTypes() {
         LOADED_TYPES.clear();
@@ -73,7 +72,6 @@ public class BaseOreCreeperLoader {
 
         OreCreeper.LOG.info("Loaded {} ore creeper types", LOADED_TYPES.size());
     }
-
 
 
     private static void loadInputStream(InputStream is, String id) {

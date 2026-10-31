@@ -88,6 +88,9 @@ public class BaseOreCreeperEntity extends Creeper {
         BaseOreCreeper base = BaseOreCreeperManager.getType(entityId);
 
         if (base != null) {
+            if (base.removeFromBiomes().isPresent() && world.getBiome(pos).is(base.removeFromBiomes().get())) {
+                return false;
+            }
             boolean validY = pos.getY() < base.getMaxSpawnYLevel() && pos.getY() > base.getMinSpawnYLevel();
             boolean validBlock = world.getBlockState(pos.below()).is(base.isNether() ? ModTags.SPAWNABLE_BLOCKS_NETHER : ModTags.SPAWNABLE_BLOCKS);
             boolean validMonsterRules = base.isNether() ? checkMobSpawnRules(creeper, world, reason, pos, random) : checkMonsterSpawnRules(creeper, world, reason, pos, random);

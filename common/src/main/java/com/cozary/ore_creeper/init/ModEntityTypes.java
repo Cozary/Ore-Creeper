@@ -24,6 +24,9 @@ public class ModEntityTypes {
 
     public static final RegistrationProvider<EntityType<?>> ENTITY_TYPES = RegistrationProvider.get(Registries.ENTITY_TYPE, OreCreeper.MOD_ID);
     public static final Map<String, RegistryObject<EntityType<?>>> ENTITY_MAP = new HashMap<>();
+    public static final RegistryObject<EntityType<OrePrimedTnt>> ORE_PRIMED_TNT = ENTITY_TYPES.register("ore_primed_tnt", () -> EntityType.Builder.<OrePrimedTnt>of(OrePrimedTnt::new, MobCategory.MISC)
+            .fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10)
+            .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, "ore_primed_tnt"))));
     public static LinkedHashSet<RegistryObject<EntityType<?>>> ENTITY_LIST = Sets.newLinkedHashSet();
 
     @SuppressWarnings("unchecked")
@@ -51,11 +54,7 @@ public class ModEntityTypes {
                 return entity;
             });
         }
-    }    public static final RegistryObject<EntityType<OrePrimedTnt>> ORE_PRIMED_TNT = ENTITY_TYPES.register("ore_primed_tnt", () -> EntityType.Builder.<OrePrimedTnt>of(OrePrimedTnt::new, MobCategory.MISC)
-            .fireImmune().sized(0.98F, 0.98F).clientTrackingRange(10).updateInterval(10)
-            .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(OreCreeper.MOD_ID, "ore_primed_tnt"))));
-
-
+    }
 
 
 }

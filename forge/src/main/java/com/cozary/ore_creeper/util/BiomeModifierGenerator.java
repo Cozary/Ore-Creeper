@@ -54,8 +54,15 @@ public class BiomeModifierGenerator {
             JsonObject spawner = new JsonObject();
             spawner.addProperty("type", "ore_creeper:" + id.getPath());
             spawner.addProperty("weight", base.spawnWeight());
-            spawner.addProperty("minCount", base.minGroupSize());
-            spawner.addProperty("maxCount", base.maxGroupSize());
+            if (base.minGroupSize() == base.maxGroupSize()) {
+                spawner.addProperty("count", base.minGroupSize());
+            } else {
+                JsonObject countObj = new JsonObject();
+                countObj.addProperty("type", "minecraft:uniform");
+                countObj.addProperty("min_inclusive", base.minGroupSize());
+                countObj.addProperty("max_inclusive", base.maxGroupSize());
+                spawner.add("count", countObj);
+            }
 
             JsonArray spawners = new JsonArray();
             spawners.add(spawner);
@@ -67,20 +74,6 @@ public class BiomeModifierGenerator {
             } catch (IOException e) {
                 OreCreeper.LOG.error("Failed to write add_spawns biome modifier for {}", id, e);
             }
-
-            base.removeFromBiomes().ifPresent(tagKey -> {
-                JsonObject removeJson = new JsonObject();
-                removeJson.addProperty("type", "forge:remove_spawns");
-                removeJson.addProperty("biomes", "#" + tagKey.location());
-                removeJson.addProperty("entity_types", "ore_creeper:" + id.getPath());
-
-                File removeFile = new File(modifiersDir, id.getPath() + "_removal.json");
-                try (FileWriter writer = new FileWriter(removeFile)) {
-                    GSON.toJson(removeJson, writer);
-                } catch (IOException e) {
-                    OreCreeper.LOG.error("Failed to write remove_spawns biome modifier for {}", id, e);
-                }
-            });
         }
 
         OreCreeper.LOG.info("Generated dynamic biome modifiers pack at {}", packDir.toAbsolutePath());
